@@ -1,0 +1,91 @@
+A Blockchain-based Tracking System and Mobile Application to Manage the Decentralised 3D Printing of Medical Supplies in Greece 
+Date: April 15, 2020 
+James Simbouras, Giorgos Nikolaou  
+
+In Greece as well as in other countries we are dealing with the coronavirus. But unfortunately we are also dealing with an overload of the health system. Notably a large number of .of 3D Printer owners around Greece is is starting to mobilize and help with the Covid-19 crisis. This effort involves the 3D Printing of Face Shield parts, which are then delivered to the Ministry of Health to further distribute to hospitals and medical personnel across the country. These items are potentially life-saving. A notable example is the volunteer network HELLAS COVID 3D Printing Supplies, in coordinating, from the ground up, a decentralised supply chain from donantion of materials by individuals, shipment to 3D Printer Owners (in some occasions Universities), collection of printed batches, and delivery to the Ministry of Health.
+
+
+
+An important issue that we are experiencing here in Athens, however, is that not many groups have had the time or resources to develop a process around the production and distribution of these parts. An increasing number of volunteers are jumping in to help, while the potential to encounter severe problems with quality control and logistics down the road increases rapidly. Already, there have been instances made apparent where Protective Shields made from donated material have found their way into the market rather than be shipped to their intended destinations. We expect these and other issues to increase as this operation scales.
+Our involvement in this effort has given us insight into the specific challenges they have been encountered so far, what processes have emerged as a response, and ideas about what can be further be done so as to overcome these challenges. 
+We believe that leveraging the immutability and public nature of a blockchain-based tracking system will be an effective way to mitigate many of these challenges.
+The purpose of this project is to build a software tool to track the decentralised supply chain for the creation of 3D printed Protective Shields (blockchain tracking of provenance + android app)  that can mitigate these issues and can fit into the flow of operations of Covid 19 relief efforts. It is our hope this will help others as they form their local groups and establish protocols for the 3D Printing of medical equipment across the globe.
+This tool will be free and will be made available to regional coordinators and participants at any location in the world who would like to be involved in coordinating a local group of 3D printers serving local needs. Furthermore it will be presented and proposed for use by local authorities, who, under these unprecedented circumstances, are becoming increasingly dependant on these self-organised local networks for the manufacturing of medical protective gear to bring to the front lines in the battle against COVID19. 
+
+What are the problems that our application seeks to target:
+● Logistics:
+Tracking the operations of a decentralised supply chain becomes very complicated for local  coordinators. How much material is brought in by donations, which 3D Printer Owners have enough parts to get picked up,arranging their transportation, which 3D Printer Owners are requesting more material, creating a paper trail for quality control, then distributing the parts to the local authorities.The logistics of coordination and tracking of the entire process is the most significant barrier to scaling the solution, not only locally but globally.
+● Quality Control: 
+○ As the crisis escalates and shortages increase, any measures that can be taken to ensure basic quality control of 3D printed parts, that end up in the front line, in the Hospitals, should be applied with a sense of urgency. 
+● Trackability:
+○ Each batch that is manufactured At every step of the supply chain, there must be access to the  serial numbers for each 3D Printed part. Assumably to track in-field failures or contaminations (if they occur). 
+
+
+How operations work today:
+● User Types: There are 3 types of ‘users’ involved: 
+Local Coordinators 
+■ Right now local Coordinators are using Google Spreadsheets, Google forms, and exel sheets to track everything, from who is participating in the decentralised supply chain, number of parts completed, who needs to receive more extrusion material, when pickups & deliveries need to occur, and quality control checks. 
+ 3D Printer Owners 
+
+Receivers of batches of 3D printed parts (in our case the Ministry of Health)
+
+● Connecting with Medical Facilities: 
+In our case there has been connections established between some local Coordinators and the authorities. But there needs to be a scalable solution that will direclty connect more local Coordinators of groups of 3D Printers with authorities and medical facilities, in a verifiable and trust enforcing way, for the provision of 3D Printed parts. 
+
+● Design approval of printed parts: 
+In our case Regional Coordinators have the printed design verified by the Ministry of Health. For face shield parts, a standard design from Prusa is used.
+● Finding 3D Printer owners: 
+This is currently coordinated in a time-consuming way, through social media and word of mouth. Volunteer 3D Printer owners submit a google form, requesting to participate in the initiative, and requesting an amount of extrusion material to be sent to them. This form is received and processed by the Local Coordinator. A goal for our application should be to help make these connections between participants in a way that is streamlined and ensures accountability. 
+Printing of Parts; Sending off completed batch of 3D printed parts; Requesting a new batch of extrusion material:
+Each 3D Printer owner in the decentralised supply chain prints their parts individually. After each batch is complete, they mark a Google Spreadsheet, showing that the batch is complete, requesting pickup and requesting a new amount of extrusion material to be provided to them from the Local Coordinator.  
+● Pick Up of Parts:. 
+○ Pick-up after a set number of prints have been completed
+The Regional Coordinator tracks how many parts a Printer Owner has completed since their last pickup. This is currently done through the Google Spreadsheet.
+
+Once the Printer Owner has a batch of parts ready for pickup, the local Coordinator contacts them and arranges to pick up. and also arranges to send them a new batch of extrusion material. 
+
+Mailing / Shipping is done with the help of municipal organizations stepping up to help, and also done through mail and courier services.
+● Quality Control Check 
+Upon receiving the batch, the Regional Coordinator performs a visual quality control check of each part. Parts that fail the quality control are discarded. This step should also be done by the receiving authority.
+● Delivery to authorities 
+The Regional Coordinator arranges for delivery of the parts that pass quality control to the appropriate authorities. 
+The initiatives that have stepped up to the challenge in Greece are no doubt saving lives. These groups are also experiencing the expected challenges in regards to scaling existing solutions. Most of these challenges relate to coordination, tracking, and logistics. 
+With the right software tools in place, a more streamlined, accountable and scalable process can be set up that can be duplicated in other areas, and hopefully save lives there as well. We will roll it out via the groups mentioned above that are operating in Greece, where it will be Beta tested, then we can make it available to everyone else in the world.
+
+
+Build:
+
+
+
+
+
+
+
+-Simple and easy to use mobile dapp UI, with different interfaces for each user type.
+
+-Manages information accurately across the entire chain.
+
+-Visibility of all handovers in the supply chain.
+
+
+- Serial Numbers (QR Codes): 
+
+Each batch must be accompanied by a QR code sticker that can be read by the app and retrieves information about the provenance of the batch and/or prompts the user to take action. The Regional Coordinator is prompted by the app to give the Printer Owner a QR code sticker be added on the batch.
+
+Smart contracts addressing the issue of storing data necessary at different stages of supply chain, signing actions and making it verifiable by all who participate in the supply chain.
+
+
+Reference Ethereum implementations:
+
+https://github.com/AtrauraBlockchain/scts
+
+https://github.com/maximevaillancourt/trace
+
+https://github.com/kamalkishorm/Blockchain_SupplyChain
+
+https://github.com/Eyongkevin/coffee-supplychain-ethereum
+
+https://github.com/oliversd/basic-supplychain-ethereum/blob/master/contracts/SupplyChain.sol
+
+https://github.com/CONNEX-AB-Delivery-System
+
