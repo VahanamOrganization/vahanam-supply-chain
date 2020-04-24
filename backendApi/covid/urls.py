@@ -25,6 +25,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',accountViews.Login,name='login'),
+    path('checkLogin/',accountViews.checkLogin,name='checkLogin'),
     path('logout/',accountViews.Logout,name='logout'),
     path('signup/',accountViews.Register,name='signup'),
     path('campaigns/',campaignViews.getCampaigns,name='campaignsAll'),
