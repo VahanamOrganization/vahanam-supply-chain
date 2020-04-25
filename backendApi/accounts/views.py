@@ -77,6 +77,14 @@ def getUsersByRole(request):
 
 
 
-
-
+@api_view(['POST'])
+@csrf_exempt
+def setAdditionalData(request):
+	userCookies=request.data.get('sid',None)
+	newData=request.data.get('data',None)
+	s=Session.objects.get(pk=userCookies)
+	data=s.get_decoded()['_auth_user_id']
+	account.objects.filter(id=data).update(additionalData=newData)
+	user=account.objects.filter(id=data)
+	return Response(accountSerializer(user, many=True).data)
 	
