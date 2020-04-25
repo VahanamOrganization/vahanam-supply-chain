@@ -65,3 +65,18 @@ def Register(request):
 	login(request,myuser)
 	return Response(accountSerializer(myuser, many=False).data)
 
+
+
+@api_view(['GET'])
+def getUsersByRole(request):
+	role=request.query_params.get('role')
+	users=account.objects.filter(role=int(role))
+	serializer=accountSerializer(users,many=True)
+	return Response(serializer.data)
+
+
+
+
+
+
+	
