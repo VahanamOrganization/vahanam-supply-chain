@@ -1,0 +1,39 @@
+.loginPage {
+    width: 100vw;
+    height: 100vh;
+    font-size: 4vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .loginPageInner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 60%;
+        width: 80%;
+        .title {
+            font-size: 5vh;
+            font-weight: bold;
+        }
+        img {
+            height: 6vh;
+            width: 6vh;
+        }
+        a {
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            background: blue;
+            padding: 5px;
+            color: white;
+            border-radius: 5%;
+            &:hover {
+                background: darkblue;
+            }
+        }
+    }
+}

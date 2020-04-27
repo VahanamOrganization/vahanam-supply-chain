@@ -1,0 +1,46 @@
+.navBar {
+    background: white;
+    color: black;
+    font-size: 2vh;
+    padding: 1vh;
+    height: 8vh;
+    width: 98vw;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 0.5vh 1vh black;
+    .user {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .email {
+            font-weight: bold;
+        }
+    }
+    a {
+        text-decoration: none;
+        background: blue;
+        color: white;
+        padding: 10px;
+        color: white;
+        border-radius: 5%;
+        &:hover {
+            background: darkblue;
+        }
+    }
+}
+.homePage {
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    width: 100vw;
+    font-size: 2vh;
+    padding: 10px;
+}
