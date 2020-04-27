@@ -8,6 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 @api_view(['GET'])
 @csrf_exempt
 def getCampaigns(request):
+	iden=request.query_params.get('identifier',None)
+	if iden != None:
+		campaigns=campaign.objects.filter(identifier=int(iden))
+		return Response(campaignSerializer(campaigns,many=True).data)
 	campaigns=campaign.objects.all()
 	serializer=campaignSerializer(campaigns,many=True)
 	return Response(serializer.data)
@@ -18,15 +22,11 @@ def getCampaigns(request):
 def createCampaigns(request):
 	title=request.data.get('title')
 	description=request.data.get('description')
-	email=request.data.get('email')
+	identifier=request.data.get('identifier')
 	myCampaign=campaign()
 	myCampaign.title=title
 	myCampaign.description=description
-	myCampaign.is_started=False
-	myCampaign.account= account.objects.filter(email=email)[0]
-	try:
-		myCampaign.save()
-		return Response({"status":"Campaign created succesfully"})
-	except:
-		return Response({"status":"unable to create Campaign"})
+	myCampaign.identifier=identifier
+	myCampaign.save()
+	return Response({"status":"Campaign created succesfully"})
 		

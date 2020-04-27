@@ -6,8 +6,7 @@ import jsonfield
 class campaign(models.Model):
 	title = models.CharField(max_length=1000, blank=True, default='')
 	description = models.CharField(max_length=1000, blank=True, default='')
-	is_started= models.BooleanField(default=False)
-	account=models.ForeignKey(settings.AUTH_USER_MODEL,default=None,on_delete=models.CASCADE)
+	identifier= models.IntegerField()
 	additionalData=jsonfield.JSONField()
 
 	def __str__(self):
