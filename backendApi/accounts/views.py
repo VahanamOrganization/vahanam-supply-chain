@@ -57,11 +57,10 @@ def Register(request):
 	"""
 	List all code snippets, or create a new snippet.
 	"""
-	email=request.data.get('email')
+	address=request.data.get('address')
 	role=request.data.get('role')
-	phone_number=request.data.get('phone_number')
 	password=request.data.get('password')
-	myuser=account.objects.create_user(email=email,phone_number=phone_number,role=int(role),password=password)
+	myuser=account.objects.create_user(address=address,role=int(role),password=password)
 	login(request,myuser)
 	return Response(accountSerializer(myuser, many=False).data)
 

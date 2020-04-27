@@ -2,14 +2,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 import jsonfield
 class MyAccountManager(BaseUserManager):
-	def create_user(self,email,role,phone_number,password=None):
-		if not email:
-			raise ValueError("Users must have an email")
+	def create_user(self,address,role,password=None):
+		if not address:
+			raise ValueError("Users must have an address")
 		if not role:
 			raise ValueError("Users must have a role")
-		if not phone_number:
-			raise ValueError("Users must have a phone_number")
-		user=self.model(email=self.normalize_email(email),role=role,phone_number=phone_number)
+		user=self.model(address=address,role=role)
 		user.is_staff=False
 		user.set_password(password)
 		user.save(using=self.db)
@@ -19,8 +17,8 @@ class MyAccountManager(BaseUserManager):
 
 
 
-	def create_superuser(self,email,role,phone_number,password=None):
-		user=self.create_user(email=self.normalize_email(email),role=role,phone_number=phone_number,password=password)
+	def create_superuser(self,address,role,password=None):
+		user=self.create_user(address=address,role=role,password=password)
 		user.is_admin=True
 		user.is_staff=True
 		user.save(using=self.db)
@@ -37,21 +35,20 @@ class account(AbstractBaseUser):
 		COURIER=3
 		ADMIN=4
 		RECIEVER=5
-	email=models.EmailField(verbose_name='email',max_length=100,unique=True)
+	address=models.CharField(max_length=150,unique=True,default='example')
 	date_joined=models.DateTimeField(verbose_name='date joined',auto_now_add=True)
 	is_admin=models.BooleanField(default=False)
 	is_staff=models.BooleanField(default=False)
 	role=models.IntegerField(choices=Role.choices)
-	phone_number=models.IntegerField()
 	additionalData=jsonfield.JSONField()	
-	USERNAME_FIELD='email'
-	REQUIRED_FIELDS=['role','phone_number']
+	USERNAME_FIELD='address'
+	REQUIRED_FIELDS=['role']
 
 	objects=MyAccountManager()
 
 
 	def __str__(self):
-		return self.email
+		return self.address
 
 	def has_perm(self,perm,obj=None):
 		return self.is_admin
