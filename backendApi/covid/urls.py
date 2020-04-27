@@ -31,7 +31,7 @@ urlpatterns = [
     path('campaigns/',campaignViews.getCampaigns,name='campaignsAll'),
     path('campaigns/create',campaignViews.createCampaigns,name='createCampaign'),
     path('setUserData/',accountViews.setAdditionalData,name='setUsersDetails'),
-    path('accounts/',accountViews.getUsersByRole,name='get Users by role'),
+    path('accounts/',accountViews.getUsersByAddress,name='get Users by address'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('', include(router.urls)),
 

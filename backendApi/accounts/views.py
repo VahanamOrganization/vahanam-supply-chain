@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 import json
 from .serializers import accountSerializer
 from django.contrib.sessions.models import Session
-
+from django.db.models import Q
 
 @api_view(['POST'])
 #@csrf_exempt
@@ -86,4 +86,19 @@ def setAdditionalData(request):
 	account.objects.filter(id=data).update(additionalData=newData)
 	user=account.objects.filter(id=data)
 	return Response(accountSerializer(user, many=True).data)
-	
+
+
+@api_view(['GET'])
+@csrf_exempt
+
+def getUsersByAddress(request):
+	currentAddress=request.query_params.get('address')
+	if currentAddress is None:
+		return Response({"status":"need at least one addres"})	
+	addresses=currentAddress.split(',')
+	queries=[Q(address=i) for i in addresses]
+	query=queries.pop()
+	for item in queries:
+		query |=item
+	users=account.objects.filter(query)
+	return Response(accountSerializer(users,many=True).data)			
