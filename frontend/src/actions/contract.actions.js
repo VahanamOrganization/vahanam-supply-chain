@@ -6,7 +6,11 @@ import { contractConstants } from "../constants";
 export const contractActions = {
     getRole,
     makeCoordinator,
-    grantRole
+    startCampaign,
+    addManufacturers,
+    addCouriers,
+    getCampaignDetails,
+    createNewBatch
 };
 
 function getRole() {
@@ -18,32 +22,49 @@ function getRole() {
             role = await contract.methods.getRole(account).call();
             role = getStringFromRole(role);
         } catch (e) {
+            console.log(e);
             dispatch(failure(e));
-            dispatch(alertActions.error(e));
+            dispatch(alertActions.error("Error Getting Role"));
             return;
         }
         dispatch(alertActions.success("Found Role: " + role));
-        dispatch(done(role));
+        dispatch(result(role));
+        dispatch(done());
         return role;
     };
 
-    function started() {
+    function result(role) {
         return {
-            type: contractConstants.ROLE_STARTED
-        };
-    }
-
-    function done(role) {
-        return {
-            type: contractConstants.ROLE_DONE,
+            type: contractConstants.ROLE_RESULT,
             role
         };
     }
+}
 
-    function failure(error) {
+function getCampaignDetails(campaignId) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let campaign;
+        try {
+            const { contract } = getState().web3;
+            campaign = await contract.methods
+                .getCampaignDetalis(campaignId)
+                .call();
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            dispatch(alertActions.error("Error Getting Campaign"));
+            return;
+        }
+        dispatch(alertActions.success("Got Campaign"));
+        dispatch(result(campaign));
+        dispatch(done());
+    };
+
+    function result(campaign) {
         return {
-            type: contractConstants.ROLE_ERROR,
-            error
+            type: contractConstants.GET_CAMPAIGN_RESULT,
+            campaign
         };
     }
 }
@@ -56,217 +77,199 @@ function makeCoordinator(address) {
             const { contract } = getState().web3;
             info = await contract.methods.makeCoordinator(address).send();
         } catch (e) {
+            console.log(e);
             dispatch(failure(e));
-            dispatch(alertActions.error(e));
+            dispatch(alertActions.error("Error Making Coordinator"));
             return;
         }
         if (info.status) {
             dispatch(alertActions.success("Made Coordinator"));
             dispatch(done());
         } else {
-            console.log(info)
-            e = info.toString();
-            dispatch(failure(e));
-            dispatch(alertActions.error("Error Making Coordinator: "+e));
+            printReceipt(info);
+            dispatch(failure(info.toString()));
+            dispatch(alertActions.error("Error Making Coordinator: " + e));
         }
         return;
     };
-
-    function started() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_STARTED
-        };
-    }
-
-    function done() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_DONE,
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_ERROR,
-            error
-        };
-    }
 }
-
-function grantRole(role, address) {
-    return async (dispatch, getState) => {
-        dispatch(started());
-        let info;
-        try {
-            role = getRoleFromString(role);
-            const { contract } = getState().web3;
-            info = await contract.methods.grantRole(role, address).send();
-        } catch (e) {
-            dispatch(failure(e));
-            dispatch(alertActions.error(e));
-            return;
-        }
-        if (info.status) {
-            dispatch(alertActions.success("Role Granted"));
-            dispatch(done());
-        } else {
-            console.log(info)
-            e = info.toString();
-            dispatch(failure(e));
-            dispatch(alertActions.error("Error Granting Role: "+e));
-        }
-        return;
-    };
-
-    function started() {
-        return {
-            type: contractConstants.GRANT_ROLE_STARTED
-        };
-    }
-
-    function done() {
-        return {
-            type: contractConstants.GRANT_ROLE_DONE,
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: contractConstants.GRANT_ROLE_ERROR,
-            error
-        };
-    }
-}
-/*
 
 function startCampaign(campaign) {
     return async (dispatch, getState) => {
         dispatch(started());
-        let info;
+        let receipt;
         try {
             const { contract } = getState().web3;
-            info = await contract.methods.startCampaign(campaign).send();
+            receipt = await contract.methods
+                .startCampaign(
+                    campaign.manufacturers,
+                    campaign.couriers,
+                    campaign.receiver,
+                    campaign.totalPLA
+                )
+                .send();
         } catch (e) {
+            console.log(e);
             dispatch(failure(e));
-            dispatch(alertActions.error(e));
+            dispatch(alertActions.error("Error Starting Campaign"));
             return;
         }
-        if (info.status) {
-            dispatch(alertActions.success("Started Campaign: "+info.result.campaignId));
+        if (receipt.status) {
+            let event = receipt.events["CampaignStarted"];
+            dispatch(
+                alertActions.success(
+                    "Started Campaign ID: " + event.returnValues.campaignId
+                )
+            );
             dispatch(done());
         } else {
-            console.log(info)
-            e = info.toString();
-            dispatch(failure(e));
-            dispatch(alertActions.error("Error Starting Campaign: "+e));
+            printReceipt(receipt);
+            dispatch(failure(receipt.toString()));
+            dispatch(alertActions.error("Error Starting Campaign"));
         }
-        return role;
     };
-
-    function started() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_STARTED
-        };
-    }
-
-    function done() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_DONE,
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_ERROR,
-            error
-        };
-    }
 }
 
-function getCampaign(campaignId) {
+function addManufacturers(data) {
     return async (dispatch, getState) => {
         dispatch(started());
-        let info;
+        let receipt;
         try {
             const { contract } = getState().web3;
-            info = await contract.methods.getCampaign(campaignId).send();
+            receipt = await contract.methods
+                .addManufacturers(data.campaignId, data.manufacturers)
+                .send();
         } catch (e) {
+            console.log(e);
             dispatch(failure(e));
-            dispatch(alertActions.error(e));
+            dispatch(alertActions.error("Error Adding Manufacturers"));
             return;
         }
-        if (info.status) {
-            dispatch(alertActions.success("Made Coordinator"));
+        if (receipt.status) {
+            printReceipt(receipt);
+            let events = receipt.events["RoleGranted"];
+            if (events) {
+                let number = Array.isArray(events) ? events.length : 1;
+                dispatch(
+                    alertActions.success(number + " Manufacturer Roles Granted")
+                );
+            } else {
+                dispatch(alertActions.success("No Roles Granted"));
+            }
+            dispatch(alertActions.success("Added Manufacturers"));
             dispatch(done());
         } else {
-            console.log(info)
-            e = info.toString();
-            dispatch(failure(e));
-            dispatch(alertActions.error("Error Making Coordinator: "+e));
+            printReceipt(receipt);
+            dispatch(failure(receipt.toString()));
+            dispatch(alertActions.error("Error Adding Manufacturers"));
         }
-        return role;
     };
+}
 
-    function started() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_STARTED
-        };
-    }
-
-    function done() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_DONE,
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_ERROR,
-            error
-        };
-    }
+function addCouriers(data) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let receipt;
+        try {
+            const { contract } = getState().web3;
+            receipt = await contract.methods
+                .addCouriers(data.campaignId, data.couriers)
+                .send();
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            dispatch(alertActions.error("Error Adding Couriers"));
+            return;
+        }
+        if (receipt.status) {
+            let events = receipt.events["RoleGranted"];
+            if (events) {
+                let number = Array.isArray(events) ? events.length : 1;
+                dispatch(
+                    alertActions.success(number + " Courier Roles Granted")
+                );
+            } else {
+                dispatch(alertActions.success("No Roles Granted"));
+            }
+            dispatch(alertActions.success("Added Couriers"));
+            dispatch(done());
+        } else {
+            printReceipt(receipt);
+            dispatch(failure(receipt.toString()));
+            dispatch(alertActions.error("Error Adding Couriers"));
+        }
+    };
 }
 
 function createNewBatch(batch) {
     return async (dispatch, getState) => {
+        const {
+            campaignId,
+            amountOfPLA,
+            expectedAmountOfMasks,
+            tfForDeliveryToManufacturer,
+            tfForMakingMasks,
+            tfForDeliveryToReciver,
+            courier1,
+            courier2,
+            manufacturer
+        } = batch;
         dispatch(started());
         let info;
         try {
             const { contract } = getState().web3;
-            info = await contract.methods.createNewBatch(batch).send();
+            info = await contract.methods
+                .createNewBatch(
+                    campaignId,
+                    amountOfPLA,
+                    expectedAmountOfMasks,
+                    tfForDeliveryToManufacturer,
+                    tfForMakingMasks,
+                    tfForDeliveryToReciver,
+                    courier1,
+                    courier2,
+                    manufacturer
+                )
+                .send();
         } catch (e) {
+            console.log(e);
             dispatch(failure(e));
-            dispatch(alertActions.error(e));
+            dispatch(alertActions.error("Error Creating Batch"));
             return;
         }
         if (info.status) {
             dispatch(alertActions.success("Created New Batch"));
             dispatch(done());
         } else {
-            console.log(info)
-            e = info.toString();
-            dispatch(failure(e));
-            dispatch(alertActions.error("Error Creating New Batch: "+e));
+            printReceipt(info);
+            dispatch(failure(info.toString()));
+            dispatch(alertActions.error("Error Creating Batch"));
         }
-        return role;
     };
-
-    function started() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_STARTED
-        };
-    }
-
-    function done() {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_DONE,
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: contractConstants.MAKE_COORDINATOR_ERROR,
-            error
-        };
-    }
 }
-*/
+
+function started() {
+    return {
+        type: contractConstants.TRANSACTION_STARTED
+    };
+}
+
+function done() {
+    return {
+        type: contractConstants.TRANSACTION_DONE
+    };
+}
+
+function failure(error) {
+    return {
+        type: contractConstants.TRANSACTION_ERROR,
+        error
+    };
+}
+
+function printReceipt(receipt) {
+    console.log("Got Receipt");
+    Object.keys(receipt).map((key, index) => {
+        console.log(key, receipt[key]);
+    });
+}

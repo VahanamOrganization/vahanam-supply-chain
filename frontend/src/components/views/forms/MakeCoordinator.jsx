@@ -51,7 +51,6 @@ class MakeCoordinator extends React.Component {
         const { address, submitted } = this.state;
         return (
             <div className="makeCoordinator form">
-                <span className="title">Make Coordinator</span>
                 <span className="label">Coordinator Address</span>
                 <input
                     className="input"

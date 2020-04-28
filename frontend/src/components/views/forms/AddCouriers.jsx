@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { contractActions } from "../../../actions";
-import { contractConstants } from "../../../constants";
 
-class GrantRole extends React.Component {
+class AddCouriers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            role: "",
-            address: "",
+            couriers: [],
+            campaignId: 0,
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -20,14 +19,18 @@ class GrantRole extends React.Component {
     clearForm(event) {
         event.preventDefault();
         this.setState({
-            role: "",
-            address: "",
+            couriers: [],
+            campaignId: 0,
             submitted: false
         });
     }
 
     handleChange(event) {
-        const { name, value } = event.target;
+        let { name, value } = event.target;
+        value = value.trim();
+        if (["couriers", "couriers"].includes(name)) {
+            value = value.split(",").map(val => val.trim());
+        }
         this.setState({
             [name]: value
         });
@@ -44,54 +47,53 @@ class GrantRole extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
-        const { address, role } = this.state;
-        if (address && role) {
-            await this.props.grantRole(role, address);
+        const { couriers, campaignId } = this.state;
+        if (
+            couriers.length != 0 &&
+            campaignId > 0
+        ) {
+            await this.props.addCouriers(this.state);
         }
     }
 
     render() {
-        const { role, address, submitted } = this.state;
+        const {
+            couriers,
+            campaignId,
+            submitted
+        } = this.state;
         return (
-            <div className="grantRole form">
-                <span className="label">Role</span>
-                <select
-                    name="role"
-                    className="input"
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleEnter}
-                    defaultValue="NONE"
-                >
-                {contractConstants.ROLES.map((role, index) => {
-                    if (role === "COORDINATOR") {
-                        role = "NONE";
-                    } else if (role === "ADMIN") {
-                        return;
-                    }
-                    return (
-                        <option key={index} value={role}>{role}</option>
-                    );
-                })}
-                </select>
-                {submitted && (!role || role === "NONE") && (
-                    <div className="helpBlock">Role is required</div>
-                )}
-                <span className="label">Address</span>
+            <div className="addCouriers form">
+                <span className="label">Couriers Addresses</span>
                 <input
                     className="input"
                     type="text"
-                    name="address"
-                    placeholder="0x..."
-                    value={address}
+                    name="couriers"
+                    value={couriers}
+                    placeholder="0x..., 0x..., ..."
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
-                {submitted && !address && (
-                    <div className="helpBlock">Address is Required</div>
+                {submitted && couriers.length == 0 && (
+                    <div className="helpBlock">
+                        Couriers Address Required
+                    </div>
+                )}
+                <span className="label">Campaign ID</span>
+                <input
+                    className="input"
+                    type="number"
+                    name="campaignId"
+                    value={campaignId}
+                    onChange={this.handleChange}
+                    onKeyPress={this.handleEnter}
+                />
+                {submitted && campaignId == 0 && (
+                    <div className="helpBlock">CampaignId cannot be 0</div>
                 )}
                 <div className="submitForm">
                     <a href="#" onClick={this.handleSubmit}>
-                        Grant
+                        Add
                     </a>
                     <a href="#" onClick={this.clearForm}>
                         Clear
@@ -107,9 +109,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    grantRole: contractActions.grantRole
-
+    addCouriers: contractActions.addCouriers
 };
 
-const connectedGrantRole = connect(mapState, actionCreators)(GrantRole);
-export { connectedGrantRole as GrantRole };
+const connectedAddCouriers = connect(mapState, actionCreators)(AddCouriers);
+export { connectedAddCouriers as AddCouriers };

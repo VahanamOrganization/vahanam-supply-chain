@@ -11,17 +11,21 @@
         align-items: center;
         height: 100%;
         width: 80%;
-        .form {
+        select {
             margin-top: 2vh;
+            font-size: 4vh;
+            font-weight: bold;
+            width: 100%;
+            option {
+                font-size: 1.5vh;
+            }
+        }
+        .form {
             width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            .title {
-                font-size: 4vh;
-                font-weight: bold;
-            }
             .label {
                 margin-top: 2vh;
                 font-size: 3vh;
@@ -35,7 +39,6 @@
                 width: 100%;
                 font-size: 3vh;
                 option {
-                    width: 100% !important;
                     font-size: 1.5vh;
                 }
             }
@@ -63,6 +66,23 @@
                     &:hover {
                         background: darkblue;
                     }
+                }
+            }
+            .response {
+                margin-top: 2vh;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .label {
+                    font-size: 3vh;
+                    align-self: flex-start;
+                }
+                .data {
+                    font-size: 2vh;
+                    font-weight: bold;
+                    align-self: flex-start;
                 }
             }
         }
