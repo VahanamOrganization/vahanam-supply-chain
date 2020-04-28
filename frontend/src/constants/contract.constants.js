@@ -1,9 +1,9 @@
 export const contractConstants = {
     ROLES: [
-        "ADMIN",
         "COORDINATOR",
-        "COURIER",
         "MANUFACTURER",
+        "COURIER",
+        "ADMIN",
         "RECIEVER"
     ],
 

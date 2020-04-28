@@ -60,12 +60,48 @@ class LoginPage extends React.Component {
                         />
                     </div>
                     <div className="loginForm form">
-                    <a className="login" href="#" onClick={this.handleSubmit}>
-                        Login with MetaMask
-                    </a>
-                    <Link className="register" to="/register">
-                        Register
-                    </Link>
+                        <span className="label">Account</span>
+                        <input
+                            className="account"
+                            type="text"
+                            name="account"
+                            value={account}
+                            disabled
+                        />
+                        {!account && (
+                            <div className="helpBlock">
+                                MetaMask not connected
+                            </div>
+                        )}
+                        {account && (
+                            <div className="successBlock">
+                                MetaMask connected
+                            </div>
+                        )}
+                        <span className="label">Password</span>
+                        <input
+                            className="input"
+                            type="password"
+                            name="password"
+                            value={password}
+                            onChange={this.handleChange}
+                            onKeyPress={this.handleEnter}
+                        />
+                        {submitted && !password && (
+                            <div className="helpBlock">
+                                Password is required
+                            </div>
+                        )}
+                        <a
+                            className="login"
+                            href="#"
+                            onClick={this.handleSubmit}
+                        >
+                            Login
+                        </a>
+                        <Link className="register" to="/register">
+                            Register
+                        </Link>
                     </div>
                 </div>
             </div>

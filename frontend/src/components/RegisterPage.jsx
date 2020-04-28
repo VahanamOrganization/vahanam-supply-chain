@@ -8,12 +8,10 @@ import loading from "../assets/img/loading.gif";
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             user: {
-                email: "",
-                role: "",
-                phone_number: "",
+                displayName: "",
+                role: 0,
                 password: "",
                 confirmPassword: ""
             },
@@ -47,13 +45,13 @@ class RegisterPage extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
-        const { user } = this.state;
+        let { user } = this.state;
+        user.address = this.props.account;
         if (
-            user.email &&
+            user.address &&
+            user.displayName &&
             user.role &&
-            user.role !== "0" &&
-            user.phone_number &&
-            user.phone_number !== "0" &&
+            user.role >= 0 &&
             user.password &&
             user.confirmPassword &&
             user.password === user.confirmPassword
@@ -63,22 +61,45 @@ class RegisterPage extends React.Component {
     }
 
     render() {
-        const { registering } = this.props;
+        const { inProgress, account } = this.props;
         const { user, submitted } = this.state;
         return (
             <div className="registerPage">
-                <div className="registerPageInner">
-                    <span className="label">Email</span>
+                <div className="registerPageInner form">
+                    <div className="title">
+                        <span>Register</span>
+                        <img
+                            src={loading}
+                            style={inProgress ? { opacity: 1 } : { opacity: 0 }}
+                        />
+                    </div>
+                    <span className="label">Account</span>
+                    <input
+                        className="account"
+                        type="text"
+                        name="account"
+                        value={account}
+                        disabled
+                    />
+                    {!account && (
+                        <div className="helpBlock">MetaMask not connected</div>
+                    )}
+                    {account && (
+                        <div className="successBlock">MetaMask connected</div>
+                    )}
+                    <span className="label">Display Name</span>
                     <input
                         className="input"
-                        type="email"
-                        name="email"
-                        value={user.email}
+                        type="text"
+                        name="displayName"
+                        value={user.displayName}
                         onChange={this.handleChange}
                         onKeyPress={this.handleEnter}
                     />
-                    {submitted && !user.email && (
-                        <div className="helpBlock">Email is required</div>
+                    {submitted && !user.displayName && (
+                        <div className="helpBlock">
+                            Display Name is required
+                        </div>
                     )}
                     <span className="label">Role</span>
                     <select
@@ -86,10 +107,11 @@ class RegisterPage extends React.Component {
                         onChange={this.handleChange}
                         onKeyPress={this.handleEnter}
                         className="input"
-                        defaultValue="0"
+                        defaultValue={0}
                     >
-                        {contractConstants.roles.map((role, index) => (
-                            <option key={index} value={role}>
+                        <option value={0}>NONE</option>
+                        {contractConstants.ROLES.map((role, index) => (
+                            <option key={index} value={index + 1}>
                                 {role}
                             </option>
                         ))}
@@ -97,6 +119,7 @@ class RegisterPage extends React.Component {
                     {submitted && (!user.role || user.role === "0") && (
                         <div className="helpBlock">Role is required</div>
                     )}
+                    {/*
                     <span className="label">Phone Number</span>
                     <input
                         className="input"
@@ -112,6 +135,7 @@ class RegisterPage extends React.Component {
                                 Phone Number is required
                             </div>
                         )}
+                    */}
                     <span className="label">Password</span>
                     <input
                         className="input"
@@ -149,7 +173,6 @@ class RegisterPage extends React.Component {
                             <a href="#" onClick={this.handleSubmit}>
                                 Register
                             </a>
-                            {registering && <img src={loading} />}
                         </div>
                         <div className="cancel">
                             <Link to="/login">Cancel</Link>
@@ -162,8 +185,9 @@ class RegisterPage extends React.Component {
 }
 
 function mapState(state) {
-    const { registering } = state.authentication;
-    return { registering };
+    const { account } = state.web3;
+    let inProgress = state.web3.inProgress || state.authentication.inProgress;
+    return { inProgress, account };
 }
 
 const actionCreators = {

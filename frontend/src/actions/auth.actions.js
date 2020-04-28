@@ -39,6 +39,7 @@ function login(username, password) {
 
 function logout() {
     return dispatch => {
+        authService.logout();
         dispatch({ type: authConstants.LOGOUT });
     };
 }

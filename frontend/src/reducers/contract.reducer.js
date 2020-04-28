@@ -1,6 +1,6 @@
-import { contractConstants } from "../constants";
+import { contractConstants, authConstants } from "../constants";
 
-export function contract(state = { inProgress: false }, action) {
+export function contract(state = {}, action) {
     switch (action.type) {
         case contractConstants.TRANSACTION_STARTED:
             return {
@@ -10,7 +10,7 @@ export function contract(state = { inProgress: false }, action) {
         case contractConstants.TRANSACTION_DONE:
             return {
                 ...state,
-                inProgress: false,
+                inProgress: false
             };
         case contractConstants.TRANSACTION_ERROR:
             return {
@@ -30,6 +30,8 @@ export function contract(state = { inProgress: false }, action) {
                 inProgress: false,
                 campaign: action.campaign
             };
+        case authConstants.LOGOUT:
+            return {};
         default:
             return state;
     }

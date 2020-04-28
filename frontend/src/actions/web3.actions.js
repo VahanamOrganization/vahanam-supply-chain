@@ -22,12 +22,12 @@ function loadAccount() {
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
-            let error = "Could not load Web3 Account";
+            let error = "Could not load MetaMask Account";
             dispatch(alertActions.error(error));
             return;
         }
         dispatch(loaded({account}));
-        dispatch(alertActions.success("Reloaded Web3 Account"));
+        dispatch(alertActions.success("Reloaded MetaMask Account"));
     };
 }
 
@@ -41,7 +41,7 @@ function loadNetwork() {
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
-            let error = "Could not load Web3 Account";
+            let error = "Could not load MetaMask Account";
             dispatch(alertActions.error(error));
             return;
         }
@@ -52,7 +52,7 @@ function loadNetwork() {
             return;
         }
         dispatch(loaded({networkId}));
-        dispatch(alertActions.success("Reloaded Web3 Network"));
+        dispatch(alertActions.success("Reloaded MetaMask Network"));
     };
 }
 
@@ -76,7 +76,7 @@ function loadWeb3() {
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
-            let error = "Could not load Web3 Account";
+            let error = "Could not load MetaMask Account";
             dispatch(alertActions.error(error));
             return;
         }
@@ -86,7 +86,7 @@ function loadWeb3() {
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
-            let error = "Could not load Web3 Network";
+            let error = "Could not load MetaMask Network";
             dispatch(alertActions.error(error));
             return;
         }
@@ -113,7 +113,7 @@ function loadWeb3() {
             return;
         }
         dispatch(loaded({web3, account, networkId, contract}));
-        dispatch(alertActions.success("Web3 Connected"));
+        dispatch(alertActions.success("MetaMask Connected"));
         return contract;
     };
 

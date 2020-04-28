@@ -1,36 +1,47 @@
 import { authConstants } from "../constants";
 
-let user = JSON.parse(localStorage.getItem("user"));
-const initialState = user ? { loggedIn: true, user } : {};
+//let user = JSON.parse(localStorage.getItem("user"));
+//const initialState = user ? { loggedIn: true, user } : {};
 
-export function authentication(state = initialState, action) {
+export function authentication(state = {}, action) {
     switch (action.type) {
         case authConstants.LOGIN_REQUEST:
             return {
-                loggingIn: true,
+                inProgress: true,
                 user: action.user
             };
         case authConstants.LOGIN_SUCCESS:
             return {
+                inProgress: false,
                 loggedIn: true,
                 user: action.user
             };
         case authConstants.LOGIN_FAILURE:
-            return {};
+            return {
+                inProgress: false,
+                loggedIn: false
+            };
         case authConstants.LOGOUT:
-            return {};
+            return {
+                inProgress: false,
+                loggedIn: false
+            };
         case authConstants.REGISTER_REQUEST:
             return {
-                registering: true,
+                inProgress: true,
                 user: action.user
             };
         case authConstants.REGISTER_SUCCESS:
             return {
-                registered: true,
+                loggedIn: true,
+                inProgress: false,
                 user: action.user
             };
         case authConstants.REGISTER_FAILURE:
-            return {};
+            return {
+                inProgress: false,
+                loggedIn: false
+            };
         default:
             return state;
     }

@@ -20,22 +20,19 @@ function login(username, password) {
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem("user", JSON.stringify(user));
-
+            //localStorage.setItem("user", JSON.stringify(user));
             return user;
         });
 }
 
 export function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem("user");
+    //localStorage.removeItem("user");
     const requestOptions = {
         method: "POST"
     };
 
-    return fetch(`${config.apiUrl}/logout/`, requestOptions).then(
-        handleResponse
-    );
+    return fetch(`${config.apiUrl}/logout/`, requestOptions);
 }
 
 function register(user) {
@@ -51,7 +48,7 @@ function register(user) {
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem("user", JSON.stringify(user));
+            //localStorage.setItem("user", JSON.stringify(user));
 
             return user;
         });
@@ -70,10 +67,9 @@ function handleResponse(response) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-        if (!data.email) {
+        if (!data.address) {
             return Promise.reject("Login failed");
         }
-
         return data;
     });
 }
