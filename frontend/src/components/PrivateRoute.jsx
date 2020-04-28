@@ -4,13 +4,14 @@ import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
-    const { account, network } = useSelector(state => state.web3);
-    let isPrivateNetwork = account && network == config.networkId;
+    const { web3, authentication } = useSelector(state => state);
+    let isCorrectNetwork = web3.account && web3.networkId == config.networkId;
+    let isLoggedIn = authentication.loggedIn && authentication.user;
     return (
         <Route
             {...rest}
             render={props =>
-                isPrivateNetwork ? (
+                isCorrectNetwork && isLoggedIn ? (
                     <Component {...props} />
                 ) : (
                     <Redirect

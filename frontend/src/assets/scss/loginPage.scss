@@ -14,12 +14,19 @@
         height: 60%;
         width: 80%;
         .title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             font-size: 5vh;
             font-weight: bold;
+            img {
+                height: 6vh;
+                width: 6vh;
+            }
         }
-        img {
-            height: 6vh;
-            width: 6vh;
+        .account {
+            font-size: 2vh;
         }
         a {
             margin-top: 2vh;

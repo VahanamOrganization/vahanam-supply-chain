@@ -1,63 +1,32 @@
 .registerPage {
-    display: flex;
-    justify-content: center;
-    align-content: center;
     width: 100vw;
     height: 100vh;
-    font-size: 2vh;
+    font-size: 4vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .registerPageInner {
-        min-width: 20vw;
-        max-width: 500px;
         display: flex;
-        justify-content: center;
-        align-content: center;
         flex-direction: column;
-        .label {
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-        .input {
-            height: 30px;
-        }
-        .helpBlock {
-            color: red;
-            font-size: 1.5vh;
-        }
-        .submitForm{
-            padding-top: 10px;
-            padding-bottom: 5px;
+        justify-content: center;
+        align-items: center;
+        height: 60%;
+        width: 80%;
+        .title {
             display: flex;
-            justify-content: space-between;
-            align-content: center;
-            .register {
-                display: flex;
-                align-content: center;
-                justify-content: center;
-                height: 30px;
-                a {
-                    margin-right: 2px;
-                }
-                img {
-                    height: 100%;
-                }
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 5vh;
+            font-weight: bold;
+            img {
+                height: 6vh;
+                width: 6vh;
             }
-            .cancel {
-                height: 30px;
-                display: flex;
-                align-content: center;
-                justify-content: center;
-            }
-
-            a {
-                text-decoration: none;
-                background: blue;
-                padding: 5px;
-                color: white;
-                border-radius: 5%;
-                &:hover {
-                    background: darkblue;
-                }
-            }
+        }
+        .account {
+            font-size: 2vh;
         }
     }
 }
