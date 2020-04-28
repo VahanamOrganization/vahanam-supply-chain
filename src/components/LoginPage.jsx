@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { history } from "../../../helpers";
-
-import { web3Actions, authActions } from "../../../actions";
-import loading from "../../../assets/img/loading.gif";
+import { history } from "../helpers";
+import { contractActions, web3Actions, authActions } from "../actions";
+import loading from "../assets/img/loading.gif";
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -12,7 +11,7 @@ class LoginPage extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.logout();
     }
 
@@ -20,11 +19,12 @@ class LoginPage extends React.Component {
         e.preventDefault();
         await this.props.loadWeb3();
         await this.props.loadAccount();
+        await this.props.loadNetwork();
+        await this.props.loadContract();
         history.push("/");
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="loginPage">
                 <div className="loginPageInner">
@@ -57,6 +57,8 @@ function mapState(state) {
 const actionCreators = {
     loadWeb3: web3Actions.load,
     loadAccount: web3Actions.account,
+    loadNetwork: web3Actions.network,
+    loadContract: web3Actions.loadContract,
     logout: authActions.logout
 };
 

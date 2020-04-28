@@ -49,14 +49,8 @@ module.exports = {
         // global app config object
         config: JSON.stringify({
             apiUrl: "http://127.0.0.1:8000",
-            roles: [
-                "None",
-                "Coordinator",
-                "Manufacturer",
-                "Courier",
-                "Admin",
-                "Reciever"
-            ]
+            networkId: 4447,
+            contractAddress: "0xCfEB869F69431e42cdB54A4F4f105C19C080A601"
         })
     }
 };

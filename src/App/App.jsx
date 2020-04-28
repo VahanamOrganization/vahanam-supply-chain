@@ -5,9 +5,9 @@ import { ToastContainer } from "react-toastify";
 import { history } from "../helpers";
 import { alertActions } from "../actions";
 import { PrivateRoute } from "../components";
-import { HomePage } from "../components/pages/HomePage";
-import { LoginPage } from "../components/pages/LoginPage";
-import { RegisterPage } from "../components/pages/RegisterPage";
+import { HomePage } from "../components/HomePage";
+import { LoginPage } from "../components/LoginPage";
+import { RegisterPage } from "../components/RegisterPage";
 
 class App extends React.Component {
     constructor(props) {
@@ -16,7 +16,11 @@ class App extends React.Component {
 
     componentDidMount() {
         if (window.ethereum) {
+            window.ethereum.autoRefreshOnNetworkChange = false;
             window.ethereum.on("accountsChanged", function(accounts) {
+                history.push("/login");
+            });
+            window.ethereum.on("networkChanged", function(accounts) {
                 history.push("/login");
             });
         }
@@ -25,7 +29,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <ToastContainer />
+                <ToastContainer closeButton={false} autoClose={2000}/>
                 <Router history={history}>
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage} />

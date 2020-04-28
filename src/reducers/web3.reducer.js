@@ -5,8 +5,7 @@ export function web3(state = { inProgress: false }, action) {
         case web3Constants.CONNECTION_STARTED:
             return {
                 ...state,
-                inProgress: true,
-                connection: action.connection
+                inProgress: true
             };
         case web3Constants.CONNECTION_LOADED:
             return {
@@ -23,8 +22,7 @@ export function web3(state = { inProgress: false }, action) {
         case web3Constants.ACCOUNT_STARTED:
             return {
                 ...state,
-                inProgress: true,
-                account: action.account
+                inProgress: true
             };
         case web3Constants.ACCOUNT_LOADED:
             return {
@@ -38,11 +36,39 @@ export function web3(state = { inProgress: false }, action) {
                 inProgress: false,
                 error: action.error
             };
+        case web3Constants.NETWORK_STARTED:
+            return {
+                ...state,
+                inProgress: true
+            };
         case web3Constants.NETWORK_LOADED:
             return {
                 ...state,
                 inProgress: false,
                 network: action.network
+            };
+        case web3Constants.NETWORK_ERROR:
+            return {
+                ...state,
+                inProgress: false,
+                error: action.error
+            };
+        case web3Constants.CONTRACT_STARTED:
+            return {
+                ...state,
+                inProgress: true
+            };
+        case web3Constants.CONTRACT_LOADED:
+            return {
+                ...state,
+                inProgress: false,
+                contract: action.contract
+            };
+        case web3Constants.CONTRACT_ERROR:
+            return {
+                ...state,
+                inProgress: false,
+                error: action.error
             };
         default:
             return state;
