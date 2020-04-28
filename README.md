@@ -1,6 +1,6 @@
-# stopcoid19-react
+# stopcovid19-react
 
-Blockchain-based Tracking System Medical Supplies in Greece
+Blockchain-based Supply Chain Tracking System
 
-frontend built using react, redux, drizzle & webpack
+frontend built using react, redux, web3 & webpack
 
