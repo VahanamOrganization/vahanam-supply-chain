@@ -1,0 +1,55 @@
+{
+  "name": "stopcovid19-react",
+  "version": "0.1.0",
+  "description": "Blockchain-based Tracking System Medical Supplies in Greece",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dan13ram/stopcovid19-react.git"
+  },
+  "author": "dan13ram",
+  "license": "ISC",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server"
+  },
+  "bugs": {
+    "url": "https://github.com/dan13ram/stopcovid19-react/issues"
+  },
+  "homepage": "https://github.com/dan13ram/stopcovid19-react#readme",
+  "dependencies": {
+    "@drizzle/react-components": "^1.5.1",
+    "@drizzle/react-plugin": "^1.5.1",
+    "@drizzle/store": "^1.5.1",
+    "babel-polyfill": "^6.26.0",
+    "history": "^4.10.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-toastify": "^5.5.0",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.2",
+    "file-loader": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^4.1.0",
+    "html-webpack-plugin": "^4.2.0",
+    "image-webpack-loader": "^6.0.0",
+    "merge-stream": "^2.0.0",
+    "normalize-scss": "^7.0.1",
+    "path": "^0.12.7",
+    "style-loader": "^1.1.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
