@@ -8,41 +8,65 @@ import loading from "../assets/img/loading.gif";
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            password: "",
+            submitted: false
+        };
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEnter = this.handleEnter.bind(this);
     }
 
     componentDidMount() {
         this.props.logout();
     }
 
-    async handleSubmit(e) {
-        e.preventDefault();
-        await this.props.loadWeb3();
-        await this.props.loadAccount();
-        await this.props.loadNetwork();
-        await this.props.loadContract();
-        history.push("/");
+    handleChange(event) {
+        let { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleEnter(e) {
+        var code = e.keyCode || e.which;
+        if (code === 13) {
+            //13 is the enter keycode
+            this.handleSubmit(e);
+        }
+    }
+
+    async handleSubmit(event) {
+        event.preventDefault();
+        this.setState({ submitted: true });
+        const { password } = this.state;
+        const { account } = this.props;
+        if (account && password) {
+            await this.props.login(account, password);
+        }
     }
 
     render() {
+        const { inProgress, account } = this.props;
+        const { password, submitted } = this.state;
         return (
             <div className="loginPage">
                 <div className="loginPageInner">
-                    <span className="title">3D Printed Masks</span>
-                    <img
-                        src={loading}
-                        style={
-                            this.props.inProgress
-                                ? { opacity: 1 }
-                                : { opacity: 0 }
-                        }
-                    />
+                    <div className="title">
+                        <span>3D Printed Masks</span>
+                        <img
+                            src={loading}
+                            style={inProgress ? { opacity: 1 } : { opacity: 0 }}
+                        />
+                    </div>
+                    <div className="loginForm form">
                     <a className="login" href="#" onClick={this.handleSubmit}>
                         Login with MetaMask
                     </a>
                     <Link className="register" to="/register">
                         Register
                     </Link>
+                    </div>
                 </div>
             </div>
         );
@@ -50,15 +74,13 @@ class LoginPage extends React.Component {
 }
 
 function mapState(state) {
-    const { inProgress } = state.web3;
-    return { inProgress };
+    const { account } = state.web3;
+    let inProgress = state.web3.inProgress || state.authentication.inProgress;
+    return { inProgress, account };
 }
 
 const actionCreators = {
-    loadWeb3: web3Actions.load,
-    loadAccount: web3Actions.account,
-    loadNetwork: web3Actions.network,
-    loadContract: web3Actions.loadContract,
+    login: authActions.login,
     logout: authActions.logout
 };
 

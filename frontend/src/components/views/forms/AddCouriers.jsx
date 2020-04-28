@@ -48,20 +48,13 @@ class AddCouriers extends React.Component {
         event.preventDefault();
         this.setState({ submitted: true });
         const { couriers, campaignId } = this.state;
-        if (
-            couriers.length != 0 &&
-            campaignId > 0
-        ) {
+        if (couriers.length != 0 && campaignId > 0) {
             await this.props.addCouriers(this.state);
         }
     }
 
     render() {
-        const {
-            couriers,
-            campaignId,
-            submitted
-        } = this.state;
+        const { couriers, campaignId, submitted } = this.state;
         return (
             <div className="addCouriers form">
                 <span className="label">Couriers Addresses</span>
@@ -75,9 +68,7 @@ class AddCouriers extends React.Component {
                     onKeyPress={this.handleEnter}
                 />
                 {submitted && couriers.length == 0 && (
-                    <div className="helpBlock">
-                        Couriers Address Required
-                    </div>
+                    <div className="helpBlock">Couriers Address Required</div>
                 )}
                 <span className="label">Campaign ID</span>
                 <input

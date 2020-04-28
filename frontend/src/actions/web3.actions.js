@@ -6,13 +6,57 @@ import { web3Constants } from "../constants";
 import campaignGenerator from "../assets/contracts/CampaignGenerator.json";
 
 export const web3Actions = {
-    load,
-    account,
-    network,
-    loadContract
+    loadWeb3,
+    loadAccount,
+    loadNetwork
 };
 
-function load() {
+function loadAccount() {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let account;
+        try {
+            const { web3 } = getState().web3;
+            const accounts = await web3.eth.getAccounts();
+            account = accounts[0];
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            let error = "Could not load Web3 Account";
+            dispatch(alertActions.error(error));
+            return;
+        }
+        dispatch(loaded({account}));
+        dispatch(alertActions.success("Reloaded Web3 Account"));
+    };
+}
+
+function loadNetwork() {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let networkId;
+        try {
+            const { web3 } = getState().web3;
+            networkId = await web3.eth.net.getId();
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            let error = "Could not load Web3 Account";
+            dispatch(alertActions.error(error));
+            return;
+        }
+        if (networkId !== config.networkId) {
+            let error = "Incorrect NetworkID, Expecting " + config.networkId;
+            dispatch(failure(error));
+            dispatch(alertActions.error(error));
+            return;
+        }
+        dispatch(loaded({networkId}));
+        dispatch(alertActions.success("Reloaded Web3 Network"));
+    };
+}
+
+function loadWeb3() {
     return async dispatch => {
         dispatch(started());
         let web3;
@@ -25,123 +69,36 @@ function load() {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded(web3));
-        dispatch(alertActions.success("Found MetaMask Web3 "));
-        return web3;
-    };
-
-    function started() {
-        return {
-            type: web3Constants.CONNECTION_STARTED
-        };
-    }
-
-    function loaded(connection) {
-        return {
-            type: web3Constants.CONNECTION_LOADED,
-            connection
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: web3Constants.CONNECTION_ERROR,
-            error
-        };
-    }
-}
-
-function account() {
-    return async (dispatch, getState) => {
-        dispatch(started());
         let account;
         try {
-            const { connection } = getState().web3;
-            const accounts = await connection.eth.getAccounts();
+            const accounts = await web3.eth.getAccounts();
             account = accounts[0];
         } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
             let error = "Could not load Web3 Account";
-            dispatch(failure(error));
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded(account));
-        dispatch(alertActions.success("Found Web3 Account"));
-        return account;
-    };
-
-    function started() {
-        return {
-            type: web3Constants.ACCOUNT_STARTED
-        };
-    }
-
-    function loaded(account) {
-        return {
-            type: web3Constants.ACCOUNT_LOADED,
-            account
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: web3Constants.ACCOUNT_ERROR,
-            error
-        };
-    }
-}
-
-function network() {
-    return async (dispatch, getState) => {
-        dispatch(started());
-        let network;
+        let networkId;
         try {
-            const { connection } = getState().web3;
-            network = await connection.eth.net.getId();
+            networkId = await web3.eth.net.getId();
         } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
             let error = "Could not load Web3 Network";
-            dispatch(failure(error));
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded(network));
-        dispatch(alertActions.success("Found Correct NetworkID"));
-        if (network !== config.networkId) {
+        if (networkId !== config.networkId) {
             let error = "Incorrect NetworkID, Expecting " + config.networkId;
             dispatch(failure(error));
             dispatch(alertActions.error(error));
+            return;
         }
-        return network;
-    };
-
-    function started() {
-        return {
-            type: web3Constants.NETWORK_STARTED
-        };
-    }
-
-    function loaded(network) {
-        return {
-            type: web3Constants.NETWORK_LOADED,
-            network
-        };
-    }
-
-    function failure(error) {
-        return {
-            type: web3Constants.NETWORK_ERROR,
-            error
-        };
-    }
-}
-
-function loadContract() {
-    return async (dispatch, getState) => {
-        dispatch(started());
         let contract;
         try {
-            const { account, connection } = getState().web3;
-            contract = await new connection.eth.Contract(
+            contract = await new web3.eth.Contract(
                 campaignGenerator["abi"],
                 config.contractAddress,
                 {
@@ -149,33 +106,35 @@ function loadContract() {
                 }
             );
         } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
             let error = "Could not load CampaignGenerator Contract";
-            dispatch(failure(error));
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded(contract));
-        dispatch(alertActions.success("Loaded CampaignGenerator Contract"));
+        dispatch(loaded({web3, account, networkId, contract}));
+        dispatch(alertActions.success("Web3 Connected"));
         return contract;
     };
 
-    function started() {
-        return {
-            type: web3Constants.CONTRACT_STARTED
-        };
-    }
+}
 
-    function loaded(contract) {
-        return {
-            type: web3Constants.CONTRACT_LOADED,
-            contract
-        };
-    }
+function started() {
+    return {
+        type: web3Constants.WEB3_STARTED
+    };
+}
 
-    function failure(error) {
-        return {
-            type: web3Constants.CONTRACT_ERROR,
-            error
-        };
-    }
+function loaded(web3) {
+    return {
+        type: web3Constants.WEB3_LOADED,
+        ...web3
+    };
+}
+
+function failure(error) {
+    return {
+        type: web3Constants.WEB3_ERROR,
+        error
+    };
 }
