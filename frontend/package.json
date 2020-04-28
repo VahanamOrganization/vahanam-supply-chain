@@ -2,20 +2,12 @@
   "name": "stopcovid19-react",
   "version": "0.1.0",
   "description": "Blockchain-based Tracking System Medical Supplies in Greece",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dan13ram/stopcovid19-react.git"
-  },
   "author": "dan13ram",
   "license": "ISC",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server"
   },
-  "bugs": {
-    "url": "https://github.com/dan13ram/stopcovid19-react/issues"
-  },
-  "homepage": "https://github.com/dan13ram/stopcovid19-react#readme",
   "dependencies": {
     "@drizzle/react-components": "^1.5.1",
     "@drizzle/react-plugin": "^1.5.1",
