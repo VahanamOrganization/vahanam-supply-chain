@@ -9,8 +9,8 @@ export const getStringFromRole = role => {
             return "COURIER";
         case contractConstants.MANUFACTURER_ROLE:
             return "MANUFACTURER";
-        case contractConstants.RECIEVER_ROLE:
-            return "RECIEVER";
+        case contractConstants.RECEIVER_ROLE:
+            return "RECEIVER";
         default:
             throw "Unknown Role Found";
     }
@@ -26,8 +26,8 @@ export const getRoleFromString = role => {
             return contractConstants.COURIER_ROLE;
         case "MANUFACTURER":
             return contractConstants.MANUFACTURER_ROLE;
-        case "RECIEVER":
-            return contractConstants.RECIEVER_ROLE;
+        case "RECEIVER":
+            return contractConstants.RECEIVER_ROLE;
         default:
             throw "Unknown Role Found";
     }

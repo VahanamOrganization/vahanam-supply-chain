@@ -36,6 +36,13 @@ export function logout() {
 }
 
 function register(user) {
+    // TODO: Remove this additionalData
+    user = {
+        ...user,
+        additionalData: {
+            test: true
+        }
+    };
     const requestOptions = {
         method: "POST",
         headers: {
@@ -65,9 +72,9 @@ function handleResponse(response) {
             let error = (data && data.message) || response.statusText;
             if (text.includes("UNIQUE")) {
                 if (text.includes("accounts_account.address")) {
-                    error = "Account already registered"
-                } else if (text.includes("accounts_account.displayName")){
-                    error = "Display Name already taken"
+                    error = "Account already registered";
+                } else if (text.includes("accounts_account.displayName")) {
+                    error = "Display Name already taken";
                 }
             }
             return Promise.reject(error);

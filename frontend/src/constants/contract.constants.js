@@ -4,7 +4,7 @@ export const contractConstants = {
         "MANUFACTURER",
         "COURIER",
         "ADMIN",
-        "RECIEVER"
+        "RECEIVER"
     ],
 
     STAGES: [
@@ -25,7 +25,7 @@ export const contractConstants = {
         "0x7fc3771f539a03c47afbbf258702c19273ef5e735e24ee7978081dc07288c687",
     MANUFACTURER_ROLE:
         "0xb528929ed79eb79a87ae6f578d3125509c91bfea9ac8b7fb9f69aa0bc28298dd",
-    RECIEVER_ROLE:
+    RECEIVER_ROLE:
         "0xb914ce1854b65b7506ae428aeca250f95704e80b73c091b55e0e8c805a63c657",
 
 

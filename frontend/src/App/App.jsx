@@ -45,7 +45,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <ToastContainer closeButton={false} autoClose={2000}/>
+                <ToastContainer closeButton={false} autoClose={5000}/>
                 <Router history={history}>
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage} />
