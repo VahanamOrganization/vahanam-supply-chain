@@ -2,12 +2,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 import jsonfield
 class MyAccountManager(BaseUserManager):
-	def create_user(self,address,role,password=None):
+	def create_user(self,address,role,displayName,password=None,additionalData={}):
 		if not address:
 			raise ValueError("Users must have an address")
 		if not role:
 			raise ValueError("Users must have a role")
-		user=self.model(address=address,role=role)
+		if not displayName:
+			raise ValueError("Users must have a dispayName")
+		user=self.model(address=address,role=role,displayName=displayName,additionalData=additionalData)
 		user.is_staff=False
 		user.set_password(password)
 		user.save(using=self.db)
@@ -17,8 +19,8 @@ class MyAccountManager(BaseUserManager):
 
 
 
-	def create_superuser(self,address,role,password=None):
-		user=self.create_user(address=address,role=role,password=password)
+	def create_superuser(self,address,role,displayName,password=None):
+		user=self.create_user(address=address,role=role,password=password,displayName=displayName)
 		user.is_admin=True
 		user.is_staff=True
 		user.save(using=self.db)
@@ -40,9 +42,10 @@ class account(AbstractBaseUser):
 	is_admin=models.BooleanField(default=False)
 	is_staff=models.BooleanField(default=False)
 	role=models.IntegerField(choices=Role.choices)
+	displayName=models.CharField(max_length=150,default="john",unique=True)
 	additionalData=jsonfield.JSONField()	
 	USERNAME_FIELD='address'
-	REQUIRED_FIELDS=['role']
+	REQUIRED_FIELDS=['role','displayName']
 
 	objects=MyAccountManager()
 

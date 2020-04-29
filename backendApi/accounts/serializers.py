@@ -4,4 +4,4 @@ from rest_framework import serializers
 class accountSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model=account
-		fields=['address','role','additionalData']
+		fields=['address','role','displayName','additionalData']
