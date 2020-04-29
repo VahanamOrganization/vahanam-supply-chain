@@ -10,7 +10,8 @@ export const contractActions = {
     addManufacturers,
     addCouriers,
     getCampaignDetails,
-    createNewBatch
+    createNewBatch,
+    getBatchDetails
 };
 
 function getRole() {
@@ -28,17 +29,10 @@ function getRole() {
             return;
         }
         dispatch(alertActions.success("Found Role: " + role));
-        dispatch(result(role));
+        dispatch(result({role}));
         dispatch(done());
         return role;
     };
-
-    function result(role) {
-        return {
-            type: contractConstants.ROLE_RESULT,
-            role
-        };
-    }
 }
 
 function getCampaignDetails(campaignId) {
@@ -57,37 +51,51 @@ function getCampaignDetails(campaignId) {
             return;
         }
         dispatch(alertActions.success("Got Campaign"));
-        dispatch(result(campaign));
+        dispatch(result({campaign}));
         dispatch(done());
     };
+}
 
-    function result(campaign) {
-        return {
-            type: contractConstants.GET_CAMPAIGN_RESULT,
-            campaign
-        };
-    }
+function getBatchDetails(campaignId, batchId) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let batch;
+        try {
+            const { contract } = getState().web3;
+            batch = await contract.methods
+                .getBatchDetails(campaignId, batchId)
+                .call();
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            dispatch(alertActions.error("Error Getting Batch"));
+            return;
+        }
+        dispatch(alertActions.success("Got Batch"));
+        dispatch(result({batch}));
+        dispatch(done());
+    };
 }
 
 function makeCoordinator(address) {
     return async (dispatch, getState) => {
         dispatch(started());
-        let info;
+        let receipt;
         try {
             const { contract } = getState().web3;
-            info = await contract.methods.makeCoordinator(address).send();
+            receipt = await contract.methods.makeCoordinator(address).send();
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
             dispatch(alertActions.error("Error Making Coordinator"));
             return;
         }
-        if (info.status) {
+        if (receipt.status) {
             dispatch(alertActions.success("Made Coordinator"));
             dispatch(done());
         } else {
-            printReceipt(info);
-            dispatch(failure(info.toString()));
+            printReceipt(receipt);
+            dispatch(failure(receipt.toString()));
             dispatch(alertActions.error("Error Making Coordinator: " + e));
         }
         return;
@@ -209,23 +217,23 @@ function createNewBatch(batch) {
             expectedAmountOfMasks,
             tfForDeliveryToManufacturer,
             tfForMakingMasks,
-            tfForDeliveryToReciver,
+            tfForDeliveryToReceiver,
             courier1,
             courier2,
             manufacturer
         } = batch;
         dispatch(started());
-        let info;
+        let receipt;
         try {
             const { contract } = getState().web3;
-            info = await contract.methods
+            receipt = await contract.methods
                 .createNewBatch(
                     campaignId,
                     amountOfPLA,
                     expectedAmountOfMasks,
                     tfForDeliveryToManufacturer,
                     tfForMakingMasks,
-                    tfForDeliveryToReciver,
+                    tfForDeliveryToReceiver,
                     courier1,
                     courier2,
                     manufacturer
@@ -237,12 +245,17 @@ function createNewBatch(batch) {
             dispatch(alertActions.error("Error Creating Batch"));
             return;
         }
-        if (info.status) {
-            dispatch(alertActions.success("Created New Batch"));
+        if (receipt.status) {
+            let event = receipt.events["PLAPacked"];
+            dispatch(
+                alertActions.success(
+                    "Created & Packed Batch ID: " + event.returnValues.branchId
+                )
+            );
             dispatch(done());
         } else {
-            printReceipt(info);
-            dispatch(failure(info.toString()));
+            printReceipt(receipt);
+            dispatch(failure(receipt.toString()));
             dispatch(alertActions.error("Error Creating Batch"));
         }
     };
@@ -257,6 +270,14 @@ function started() {
 function done() {
     return {
         type: contractConstants.TRANSACTION_DONE
+    };
+}
+
+function result(result) {
+    return {
+        type: contractConstants.TRANSACTION_RESULT,
+        ...result
+
     };
 }
 

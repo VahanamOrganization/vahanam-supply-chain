@@ -5,3 +5,4 @@ export * from "./GetCampaignDetails";
 export * from "./AddManufacturers";
 export * from "./AddCouriers";
 export * from "./CreateNewBatch";
+export * from "./GetBatchDetails";

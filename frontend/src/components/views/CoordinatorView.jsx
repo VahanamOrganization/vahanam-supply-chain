@@ -33,6 +33,7 @@ class CoordinatorView extends React.Component {
                         <option value="2">Add Manufacturers</option>
                         <option value="3">Add Couriers</option>
                         <option value="4">Create New Batch</option>
+                        <option value="5">Get Batch Details</option>
                     </select>
                     <DisplayForm form={this.state.form} />
                 </div>
@@ -53,6 +54,8 @@ function DisplayForm(props) {
             return <Forms.AddCouriers />;
         case "4":
             return <Forms.CreateNewBatch />;
+        case "5":
+            return <Forms.GetBatchDetails />;
         default:
             return <Forms.StartCampaign />;
     }

@@ -18,17 +18,11 @@ export function contract(state = {}, action) {
                 inProgress: false,
                 error: action.error
             };
-        case contractConstants.ROLE_RESULT:
+        case contractConstants.TRANSACTION_RESULT:
             return {
                 ...state,
                 inProgress: false,
-                role: action.role
-            };
-        case contractConstants.GET_CAMPAIGN_RESULT:
-            return {
-                ...state,
-                inProgress: false,
-                campaign: action.campaign
+                ...action
             };
         case authConstants.LOGOUT:
             return {};

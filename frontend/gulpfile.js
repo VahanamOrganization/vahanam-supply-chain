@@ -19,8 +19,11 @@ gulp.task("compile_scss", function() {
     const toast = gulp
         .src("node_modules/react-toastify/dist/ReactToastify.css")
         .pipe(sass().on("error", sass.logError));
+    const datePicker = gulp
+        .src("node_modules/react-datepicker/dist/react-datepicker.css")
+        .pipe(sass().on("error", sass.logError));
     const scss = gulp.src(SCSS_SRC).pipe(sass().on("error", sass.logError));
-    return merge(reset, toast, scss)
+    return merge(reset, toast, datePicker, scss)
         .pipe(minifyCSS())
         .pipe(concat("default.min.css"))
         .pipe(gulp.dest(SCSS_DEST));

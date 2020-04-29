@@ -26,9 +26,6 @@ class GetCampaignDetails extends React.Component {
     handleChange(event) {
         let { name, value } = event.target;
         value = value.trim();
-        if (["couriers", "couriers"].includes(name)) {
-            value = value.split(",").map(val => val.trim());
-        }
         this.setState({
             [name]: value
         });
@@ -90,9 +87,9 @@ function CampaignDisplay(props) {
             <span className="label">Coordinator</span>
             <p className="data">{props.campaign.coordinator}</p>
             <span className="label">Couriers</span>
-            <p className="data">{props.campaign.couriers.join("\n")}</p>
+            <p className="data">{props.campaign.couriers.join("<br/>")}</p>
             <span className="label">Manufacturers</span>
-            <p className="data">{props.campaign.manufacturers.join("\n")}</p>
+            <p className="data">{props.campaign.manufacturers.join("<br/>")}</p>
             <span className="label">Total PLA</span>
             <p className="data">{props.campaign.totalPLA}</p>
         </div>

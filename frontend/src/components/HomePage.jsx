@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { contractActions } from "../actions";
 import loading from "../assets/img/loading.gif";
 import * as Views from "./views";
+import UserDisplay from "./UserDisplay";
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class HomePage extends React.Component {
                         style={inProgress ? { opacity: 1 } : { opacity: 0 }}
                     />
                     <div className="user">
-                        <span className="email">{account}</span>
+                        <UserDisplay address={account} displayName={"displayName"} />
                         <span className="role">{role ? role : ""}</span>
                     </div>
                     <Link to="/login">Logout</Link>

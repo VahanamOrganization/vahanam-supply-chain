@@ -1,40 +1,52 @@
 import React from "react";
+import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
 import { contractActions } from "../../../actions";
 
 class CreateNewBatch extends React.Component {
     constructor(props) {
         super(props);
+        let currentTime = new Date().getTime()/1000;
         this.state = {
-            campaignId: 0,
-            amountOfPLA: 0,
-            expectedAmountOfMasks: 0,
-            tfForDeliveryToManufacturer: 0,
-            tfForMakingMasks: 0,
-            tfForDeliveryToReciver: 0,
-            courier1: "",
-            courier2: "",
-            manufacturer: "",
+            batch: {
+                campaignId: 0,
+                amountOfPLA: 0,
+                expectedAmountOfMasks: 0,
+                tfForDeliveryToManufacturer: currentTime,
+                tfForMakingMasks: currentTime,
+                tfForDeliveryToReceiver: currentTime,
+                courier1: "",
+                courier2: "",
+                manufacturer: ""
+            },
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEnter = this.handleEnter.bind(this);
         this.clearForm = this.clearForm.bind(this);
+        this.dateChange = this.dateChange.bind(this);
+    }
+
+    dateChange(name, date) {
+        this.setState({ batch: { ...this.state.batch, [name]: date.getTime()/1000 } });
     }
 
     clearForm(event) {
         event.preventDefault();
+        let currentTime = new Date().getTime()/1000;
         this.setState({
-            campaignId: 0,
-            amountOfPLA: 0,
-            expectedAmountOfMasks: 0,
-            tfForDeliveryToManufacturer: 0,
-            tfForMakingMasks: 0,
-            tfForDeliveryToReciver: 0,
-            courier1: "",
-            courier2: "",
-            manufacturer: "",
+            batch: {
+                campaignId: 0,
+                amountOfPLA: 0,
+                expectedAmountOfMasks: 0,
+                tfForDeliveryToManufacturer: currentTime,
+                tfForMakingMasks: currentTime,
+                tfForDeliveryToReceiver: currentTime,
+                courier1: "",
+                courier2: "",
+                manufacturer: ""
+            },
             submitted: false
         });
     }
@@ -42,11 +54,11 @@ class CreateNewBatch extends React.Component {
     handleChange(event) {
         let { name, value } = event.target;
         value = value.trim();
-        if (["couriers", "manufacturers"].includes(name)) {
-            value = value.split(",").map(val => val.trim());
-        }
         this.setState({
-            [name]: value
+            batch: {
+                ...this.state.batch,
+                [name]: value
+            }
         });
     }
 
@@ -61,14 +73,31 @@ class CreateNewBatch extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
-        const { couriers, manufacturers, receiver, totalPLA } = this.state;
+        console.log(this.state);
+        const {
+            campaignId,
+            amountOfPLA,
+            expectedAmountOfMasks,
+            tfForDeliveryToManufacturer,
+            tfForMakingMasks,
+            tfForDeliveryToReceiver,
+            courier1,
+            courier2,
+            manufacturer,
+        } = this.state.batch;
+        let currentTime = new Date().getTime()/1000;
         if (
-            couriers.length != 0 &&
-            manufacturers.length != 0 &&
-            receiver &&
-            totalPLA > 0
+            campaignId > 0 &&
+            amountOfPLA > 0 &&
+            expectedAmountOfMasks > 0 &&
+            tfForDeliveryToManufacturer > currentTime &&
+            tfForMakingMasks > tfForDeliveryToManufacturer &&
+            tfForDeliveryToReceiver > tfForMakingMasks &&
+            courier1 &&
+            courier2 &&
+            manufacturer
         ) {
-            await this.props.createNewBatch(this.state);
+            await this.props.createNewBatch(this.state.batch);
         }
     }
 
@@ -79,12 +108,13 @@ class CreateNewBatch extends React.Component {
             expectedAmountOfMasks,
             tfForDeliveryToManufacturer,
             tfForMakingMasks,
-            tfForDeliveryToReciver,
+            tfForDeliveryToReceiver,
             courier1,
             courier2,
             manufacturer,
-            submitted
-        } = this.state;
+        } = this.state.batch;
+        let currentTime = new Date().getTime()/1000;
+        const { submitted } = this.state;
         return (
             <div className="createNewBatch form">
                 <span className="label">Campaign ID</span>
@@ -108,7 +138,7 @@ class CreateNewBatch extends React.Component {
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
-                {submitted && totalPLA == 0 && (
+                {submitted && amountOfPLA == 0 && (
                     <div className="helpBlock">Amount of PLA cannot be 0</div>
                 )}
                 <span className="label">Expected Amount of Masks</span>
@@ -120,9 +150,60 @@ class CreateNewBatch extends React.Component {
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
-                {submitted && totalPLA == 0 && (
+                {submitted && expectedAmountOfMasks == 0 && (
                     <div className="helpBlock">
                         Expected Amount of Masks cannot be 0
+                    </div>
+                )}
+                <span className="label">Expected Date for PLA Delivery</span>
+                <DatePicker
+                    selected={new Date(tfForDeliveryToManufacturer*1000)}
+                    onChange={date =>
+                        this.dateChange("tfForDeliveryToManufacturer", date)
+                    }
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={60}
+                    timeCaption="time"
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                />
+                {submitted && tfForDeliveryToManufacturer <= currentTime && (
+                    <div className="helpBlock">
+                        Date must be in the future
+                    </div>
+                )}
+                <span className="label">Expected Date for Masks Made</span>
+                <DatePicker
+                    selected={new Date(tfForMakingMasks*1000)}
+                    onChange={date =>
+                        this.dateChange("tfForMakingMasks", date)
+                    }
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={60}
+                    timeCaption="time"
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                />
+                {submitted && tfForMakingMasks <= tfForDeliveryToManufacturer && (
+                    <div className="helpBlock">
+                        Date must be after PLA delivery
+                    </div>
+                )}
+                <span className="label">Expected Date for Masks Delivery</span>
+                <DatePicker
+                    selected={new Date(tfForDeliveryToReceiver*1000)}
+                    onChange={date =>
+                        this.dateChange("tfForDeliveryToReceiver", date)
+                    }
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeIntervals={60}
+                    timeCaption="time"
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                />
+                {submitted && tfForDeliveryToReceiver <= tfForMakingMasks && (
+                    <div className="helpBlock">
+                        Date must be after masks made
                     </div>
                 )}
                 <span className="label">Courier 1 Address</span>
@@ -131,7 +212,7 @@ class CreateNewBatch extends React.Component {
                     type="text"
                     name="courier1"
                     value={courier1}
-                    placeholder="0x..., 0x..., ..."
+                    placeholder="0x..."
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
@@ -144,7 +225,7 @@ class CreateNewBatch extends React.Component {
                     type="text"
                     name="courier2"
                     value={courier2}
-                    placeholder="0x..., 0x..., ..."
+                    placeholder="0x..."
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
@@ -161,7 +242,7 @@ class CreateNewBatch extends React.Component {
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
-                {submitted && !receiver && (
+                {submitted && !manufacturer && (
                     <div className="helpBlock">
                         Manufacturer Address Required
                     </div>

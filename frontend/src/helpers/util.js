@@ -15,18 +15,3 @@ export const wait = async ms => {
     });
 };
 
-/*
-export function getUserDisplay(address, user) {
-    return (
-        <div className="userDisplay">
-            <div className="displayName">
-                {user.additionalData.displayName}
-            <div className="tooltip">Ξ
-                <span className="tooltipText">
-                    {address}
-                </span>
-            </div>
-        </div>
-    );
-}
-*/
