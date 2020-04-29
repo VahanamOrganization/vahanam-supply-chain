@@ -1,4 +1,5 @@
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+//var fs = require('fs');
 
 module.exports = {
     mode: "development",
@@ -43,7 +44,13 @@ module.exports = {
         })
     ],
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        //http2: true,
+        //https: {
+        //    key: fs.readFileSync('./keys/server.key'),
+        //    cert: fs.readFileSync('./keys/server.crt'),
+        //    ca: fs.readFileSync('./keys/server.pem'),
+        //}
     },
     externals: {
         // global app config object
