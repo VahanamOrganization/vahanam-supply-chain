@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { contractConstants } from "../../../constants";
 import { contractActions } from "../../../actions";
 
 class GetBatchDetails extends React.Component {
@@ -96,11 +97,14 @@ class GetBatchDetails extends React.Component {
 }
 
 function BatchDisplay(props) {
-    const options = { hour12: true };
     return (
         <div className="batchDisplay response">
             <span className="label">Stage</span>
-            <p className="data">{props.batch.stage}</p>
+            <p className="data">
+                {props.batch.stage +
+                    " => " +
+                    contractConstants.STAGES[props.batch.stage]}
+            </p>
             <span className="label">Amount of PLA</span>
             <p className="data">{props.batch.amountOfPLA}</p>
             <span className="label">Expected Amount of Masks</span>
@@ -109,20 +113,15 @@ function BatchDisplay(props) {
             <p className="data">
                 {new Date(
                     props.batch.tfForDeliveryToManufacturer * 1000
-                ).toLocaleString("en-US", options)}
+                ).toString()}
             </p>
             <span className="label">Expected Date of Masks Made</span>
             <p className="data">
-                {new Date(props.batch.tfForMakingMasks * 1000).toLocaleString(
-                    "en-US",
-                    options
-                )}
+                {new Date(props.batch.tfForMakingMasks * 1000).toString()}
             </p>
             <span className="label">Expected Date of Masks Delivery</span>
             <p className="data">
-                {new Date(
-                    props.batch.tfForDeliveryToReciver * 1000
-                ).toLocaleString("en-US", options)}
+                {new Date(props.batch.tfForDeliveryToReciver * 1000).toString()}
             </p>
             <span className="label">Courier 1</span>
             <p className="data">{props.batch.courier1}</p>

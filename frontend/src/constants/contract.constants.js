@@ -7,6 +7,16 @@ export const contractConstants = {
         "RECIEVER"
     ],
 
+    STAGES: [
+        "PLAPacked",
+        "PLAPickedUpByCourier1",
+        "PLARecivedByManufaturer",
+        "MasksReady",
+        "MasksPickedUpByCourier2",
+        "MasksRceivedByReceiver", 
+        "MasksVerifiedForQuality"
+    ],
+
     ADMIN_ROLE:
         "0xf23ec0bb4210edd5cba85afd05127efcd2fc6a781bfed49188da1081670b22d8",
     COORDINATOR_ROLE:
