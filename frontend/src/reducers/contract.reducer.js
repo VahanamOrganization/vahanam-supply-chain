@@ -14,7 +14,7 @@ export function contract(state = {}, action) {
             };
         case contractConstants.TRANSACTION_ERROR:
             return {
-                ...state,
+                role: state.role,
                 inProgress: false,
                 error: action.error
             };

@@ -28,7 +28,6 @@ function getRole() {
             dispatch(alertActions.error("Error Getting Role"));
             return;
         }
-        dispatch(alertActions.success("Found Role: " + role));
         dispatch(result({role}));
         dispatch(done());
         return role;

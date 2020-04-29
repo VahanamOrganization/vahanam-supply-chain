@@ -29,6 +29,8 @@ class AdminView extends React.Component {
                         defaultValue="0"
                     >
                         <option value="0">Make Coordinator</option>
+                        <option value="1">Get Campaign Details</option>
+                        <option value="2">Get Batch Details</option>
                     </select>
                     <DisplayForm form={this.state.form} />
                 </div>
@@ -43,6 +45,8 @@ function DisplayForm(props) {
             return <Forms.MakeCoordinator />;
         case "1":
             return <Forms.GetCampaignDetails />;
+        case "2":
+            return <Forms.GetBatchDetails />;
         default:
             return <Forms.MakeCoordinator />;
     }
