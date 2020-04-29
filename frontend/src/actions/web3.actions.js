@@ -100,10 +100,7 @@ function loadWeb3() {
         try {
             contract = await new web3.eth.Contract(
                 campaignGenerator["abi"],
-                config.contractAddress,
-                {
-                    from: account
-                }
+                config.contractAddress
             );
         } catch (e) {
             console.log(e);

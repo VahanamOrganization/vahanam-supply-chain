@@ -30,6 +30,7 @@ class ReceiverView extends React.Component {
                     >
                         <option value="0">Get Campaign Details</option>
                         <option value="1">Get Batch Details</option>
+                        <option value="2">Confirm Masks Received</option>
                     </select>
                     <DisplayForm form={this.state.form} />
                 </div>
@@ -44,6 +45,8 @@ function DisplayForm(props) {
             return <Forms.GetCampaignDetails />;
         case "1":
             return <Forms.GetBatchDetails />;
+        case "2":
+            return <Forms.ConfirmMasksReceived />;
         default:
             return <Forms.GetCampaignDetails />;
     }

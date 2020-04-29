@@ -30,6 +30,10 @@ class CourierView extends React.Component {
                     >
                         <option value="0">Get Campaign Details</option>
                         <option value="1">Get Batch Details</option>
+                        <option value="2">Confirm PLA Picked Up</option>
+                        <option value="3">Confirm PLA Delivered</option>
+                        <option value="4">Confirm Masks Picked Up</option>
+                        <option value="5">Confirm Masks Delivered</option>
                     </select>
                     <DisplayForm form={this.state.form} />
                 </div>
@@ -44,6 +48,14 @@ function DisplayForm(props) {
             return <Forms.GetCampaignDetails />;
         case "1":
             return <Forms.GetBatchDetails />;
+        case "2":
+            return <Forms.ConfirmPLAPickUp />;
+        case "3":
+            return <Forms.ConfirmPLAReceived />;
+        case "4":
+            return <Forms.ConfirmMasksPickUp />;
+        case "5":
+            return <Forms.ConfirmMasksReceived />;
         default:
             return <Forms.GetCampaignDetails />;
     }

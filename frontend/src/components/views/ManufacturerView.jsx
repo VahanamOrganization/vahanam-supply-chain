@@ -30,6 +30,9 @@ class ManufacturerView extends React.Component {
                     >
                         <option value="0">Get Campaign Details</option>
                         <option value="1">Get Batch Details</option>
+                        <option value="2">Confirm PLA Received</option>
+                        <option value="3">Confirm Masks Made</option>
+                        <option value="4">Confirm Masks Picked Up</option>
                     </select>
                     <DisplayForm form={this.state.form} />
                 </div>
@@ -44,6 +47,12 @@ function DisplayForm(props) {
             return <Forms.GetCampaignDetails />;
         case "1":
             return <Forms.GetBatchDetails />;
+        case "2":
+            return <Forms.ConfirmPLAReceived />;
+        case "3":
+            return <Forms.ConfirmMasksMade />;
+        case "4":
+            return <Forms.ConfirmMasksPickUp />;
         default:
             return <Forms.GetCampaignDetails />;
     }

@@ -6,3 +6,8 @@ export * from "./AddManufacturers";
 export * from "./AddCouriers";
 export * from "./CreateNewBatch";
 export * from "./GetBatchDetails";
+export * from "./ConfirmPLAPickUp";
+export * from "./ConfirmPLAReceived";
+export * from "./ConfirmMasksPickUp";
+export * from "./ConfirmMasksMade";
+export * from "./ConfirmMasksReceived";

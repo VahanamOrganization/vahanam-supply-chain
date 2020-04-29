@@ -34,6 +34,7 @@ class CoordinatorView extends React.Component {
                         <option value="3">Add Couriers</option>
                         <option value="4">Create New Batch</option>
                         <option value="5">Get Batch Details</option>
+                        <option value="6">Confirm PLA Picked Up</option>
                     </select>
                     <DisplayForm form={this.state.form} />
                 </div>
@@ -56,6 +57,8 @@ function DisplayForm(props) {
             return <Forms.CreateNewBatch />;
         case "5":
             return <Forms.GetBatchDetails />;
+        case "6":
+            return <Forms.ConfirmPLAPickUp />;
         default:
             return <Forms.StartCampaign />;
     }
