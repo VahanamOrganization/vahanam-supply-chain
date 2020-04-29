@@ -56,17 +56,23 @@ function register(user) {
 
 function handleResponse(response) {
     return response.text().then(text => {
-        const data = text && JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout();
                 location.reload(true);
             }
-
-            const error = (data && data.message) || response.statusText;
+            let error = (data && data.message) || response.statusText;
+            if (text.includes("UNIQUE")) {
+                if (text.includes("accounts_account.address")) {
+                    error = "Account already registered"
+                } else if (text.includes("accounts_account.displayName")){
+                    error = "Display Name already taken"
+                }
+            }
             return Promise.reject(error);
         }
+        const data = text && JSON.parse(text);
         if (!data.address) {
             return Promise.reject("Login failed");
         }

@@ -17,8 +17,7 @@ class HomePage extends React.Component {
     }
 
     render() {
-        const { account, contract } = this.props;
-        const { role, inProgress } = contract;
+        const { account, user, role, inProgress } = this.props;
         return (
             <div className="homePage">
                 <div className="navBar">
@@ -28,7 +27,7 @@ class HomePage extends React.Component {
                         style={inProgress ? { opacity: 1 } : { opacity: 0 }}
                     />
                     <div className="user">
-                        <UserDisplay address={account} displayName={"displayName"} />
+                        <UserDisplay address={account} displayName={user.displayName} />
                         <span className="role">{role ? role : ""}</span>
                     </div>
                     <Link to="/login">Logout</Link>
@@ -70,9 +69,10 @@ function RoleBasedView(props) {
 }
 
 function mapState(state) {
-    const { web3, contract } = state;
-    const { account } = web3;
-    return { account, contract };
+    const { role, inProgress } = state.contract;
+    const { account } = state.web3;
+    const { user } = state.authentication;
+    return { account, user, role, inProgress };
 }
 
 const actionCreators = {

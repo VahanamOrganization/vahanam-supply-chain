@@ -87,9 +87,17 @@ function CampaignDisplay(props) {
             <span className="label">Coordinator</span>
             <p className="data">{props.campaign.coordinator}</p>
             <span className="label">Couriers</span>
-            <p className="data">{props.campaign.couriers.join("<br/>")}</p>
+            <ul className="data">
+                {props.campaign.couriers.map((item, index) => (
+                    <li key={index}>{item}</li>
+                ))}
+            </ul>
             <span className="label">Manufacturers</span>
-            <p className="data">{props.campaign.manufacturers.join("<br/>")}</p>
+            <ul className="data">
+                {props.campaign.manufacturers.map((item, index) => (
+                    <li key={index}>{item}</li>
+                ))}
+            </ul>
             <span className="label">Total PLA</span>
             <p className="data">{props.campaign.totalPLA}</p>
         </div>

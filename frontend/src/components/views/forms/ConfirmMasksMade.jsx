@@ -49,7 +49,7 @@ class ConfirmMasksMade extends React.Component {
         this.setState({ submitted: true });
         const { campaignId, batchId, amountOfMasks } = this.state;
         if (campaignId > 0 && batchId > 0 && amountOfMasks > 0) {
-            await this.props.confirmMasksMade(campaignId, batchId, amountOfMaks);
+            await this.props.confirmMasksMade(campaignId, batchId, amountOfMasks);
         }
     }
 
