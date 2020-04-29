@@ -60,7 +60,9 @@ def Register(request):
 	address=request.data.get('address')
 	role=request.data.get('role')
 	password=request.data.get('password')
-	myuser=account.objects.create_user(address=address,role=int(role),password=password)
+	displayName=request.data.get('displayName')
+	additionalData=request.data.get('additionalData')
+	myuser=account.objects.create_user(address=address,role=int(role),password=password,displayName=displayName,additionalData=additionalData)
 	login(request,myuser)
 	return Response(accountSerializer(myuser, many=False).data)
 
@@ -79,12 +81,10 @@ def getUsersByRole(request):
 @api_view(['POST'])
 @csrf_exempt
 def setAdditionalData(request):
-	userCookies=request.data.get('sid',None)
+	address=request.data.get('address',None)
 	newData=request.data.get('data',None)
-	s=Session.objects.get(pk=userCookies)
-	data=s.get_decoded()['_auth_user_id']
-	account.objects.filter(id=data).update(additionalData=newData)
-	user=account.objects.filter(id=data)
+	account.objects.filter(address=address).update(additionalData=newData)
+	user=account.objects.filter(address=address)
 	return Response(accountSerializer(user, many=True).data)
 
 
