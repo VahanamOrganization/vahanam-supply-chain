@@ -3,3 +3,4 @@
 /dist
 /keys
 package-lock.json
+.firebase*
