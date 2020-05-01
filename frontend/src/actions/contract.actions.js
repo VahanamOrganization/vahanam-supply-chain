@@ -441,7 +441,7 @@ function createNewBatch(batch) {
                     "Created & Packed Batch ID: " + event.returnValues.branchId
                 )
             );
-            dispatch(done());
+            dispatch(result({newBatchId: event.returnValues.branchId}));
         } else {
             printReceipt(receipt);
             dispatch(failure(receipt.toString()));

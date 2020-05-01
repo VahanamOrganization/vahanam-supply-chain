@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
 import { contractActions } from "../../../actions";
+import QRCode from "qrcode";
+import { getQRString } from "../../../helpers";
 
 class CreateNewBatch extends React.Component {
     constructor(props) {
         super(props);
-        let currentTime = new Date().getTime()/1000;
+        let currentTime = new Date().getTime() / 1000;
         this.state = {
             batch: {
                 campaignId: 0,
@@ -29,12 +31,14 @@ class CreateNewBatch extends React.Component {
     }
 
     dateChange(name, date) {
-        this.setState({ batch: { ...this.state.batch, [name]: date.getTime()/1000 } });
+        this.setState({
+            batch: { ...this.state.batch, [name]: date.getTime() / 1000 }
+        });
     }
 
     clearForm(event) {
         event.preventDefault();
-        let currentTime = new Date().getTime()/1000;
+        let currentTime = new Date().getTime() / 1000;
         this.setState({
             batch: {
                 campaignId: 0,
@@ -83,9 +87,9 @@ class CreateNewBatch extends React.Component {
             tfForDeliveryToReceiver,
             courier1,
             courier2,
-            manufacturer,
+            manufacturer
         } = this.state.batch;
-        let currentTime = new Date().getTime()/1000;
+        let currentTime = new Date().getTime() / 1000;
         if (
             campaignId > 0 &&
             amountOfPLA > 0 &&
@@ -111,10 +115,11 @@ class CreateNewBatch extends React.Component {
             tfForDeliveryToReceiver,
             courier1,
             courier2,
-            manufacturer,
+            manufacturer
         } = this.state.batch;
-        let currentTime = new Date().getTime()/1000;
+        let currentTime = new Date().getTime() / 1000;
         const { submitted } = this.state;
+        const { newBatchId, inProgress } = this.props;
         return (
             <div className="createNewBatch form">
                 <span className="label">Campaign ID</span>
@@ -157,7 +162,7 @@ class CreateNewBatch extends React.Component {
                 )}
                 <span className="label">Expected Date for PLA Delivery</span>
                 <DatePicker
-                    selected={new Date(tfForDeliveryToManufacturer*1000)}
+                    selected={new Date(tfForDeliveryToManufacturer * 1000)}
                     onChange={date =>
                         this.dateChange("tfForDeliveryToManufacturer", date)
                     }
@@ -168,30 +173,27 @@ class CreateNewBatch extends React.Component {
                     dateFormat="MMMM d, yyyy h:mm aa"
                 />
                 {submitted && tfForDeliveryToManufacturer <= currentTime && (
-                    <div className="helpBlock">
-                        Date must be in the future
-                    </div>
+                    <div className="helpBlock">Date must be in the future</div>
                 )}
                 <span className="label">Expected Date for Masks Made</span>
                 <DatePicker
-                    selected={new Date(tfForMakingMasks*1000)}
-                    onChange={date =>
-                        this.dateChange("tfForMakingMasks", date)
-                    }
+                    selected={new Date(tfForMakingMasks * 1000)}
+                    onChange={date => this.dateChange("tfForMakingMasks", date)}
                     showTimeSelect
                     timeFormat="HH:mm"
                     timeIntervals={60}
                     timeCaption="time"
                     dateFormat="MMMM d, yyyy h:mm aa"
                 />
-                {submitted && tfForMakingMasks <= tfForDeliveryToManufacturer && (
-                    <div className="helpBlock">
-                        Date must be after PLA delivery
-                    </div>
-                )}
+                {submitted &&
+                    tfForMakingMasks <= tfForDeliveryToManufacturer && (
+                        <div className="helpBlock">
+                            Date must be after PLA delivery
+                        </div>
+                    )}
                 <span className="label">Expected Date for Masks Delivery</span>
                 <DatePicker
-                    selected={new Date(tfForDeliveryToReceiver*1000)}
+                    selected={new Date(tfForDeliveryToReceiver * 1000)}
                     onChange={date =>
                         this.dateChange("tfForDeliveryToReceiver", date)
                     }
@@ -259,13 +261,55 @@ class CreateNewBatch extends React.Component {
                         </a>
                     </div>
                 </div>
+                {!inProgress && submitted && newBatchId ? (
+                    <QRDisplay
+                        batchId={newBatchId}
+                        campaignId={campaignId}
+                    />
+                ) : (
+                    null
+                )}
+            </div>
+        );
+    }
+}
+
+class QRDisplay extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loaded: false,
+            dataURI: ""
+        };
+    }
+    async componentDidMount() {
+        const qrString = getQRString(this.props.campaignId, this.props.batchId);
+        const dataURI = await QRCode.toDataURL(qrString);
+        this.setState({ loaded: true, dataURI });
+    }
+
+    render() {
+        return (
+            <div className="qrDisplay display">
+                <span className="label">Campaign ID</span>
+                <p className="data">{this.props.campaignId}</p>
+                <span className="label">Batch ID</span>
+                <p className="data">{this.props.batchId}</p>
+                {this.state.loaded ? (
+                    <img
+                        className="qrcode"
+                        alt="qrcode"
+                        src={this.state.dataURI}
+                    />
+                ) : null}
             </div>
         );
     }
 }
 
 function mapState(state) {
-    return {};
+    const { newBatchId, inProgress } = state.contract;
+    return { newBatchId, inProgress };
 }
 
 const actionCreators = {
