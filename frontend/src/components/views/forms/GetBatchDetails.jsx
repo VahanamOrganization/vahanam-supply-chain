@@ -81,12 +81,16 @@ class GetBatchDetails extends React.Component {
                     <div className="helpBlock">BatchId cannot be 0</div>
                 )}
                 <div className="submitForm">
-                    <a href="#" onClick={this.handleSubmit}>
-                        Get
-                    </a>
-                    <a href="#" onClick={this.clearForm}>
-                        Clear
-                    </a>
+                    <div className="submit">
+                        <a href="#" onClick={this.handleSubmit}>
+                            Get
+                        </a>
+                    </div>
+                    <div className="cancel">
+                        <a href="#" onClick={this.clearForm}>
+                            Clear
+                        </a>
+                    </div>
                 </div>
                 {!inProgress && submitted && batch ? (
                     <BatchDisplay batch={batch} />

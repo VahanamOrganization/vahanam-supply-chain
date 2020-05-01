@@ -10,10 +10,10 @@ export const contractConstants = {
     STAGES: [
         "PLAPacked",
         "PLAPickedUpByCourier1",
-        "PLARecivedByManufaturer",
+        "PLAReceivedByManufacturer",
         "MasksReady",
         "MasksPickedUpByCourier2",
-        "MasksRceivedByReceiver", 
+        "MasksReceivedByReceiver", 
         "MasksVerifiedForQuality"
     ],
 

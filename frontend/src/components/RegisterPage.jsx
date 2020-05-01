@@ -172,7 +172,7 @@ class RegisterPage extends React.Component {
                                     </div>
                                 )))}
                         <div className="submitForm">
-                            <div className="register">
+                            <div className="submit">
                                 <a href="#" onClick={this.handleSubmit}>
                                     Register
                                 </a>

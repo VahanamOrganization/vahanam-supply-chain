@@ -248,12 +248,16 @@ class CreateNewBatch extends React.Component {
                     </div>
                 )}
                 <div className="submitForm">
-                    <a href="#" onClick={this.handleSubmit}>
-                        Create
-                    </a>
-                    <a href="#" onClick={this.clearForm}>
-                        Clear
-                    </a>
+                    <div className="submit">
+                        <a href="#" onClick={this.handleSubmit}>
+                            Create
+                        </a>
+                    </div>
+                    <div className="cancel">
+                        <a href="#" onClick={this.clearForm}>
+                            Clear
+                        </a>
+                    </div>
                 </div>
             </div>
         );

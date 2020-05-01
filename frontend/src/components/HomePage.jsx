@@ -22,7 +22,7 @@ class HomePage extends React.Component {
         return (
             <div className="homePage page">
                 <div className="homePageInner pageInner">
-                    <RoleBasedView role={role} />
+                    <RoleBasedView role={role}/>
                 </div>
             </div>
         );
@@ -41,15 +41,22 @@ function RoleBasedView(props) {
             return <Views.ManufacturerView />;
         case "RECEIVER":
             return <Views.ReceiverView />;
-        default:
+        case "ROLE NOT FOUND":
             return (
-                <p>
-                    {" "}
-                    You do not have a role assigned.
-                    <br />
-                    Please contact a local coordinator to get a role assigned.{" "}
-                </p>
+                <div className="view">
+                    <div className="viewInner">
+                        <div className="display">
+                            <span className="label">ROLE NOT FOUND.</span>
+                            <p className="data">
+                                Please contact a local coordinator to get a role
+                                assigned.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             );
+        default:
+            return null;
     }
 }
 

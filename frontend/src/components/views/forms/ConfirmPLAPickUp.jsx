@@ -80,12 +80,16 @@ class ConfirmPLAPickUp extends React.Component {
                     <div className="helpBlock">BatchId cannot be 0</div>
                 )}
                 <div className="submitForm">
-                    <a href="#" onClick={this.handleSubmit}>
-                        Confirm
-                    </a>
-                    <a href="#" onClick={this.clearForm}>
-                        Clear
-                    </a>
+                    <div className="submit">
+                        <a href="#" onClick={this.handleSubmit}>
+                            Confirm
+                        </a>
+                    </div>
+                    <div className="cancel">
+                        <a href="#" onClick={this.clearForm}>
+                            Clear
+                        </a>
+                    </div>
                 </div>
             </div>
         );

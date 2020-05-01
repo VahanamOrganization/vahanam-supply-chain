@@ -66,12 +66,16 @@ class GetCampaignDetails extends React.Component {
                     <div className="helpBlock">CampaignId cannot be 0</div>
                 )}
                 <div className="submitForm">
-                    <a href="#" onClick={this.handleSubmit}>
-                        Get
-                    </a>
-                    <a href="#" onClick={this.clearForm}>
-                        Clear
-                    </a>
+                    <div className="submit">
+                        <a href="#" onClick={this.handleSubmit}>
+                            Get
+                        </a>
+                    </div>
+                    <div className="cancel">
+                        <a href="#" onClick={this.clearForm}>
+                            Clear
+                        </a>
+                    </div>
                 </div>
                 {!inProgress && submitted && campaign ? (
                     <CampaignDisplay campaign={campaign} />
@@ -83,7 +87,7 @@ class GetCampaignDetails extends React.Component {
 
 function CampaignDisplay(props) {
     return (
-        <div className="campaignDisplay response">
+        <div className="campaignDisplay display">
             <span className="label">Coordinator</span>
             <p className="data">{props.campaign.coordinator}</p>
             <span className="label">Couriers</span>

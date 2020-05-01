@@ -12,7 +12,7 @@ export const getStringFromRole = role => {
         case contractConstants.RECEIVER_ROLE:
             return "RECEIVER";
         default:
-            throw "Unknown Role Found";
+            return "ROLE NOT FOUND";
     }
 };
 

@@ -126,12 +126,16 @@ class StartCampaign extends React.Component {
                     <div className="helpBlock">Total PLA cannot be 0</div>
                 )}
                 <div className="submitForm">
-                    <a href="#" onClick={this.handleSubmit}>
-                        Start
-                    </a>
-                    <a href="#" onClick={this.clearForm}>
-                        Clear
-                    </a>
+                    <div className="submit">
+                        <a href="#" onClick={this.handleSubmit}>
+                            Start
+                        </a>
+                    </div>
+                    <div className="cancel">
+                        <a href="#" onClick={this.clearForm}>
+                            Clear
+                        </a>
+                    </div>
                 </div>
             </div>
         );
