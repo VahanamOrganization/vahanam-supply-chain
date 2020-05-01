@@ -1,4 +1,4 @@
-.homePage {
+.page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,54 +8,17 @@
     font-size: 2vh;
 }
 
-.homePageInner {
-    padding-top: 10vh;
+.pageInner {
+    padding-top: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100vw;
     height: 100%;
-    overflow-y: scroll;
 }
 
-.navBar {
-    background: white;
-    color: black;
-    font-size: 2vh;
-    padding: 1vh;
-    height: 8vh;
-    width: 98vw;
-    top: 0;
-    left: 0;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    box-shadow: 0 0.5vh 1vh black;
-    .user {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-    }
-    img {
-        position: fixed;
-        right: 0;
-        top: 4vh;
-            height: 6vh;
-            width: 6vh;
-    }
-    a {
-        text-decoration: none;
-        background: blue;
-        color: white;
-        padding: 10px;
-        color: white;
-        border-radius: 5%;
-        &:hover {
-            background: darkblue;
-        }
-    }
+
+.homePageInner {
+    overflow-y: scroll;
 }

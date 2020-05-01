@@ -50,14 +50,10 @@ class LoginPage extends React.Component {
         const { inProgress, account } = this.props;
         const { password, submitted } = this.state;
         return (
-            <div className="loginPage">
-                <div className="loginPageInner">
+            <div className="loginPage page">
+                <div className="loginPageInner pageInner">
                     <div className="title">
                         <span>3D Printed Masks</span>
-                        <img
-                            src={loading}
-                            style={inProgress ? { opacity: 1 } : { opacity: 0 }}
-                        />
                     </div>
                     <div className="loginForm form">
                         <span className="label">Account</span>

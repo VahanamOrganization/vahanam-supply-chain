@@ -1,46 +1,36 @@
-.loginPage {
-    width: 100vw;
-    height: 100vh;
-    font-size: 4vh;
+@import 'config';
+
+.loginPageInner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .loginPageInner {
+    height: 60%;
+    width: 80%;
+    .title {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 60%;
-        width: 80%;
-        .title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 5vh;
-            font-weight: bold;
-            img {
-                height: 6vh;
-                width: 6vh;
-            }
-        }
-        .account {
-            font-size: 2vh;
-        }
-        a {
-            margin-top: 2vh;
-            margin-bottom: 2vh;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            background: blue;
-            padding: 5px;
-            color: white;
-            border-radius: 5%;
-            &:hover {
-                background: darkblue;
-            }
+        font-size: 5vh;
+        font-weight: bold;
+    }
+    .account {
+        font-size: 2vh;
+    }
+    a {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        background: $grey;
+        padding: 5px;
+        color: $white;
+        border-radius: 5%;
+        &:hover {
+            background: $blue2;
         }
     }
 }
+

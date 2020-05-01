@@ -6,6 +6,8 @@ import { history } from "../helpers";
 import { web3Actions } from "../actions";
 import { PrivateRoute } from "../components";
 import { HomePage } from "../components/HomePage";
+import { ProfilePage } from "../components/ProfilePage";
+import { NavBar } from "../components/NavBar";
 import { LoginPage } from "../components/LoginPage";
 import { RegisterPage } from "../components/RegisterPage";
 
@@ -47,8 +49,10 @@ class App extends React.Component {
             <div className="app">
                 <ToastContainer closeButton={false} autoClose={5000}/>
                 <Router history={history}>
+                    <NavBar />
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage} />
+                        <PrivateRoute path="/profile" component={ProfilePage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Redirect from="*" to="/" />

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { contractActions } from "../actions";
 import loading from "../assets/img/loading.gif";
 import * as Views from "./views";
-import UserDisplay from "./UserDisplay";
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -13,31 +12,17 @@ class HomePage extends React.Component {
     }
 
     async componentDidMount() {
-        await this.props.getRole();
+        if (this.props.loggedIn) {
+            await this.props.getRole();
+        }
     }
 
     render() {
-        const { account, user, role, inProgress } = this.props;
+        const { role } = this.props;
         return (
-            <div className="homePage">
-                <div className="navBar">
-                    <img
-                        className="loading"
-                        src={loading}
-                        style={inProgress ? { opacity: 1 } : { opacity: 0 }}
-                    />
-                    <div className="user">
-                        <UserDisplay address={account} displayName={user.displayName} />
-                        <span className="role">{role ? role : ""}</span>
-                    </div>
-                    <Link to="/login">Logout</Link>
-                </div>
-                <div className="homePageInner">
-                    {inProgress && !role ? (
-                        <img className="loading" src={loading} />
-                    ) : (
-                        <RoleBasedView role={role} />
-                    )}
+            <div className="homePage page">
+                <div className="homePageInner pageInner">
+                    <RoleBasedView role={role} />
                 </div>
             </div>
         );
@@ -69,15 +54,13 @@ function RoleBasedView(props) {
 }
 
 function mapState(state) {
-    const { role, inProgress } = state.contract;
-    const { account } = state.web3;
-    const { user } = state.authentication;
-    return { account, user, role, inProgress };
+    const { role } = state.contract;
+    const { loggedIn } = state.authentication;
+    return { role, loggedIn };
 }
 
 const actionCreators = {
     getRole: contractActions.getRole
-    //createCampaign: campaignActions.create
 };
 
 const connectedHomePage = connect(mapState, actionCreators)(HomePage);

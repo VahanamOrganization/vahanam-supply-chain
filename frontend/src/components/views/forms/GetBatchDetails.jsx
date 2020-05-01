@@ -98,7 +98,7 @@ class GetBatchDetails extends React.Component {
 
 function BatchDisplay(props) {
     return (
-        <div className="batchDisplay response">
+        <div className="batchDisplay display">
             <span className="label">Stage</span>
             <p className="data">
                 {props.batch.stage +
