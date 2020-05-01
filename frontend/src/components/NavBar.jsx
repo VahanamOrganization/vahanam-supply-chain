@@ -48,7 +48,7 @@ class NavBar extends React.Component {
                 >
                     {loggedIn ? (
                         <div className="sliderInner" ref={this.sliderInner}>
-                            <Link className="user" exact to="/profile">
+                            <Link className="user" to="/profile">
                                 <img
                                     className="profile"
                                     src={profile}

@@ -106,6 +106,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    a {
+        padding-left: 2vw;
+        padding-right: 2vw;
+        font-size: 6vw;
+        text-align: center;
+        text-decoration: none;
+        background: $grey;
+        color: $white;
+        border-radius: 5%;
+        &:hover {
+            background: $blue2;
+        }
+    }
     .label {
         font-size: 4vw;
         align-self: flex-start;

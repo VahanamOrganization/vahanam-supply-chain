@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { contractConstants } from "../../../constants";
-import { contractActions } from "../../../actions";
+import { contractActions, alertActions } from "../../../actions";
+import QrReader from "react-qr-reader";
 
 class GetBatchDetails extends React.Component {
     constructor(props) {
@@ -9,12 +10,33 @@ class GetBatchDetails extends React.Component {
         this.state = {
             campaignId: 0,
             batchId: 0,
+            scanData: "",
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEnter = this.handleEnter.bind(this);
         this.clearForm = this.clearForm.bind(this);
+        this.handleScan = this.handleScan.bind(this);
+        this.handleError = this.handleError.bind(this);
+        this.toggleScanner = this.toggleScanner.bind(this);
+    }
+
+    handleScan(data) {
+        if (data) {
+            this.setState({
+                scanData: data
+            });
+            this.props.success("Scanned QR Code");
+            this.setState({ showScanner: !this.state.showScanner });
+        }
+    }
+
+    toggleScanner() {
+        this.setState({ showScanner: !this.state.showScanner });
+    }
+    handleError(err) {
+        this.props.success("QR Code Error: " + err);
     }
 
     clearForm(event) {
@@ -22,6 +44,7 @@ class GetBatchDetails extends React.Component {
         this.setState({
             campaignId: 0,
             batchId: 0,
+            scanData: "",
             submitted: false
         });
     }
@@ -52,7 +75,13 @@ class GetBatchDetails extends React.Component {
     }
 
     render() {
-        const { campaignId, batchId, submitted } = this.state;
+        const {
+            campaignId,
+            batchId,
+            scanData,
+            submitted,
+            showScanner
+        } = this.state;
         const { inProgress, batch } = this.props;
         return (
             <div className="getBatchDetails form">
@@ -80,6 +109,8 @@ class GetBatchDetails extends React.Component {
                 {submitted && batchId == 0 && (
                     <div className="helpBlock">BatchId cannot be 0</div>
                 )}
+                <span className="label">Batch ID</span>
+                <input className="input" type="text" value={scanData} />
                 <div className="submitForm">
                     <div className="submit">
                         <a href="#" onClick={this.handleSubmit}>
@@ -94,7 +125,22 @@ class GetBatchDetails extends React.Component {
                 </div>
                 {!inProgress && submitted && batch ? (
                     <BatchDisplay batch={batch} />
-                ) : null}
+                ) : (
+                    <div className="display">
+                        {showScanner ? (
+                            <QrReader
+                                delay={300}
+                                onError={this.handleError}
+                                onScan={this.handleScan}
+                                style={{ width: "100%" }}
+                            />
+                        ) : (
+                            <a href="#" onClick={this.toggleScanner}>
+                                Scan QR Code
+                            </a>
+                        )}
+                    </div>
+                )}
             </div>
         );
     }
@@ -143,7 +189,9 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    getBatchDetails: contractActions.getBatchDetails
+    getBatchDetails: contractActions.getBatchDetails,
+    success: alertActions.success,
+    error: alertActions.error
 };
 
 const connectedGetBatchDetails = connect(
