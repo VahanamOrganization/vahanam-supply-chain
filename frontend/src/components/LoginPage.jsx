@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { history } from "../helpers";
-import { contractActions, web3Actions, authActions } from "../actions";
+import { boxActions, authActions } from "../actions";
 import loading from "../assets/img/loading.gif";
 
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            password: "",
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -39,16 +37,17 @@ class LoginPage extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
-        const { password } = this.state;
         const { account } = this.props;
-        if (account && password) {
-            await this.props.login(account, password);
+        if (account) {
+            await this.props.loadBoxProfile(account);
+            await this.props.loadBox(account);
+            await this.props.login(account);
         }
     }
 
     render() {
         const { inProgress, account } = this.props;
-        const { password, submitted } = this.state;
+        const { submitted } = this.state;
         return (
             <div className="loginPage page">
                 <div className="loginPageInner pageInner">
@@ -74,20 +73,6 @@ class LoginPage extends React.Component {
                                 MetaMask connected
                             </div>
                         )}
-                        <span className="label">Password</span>
-                        <input
-                            className="input"
-                            type="password"
-                            name="password"
-                            value={password}
-                            onChange={this.handleChange}
-                            onKeyPress={this.handleEnter}
-                        />
-                        {submitted && !password && (
-                            <div className="helpBlock">
-                                Password is required
-                            </div>
-                        )}
                         <a
                             className="login"
                             href="#"
@@ -95,9 +80,6 @@ class LoginPage extends React.Component {
                         >
                             Login
                         </a>
-                        <Link className="register" to="/register">
-                            Register
-                        </Link>
                     </div>
                 </div>
             </div>
@@ -113,7 +95,9 @@ function mapState(state) {
 
 const actionCreators = {
     login: authActions.login,
-    logout: authActions.logout
+    logout: authActions.logout,
+    loadBoxProfile: boxActions.loadProfile,
+    loadBox: boxActions.login
 };
 
 const connectedLoginPage = connect(mapState, actionCreators)(LoginPage);

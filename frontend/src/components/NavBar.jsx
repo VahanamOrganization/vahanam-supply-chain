@@ -93,6 +93,7 @@ function mapState(state) {
     const inProgress =
         state.contract.inProgress ||
         state.authentication.inProgress ||
+        state.box.inProgress ||
         state.web3.inProgress;
     return { account, user, loggedIn, role, inProgress };
 }
