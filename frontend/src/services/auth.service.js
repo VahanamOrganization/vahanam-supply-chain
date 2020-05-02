@@ -8,6 +8,7 @@ export const authService = {
 };
 
 function login(username, password) {
+    return {displayName: "displayName", address: username}
     const requestOptions = {
         method: "POST",
         headers: {
@@ -26,6 +27,7 @@ function login(username, password) {
 }
 
 export function logout() {
+    return;
     // remove user from local storage to log user out
     //localStorage.removeItem("user");
     const requestOptions = {
