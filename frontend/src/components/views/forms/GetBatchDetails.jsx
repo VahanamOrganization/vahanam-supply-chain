@@ -25,10 +25,14 @@ class GetBatchDetails extends React.Component {
 
     handleScan(data) {
         if (data) {
-            this.props.success("Scanned QR Code: "+ data);
+            this.props.success("Scanned QR Code: " + data);
             try {
                 let { campaignId, batchId } = getQRValue(data);
-                this.setState({ campaignId, batchId, showScanner: !this.state.showScanner });
+                this.setState({
+                    campaignId,
+                    batchId,
+                    showScanner: !this.state.showScanner
+                });
             } catch (e) {
                 this.props.error(e.toString());
             }
@@ -38,6 +42,7 @@ class GetBatchDetails extends React.Component {
     toggleScanner() {
         this.setState({ showScanner: !this.state.showScanner });
     }
+
     handleError(err) {
         this.props.error("QR Scanner Error: " + err.toString());
     }
@@ -70,7 +75,10 @@ class GetBatchDetails extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        this.setState({ submitted: true });
+        if (this.props.inProgress) {
+            return;
+        }
+        this.setState({ submitted: true, showScanner: false });
         const { campaignId, batchId } = this.state;
         if (campaignId > 0 && batchId > 0) {
             await this.props.getBatchDetails(campaignId, batchId);
@@ -78,12 +86,7 @@ class GetBatchDetails extends React.Component {
     }
 
     render() {
-        const {
-            campaignId,
-            batchId,
-            submitted,
-            showScanner
-        } = this.state;
+        const { campaignId, batchId, submitted, showScanner } = this.state;
         const { inProgress, batch } = this.props;
         return (
             <div className="getBatchDetails form">
@@ -145,7 +148,6 @@ class GetBatchDetails extends React.Component {
         );
     }
 }
-
 
 function BatchDisplay(props) {
     return (

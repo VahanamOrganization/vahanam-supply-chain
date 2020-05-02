@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { contractConstants } from "../../../constants";
-import { contractActions } from "../../../actions";
+import { contractActions, alertActions } from "../../../actions";
+import QrReader from "react-qr-reader";
+import { getQRValue } from "../../../helpers";
 
 class ConfirmMasksReceived extends React.Component {
     constructor(props) {
@@ -9,12 +11,40 @@ class ConfirmMasksReceived extends React.Component {
         this.state = {
             campaignId: 0,
             batchId: 0,
+            showScanner: false,
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleEnter = this.handleEnter.bind(this);
         this.clearForm = this.clearForm.bind(this);
+        this.handleScan = this.handleScan.bind(this);
+        this.handleError = this.handleError.bind(this);
+        this.toggleScanner = this.toggleScanner.bind(this);
+    }
+
+    handleScan(data) {
+        if (data) {
+            this.props.success("Scanned QR Code: " + data);
+            try {
+                let { campaignId, batchId } = getQRValue(data);
+                this.setState({
+                    campaignId,
+                    batchId,
+                    showScanner: !this.state.showScanner
+                });
+            } catch (e) {
+                this.props.error(e.toString());
+            }
+        }
+    }
+
+    toggleScanner() {
+        this.setState({ showScanner: !this.state.showScanner });
+    }
+
+    handleError(err) {
+        this.props.error("QR Scanner Error: " + err.toString());
     }
 
     clearForm(event) {
@@ -22,6 +52,7 @@ class ConfirmMasksReceived extends React.Component {
         this.setState({
             campaignId: 0,
             batchId: 0,
+            showScanner: false,
             submitted: false
         });
     }
@@ -44,7 +75,10 @@ class ConfirmMasksReceived extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        this.setState({ submitted: true });
+        if (this.props.inProgress) {
+            return;
+        }
+        this.setState({ submitted: true, showScanner: false });
         const { campaignId, batchId } = this.state;
         if (campaignId > 0 && batchId > 0) {
             await this.props.confirmMasksReceived(campaignId, batchId);
@@ -52,7 +86,7 @@ class ConfirmMasksReceived extends React.Component {
     }
 
     render() {
-        const { campaignId, batchId, submitted } = this.state;
+        const { campaignId, batchId, submitted, showScanner } = this.state;
         return (
             <div className="getBatchDetails form">
                 <span className="label">Campaign ID</span>
@@ -91,6 +125,20 @@ class ConfirmMasksReceived extends React.Component {
                         </a>
                     </div>
                 </div>
+                <div className="display">
+                    {showScanner ? (
+                        <QrReader
+                            delay={300}
+                            onError={this.handleError}
+                            onScan={this.handleScan}
+                            style={{ width: "100%" }}
+                        />
+                    ) : (
+                        <a href="#" onClick={this.toggleScanner}>
+                            Scan QR Code
+                        </a>
+                    )}
+                </div>
             </div>
         );
     }
@@ -101,7 +149,9 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    confirmMasksReceived: contractActions.confirmMasksReceived
+    confirmMasksReceived: contractActions.confirmMasksReceived,
+    success: alertActions.success,
+    error: alertActions.error
 };
 
 const connectedConfirmMasksReceived = connect(

@@ -4,12 +4,7 @@ import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { history } from "../helpers";
 import { web3Actions } from "../actions";
-import { PrivateRoute } from "../components";
-import { HomePage } from "../components/HomePage";
-import { ProfilePage } from "../components/ProfilePage";
-import { NavBar } from "../components/NavBar";
-import { LoginPage } from "../components/LoginPage";
-import { RegisterPage } from "../components/RegisterPage";
+import { PrivateRoute, HomePage, ProfilePage, NavBar, LoginPage, RegisterPage } from "../components";
 
 class App extends React.Component {
     constructor(props) {
