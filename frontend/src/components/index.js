@@ -4,3 +4,4 @@ export * from "./LoginPage";
 export * from "./NavBar";
 export * from "./ProfilePage";
 export * from "./RegisterPage";
+export * from "./QRCode";

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { history } from "../helpers";
 import { web3Actions } from "../actions";
-import { PrivateRoute, HomePage, ProfilePage, NavBar, LoginPage, RegisterPage } from "../components";
+import { PrivateRoute, HomePage, ProfilePage, NavBar, LoginPage, RegisterPage, QRCode } from "../components";
 
 class App extends React.Component {
     constructor(props) {
@@ -43,6 +43,7 @@ class App extends React.Component {
         return (
             <div className="app">
                 <ToastContainer closeButton={false} autoClose={5000}/>
+                <QRCode open={this.props.open}/>}
                 <Router history={history}>
                     <NavBar />
                     <Switch>
@@ -60,7 +61,8 @@ class App extends React.Component {
 
 function mapState(state) {
     const { web3 } = state.web3;
-    return { web3 };
+    const { open } = state.qrCode;
+    return { web3, open };
 }
 
 const actionCreators = {

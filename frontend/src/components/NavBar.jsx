@@ -38,7 +38,7 @@ class NavBar extends React.Component {
                             style={inProgress ? { opacity: 1 } : { opacity: 0 }}
                         />
                         <div className="navToggle" onClick={this.toggleOpen}>
-                            {this.state.open ? "\u274C" : "\u2630"}
+                            {this.state.open ? "\u2715" : "\u2630"}
                         </div>
                     </div>
                 </div>
