@@ -11,9 +11,10 @@ export const boxActions = {
 function login(account) {
     return async (dispatch, getState) => {
         dispatch(started());
-        let box;
+        let box, space;
         try {
             box = await Box.openBox(account, window.ethereum)
+            space = await box.openSpace(boxConstants.SPACE_NAME)
         } catch (e) {
             console.log(e);
             dispatch(failure(e.toString()));
@@ -21,7 +22,7 @@ function login(account) {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({box}));
+        dispatch(loaded({box, space}));
         dispatch(alertActions.success("Login with 3Box Successful"));
         history.push("/");
     };

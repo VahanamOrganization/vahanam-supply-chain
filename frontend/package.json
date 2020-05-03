@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "3box": "^1.18.1",
+    "3box-comments-react": "^3.0.1",
     "@drizzle/react-components": "^1.5.1",
     "@drizzle/react-plugin": "^1.5.1",
     "@drizzle/store": "^1.5.1",
