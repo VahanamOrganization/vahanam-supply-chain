@@ -67,7 +67,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: "http://134.122.58.96:8000",
+            apiUrl: "https://api.athenscovid19.com",
             networkId: 4,
             contractAddress: "0x6cf31252ab0557c4e5a1a535d013ed09350745af"
             //apiUrl: "http://127.0.0.1:8000",
