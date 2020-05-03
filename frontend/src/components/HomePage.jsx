@@ -11,18 +11,12 @@ class HomePage extends React.Component {
         super(props);
     }
 
-    async componentDidMount() {
-        if (this.props.loggedIn) {
-            await this.props.getRole();
-        }
-    }
-
     render() {
         const { role } = this.props;
         return (
             <div className="homePage page">
                 <div className="homePageInner pageInner">
-                    <RoleBasedView role={role}/>
+                    <RoleBasedView role={role} />
                 </div>
             </div>
         );
@@ -62,13 +56,10 @@ function RoleBasedView(props) {
 
 function mapState(state) {
     const { role } = state.contract;
-    const { loggedIn } = state.authentication;
-    return { role, loggedIn };
+    return { role };
 }
 
-const actionCreators = {
-    getRole: contractActions.getRole
-};
+const actionCreators = {};
 
 const connectedHomePage = connect(mapState, actionCreators)(HomePage);
 export { connectedHomePage as HomePage };

@@ -1,6 +1,7 @@
 import Box from "3box";
 import { alertActions } from "./";
 import { boxConstants } from "../constants";
+import { history } from "../helpers";
 
 export const boxActions = {
     login,
@@ -10,33 +11,28 @@ export const boxActions = {
 function login(account) {
     return async (dispatch, getState) => {
         dispatch(started());
-        let box, space;
+        let box;
         try {
-            const provider = await Box.get3idConnectProvider()
-            //box = await Box.openBox(account, provider)
-            box = await Box.create(provider)
-            await box.auth(["dSupply"], { address: account })
-            space = await box.openSpace("dSupply");
+            box = await Box.openBox(account, window.ethereum)
         } catch (e) {
             console.log(e);
-            dispatch(failure(e));
+            dispatch(failure(e.toString()));
             let error = "Could not load 3Box";
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({box, space}));
-        dispatch(alertActions.success("Loaded 3Box"));
-        //history.push("/");
+        dispatch(loaded({box}));
+        dispatch(alertActions.success("Login with 3Box Successful"));
+        history.push("/");
     };
 }
 
 function loadProfile(account) {
     return async (dispatch, getState) => {
         dispatch(started());
-        let profile, accounts = {};
+        let profile;
         try {
             profile = await Box.getProfile(account);
-            //accounts = await Box.getVerifiedAccounts(profile)
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
@@ -44,8 +40,7 @@ function loadProfile(account) {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({profile, accounts}));
-        dispatch(alertActions.success("Loaded 3Box Profile"));
+        dispatch(loaded({profile}));
     };
 }
 

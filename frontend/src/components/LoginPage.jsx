@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { boxActions, authActions } from "../actions";
+import { contractActions, boxActions, authActions } from "../actions";
 import loading from "../assets/img/loading.gif";
 
 class LoginPage extends React.Component {
@@ -36,12 +36,15 @@ class LoginPage extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
+        if (this.props.inProgress) {
+            return;
+        }
         this.setState({ submitted: true });
         const { account } = this.props;
         if (account) {
             await this.props.loadBoxProfile(account);
             await this.props.loadBox(account);
-            await this.props.login(account);
+            await this.props.getRole();
         }
     }
 
@@ -78,7 +81,7 @@ class LoginPage extends React.Component {
                             href="#"
                             onClick={this.handleSubmit}
                         >
-                            Login
+                            Login with 3box
                         </a>
                     </div>
                 </div>
@@ -89,15 +92,18 @@ class LoginPage extends React.Component {
 
 function mapState(state) {
     const { account } = state.web3;
-    let inProgress = state.web3.inProgress || state.authentication.inProgress;
+    let inProgress =
+        state.web3.inProgress ||
+        state.box.inProgress ||
+        state.contract.inProgress;
     return { inProgress, account };
 }
 
 const actionCreators = {
-    login: authActions.login,
     logout: authActions.logout,
     loadBoxProfile: boxActions.loadProfile,
-    loadBox: boxActions.login
+    loadBox: boxActions.login,
+    getRole: contractActions.getRole
 };
 
 const connectedLoginPage = connect(mapState, actionCreators)(LoginPage);

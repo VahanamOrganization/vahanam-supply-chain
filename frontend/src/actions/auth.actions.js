@@ -12,8 +12,10 @@ export const authActions = {
 function login(username) {
     return dispatch => {
         dispatch(request({ username }));
+        /*
         dispatch(success({displayName: "displayName", address: username}));
         history.push("/");
+        */
         dispatch(alertActions.success("Login successful"));
         return;
     };
