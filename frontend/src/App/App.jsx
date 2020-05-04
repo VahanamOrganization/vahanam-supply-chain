@@ -43,12 +43,13 @@ class App extends React.Component {
         return (
             <div className="app">
                 <ToastContainer closeButton={false} autoClose={5000}/>
-                <QRCode open={this.props.open}/>}
+                <QRCode open={this.props.open}/>
                 <Router history={history}>
                     <NavBar />
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage} />
                         <PrivateRoute path="/profile" component={ProfilePage} />
+                        {/*<PrivateRoute path="/campaigns/:id" component={CampaignsPage} />*/}
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Redirect from="*" to="/" />

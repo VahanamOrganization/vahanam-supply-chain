@@ -22,7 +22,7 @@ function login(account) {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({box, space}));
+        dispatch(loaded({box, space, loggedIn: true}));
         dispatch(alertActions.success("Login with 3Box Successful"));
         history.push("/");
     };

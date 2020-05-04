@@ -12,7 +12,6 @@ export function box(state = initialState, action) {
             return {
                 ...state,
                 inProgress: false,
-                loggedIn: true,
                 ...action
             };
         case boxConstants.BOX_ERROR:
