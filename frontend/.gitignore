@@ -2,5 +2,7 @@
 /build
 /dist
 /keys
+/ipfs
+/orbitdb
 package-lock.json
 .firebase*
