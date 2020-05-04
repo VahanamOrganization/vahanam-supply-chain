@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractActions, web3Actions } from "../actions";
-import { history } from "../helpers";
+import { contractActions, web3Actions } from "../../actions";
+import { history } from "../../helpers";
 import { Icon, InlineIcon } from "@iconify/react";
 import gearIcon from "@iconify/icons-octicon/gear";
 import peopleIcon from "@iconify/icons-eva/people-fill";
 import detailsIcon from "@iconify/icons-ic/baseline-assignment";
 import arrowDownIcon from "@iconify/icons-dashicons/arrow-down-alt2";
-import tempProfile from "../assets/img/temp.png";
+import tempProfile from "../../assets/img/profile.webp";
 
 class CampaignPage extends React.Component {
     constructor(props) {
@@ -26,6 +26,7 @@ class CampaignPage extends React.Component {
 
     async init() {
         await this.props.clean();
+        //TODO: remove this extra call
         await this.props.loadWeb3();
         await this.props.getCampaignDetails(this.campaignId);
         this.setState({ loaded: true });
@@ -51,7 +52,9 @@ class CampaignPage extends React.Component {
                         </div>
                         <div className="topBar">
                             <div className="photo">
-                                <img src={tempProfile} />
+                                <div className="photoInner">
+                                    <img src={tempProfile} />
+                                </div>
                             </div>
                             <div className="goal">
                                 <span className="data">
@@ -139,7 +142,8 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                PEOPLE HERE<br/>
+                                PEOPLE HERE
+                                <br />
                             </div>
                         </div>
                     </div>

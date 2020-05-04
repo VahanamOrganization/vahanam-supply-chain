@@ -1,5 +1,5 @@
 import React from "react";
-import * as Forms from "./forms";
+import * as Forms from "../forms";
 
 class AdminView extends React.Component {
     constructor(props) {

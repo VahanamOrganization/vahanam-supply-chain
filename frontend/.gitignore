@@ -6,3 +6,4 @@
 /orbitdb
 package-lock.json
 .firebase*
+*.swp

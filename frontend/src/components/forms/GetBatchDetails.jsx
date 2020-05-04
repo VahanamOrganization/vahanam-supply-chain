@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractConstants } from "../../../constants";
-import { contractActions, qrCodeActions, alertActions } from "../../../actions";
+import { contractConstants } from "../../constants";
+import { contractActions, qrCodeActions, alertActions } from "../../actions";
 import QRCode from "qrcode";
-import { getQRString } from "../../../helpers";
+import { getQRString } from "../../helpers";
 
 class GetBatchDetails extends React.Component {
     constructor(props) {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
-import { contractActions } from "../../../actions";
+import { contractActions } from "../../actions";
 import QRCode from "qrcode";
-import { getQRString } from "../../../helpers";
+import { getQRString } from "../../helpers";
 
 class CreateNewBatch extends React.Component {
     constructor(props) {

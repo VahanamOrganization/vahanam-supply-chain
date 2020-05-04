@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractConstants } from "../../../constants";
-import { contractActions, alertActions } from "../../../actions";
+import { contractConstants } from "../../constants";
+import { contractActions, alertActions } from "../../actions";
 import QrReader from "react-qr-reader";
-import { getQRValue } from "../../../helpers";
+import { getQRValue } from "../../helpers";
 
 class ConfirmMasksMade extends React.Component {
     constructor(props) {

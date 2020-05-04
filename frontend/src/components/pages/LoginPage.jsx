@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractActions, boxActions, authActions } from "../actions";
-import loading from "../assets/img/loading.gif";
+import { contractActions, boxActions, authActions } from "../../actions";
 
 class LoginPage extends React.Component {
     constructor(props) {

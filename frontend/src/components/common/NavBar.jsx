@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractActions } from "../actions";
-import loading from "../assets/img/loading.gif";
+import loading from "../../assets/img/loading.gif";
 import { Icon, InlineIcon } from "@iconify/react";
 import homeIcon from "@iconify/icons-ant-design/home-outlined";
 import searchIcon from "@iconify/icons-ant-design/search-outlined";

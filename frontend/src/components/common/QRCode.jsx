@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { alertActions, qrCodeActions } from "../actions";
+import { alertActions, qrCodeActions } from "../../actions";
 import QrReader from "react-qr-reader";
 
 class QRCode extends React.Component {

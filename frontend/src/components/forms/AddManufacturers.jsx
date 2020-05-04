@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractActions } from "../../../actions";
+import { contractActions } from "../../actions";
 
-class AddCouriers extends React.Component {
+class AddManufacturers extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            couriers: [],
+            manufacturers: [],
             campaignId: 0,
             submitted: false
         };
@@ -19,7 +19,7 @@ class AddCouriers extends React.Component {
     clearForm(event) {
         event.preventDefault();
         this.setState({
-            couriers: [],
+            manufacturers: [],
             campaignId: 0,
             submitted: false
         });
@@ -28,7 +28,7 @@ class AddCouriers extends React.Component {
     handleChange(event) {
         let { name, value } = event.target;
         value = value.trim();
-        if (["couriers", "couriers"].includes(name)) {
+        if (["couriers", "manufacturers"].includes(name)) {
             value = value.split(",").map(val => val.trim());
         }
         this.setState({
@@ -47,28 +47,37 @@ class AddCouriers extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
-        const { couriers, campaignId } = this.state;
-        if (couriers.length != 0 && campaignId > 0) {
-            await this.props.addCouriers(this.state);
+        const { manufacturers, campaignId } = this.state;
+        if (
+            manufacturers.length != 0 &&
+            campaignId > 0
+        ) {
+            await this.props.addManufacturers(this.state);
         }
     }
 
     render() {
-        const { couriers, campaignId, submitted } = this.state;
+        const {
+            manufacturers,
+            campaignId,
+            submitted
+        } = this.state;
         return (
-            <div className="addCouriers form">
-                <span className="label">Couriers Addresses</span>
+            <div className="addManufacturer form">
+                <span className="label">Manufacturer Addresses</span>
                 <input
                     className="input"
                     type="text"
-                    name="couriers"
-                    value={couriers}
+                    name="manufacturers"
+                    value={manufacturers}
                     placeholder="0x..., 0x..., ..."
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
-                {submitted && couriers.length == 0 && (
-                    <div className="helpBlock">Couriers Address Required</div>
+                {submitted && manufacturers.length == 0 && (
+                    <div className="helpBlock">
+                        Manufacturer Address Required
+                    </div>
                 )}
                 <span className="label">Campaign ID</span>
                 <input
@@ -104,8 +113,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    addCouriers: contractActions.addCouriers
+    addManufacturers: contractActions.addManufacturers
 };
 
-const connectedAddCouriers = connect(mapState, actionCreators)(AddCouriers);
-export { connectedAddCouriers as AddCouriers };
+const connectedAddManufacturers = connect(mapState, actionCreators)(AddManufacturers);
+export { connectedAddManufacturers as AddManufacturers };

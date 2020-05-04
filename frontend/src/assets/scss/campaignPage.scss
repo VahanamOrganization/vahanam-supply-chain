@@ -1,7 +1,9 @@
 @import "config";
 
 .campaignPageInner {
-    .iconify { color: $grey }
+    .iconify {
+        color: $grey;
+    }
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -32,9 +34,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            img {
+            .photoInner {
+                border-radius: 50%;
+                overflow: hidden;
                 width: 20vw;
                 height: 20vw;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
             }
         }
         .goal,
@@ -159,7 +167,7 @@
             top: 0;
             display: none;
             &.selected {
-                display: block
+                display: block;
             }
         }
     }

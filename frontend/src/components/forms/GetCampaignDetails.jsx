@@ -1,12 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractActions } from "../../../actions";
+import { contractActions } from "../../actions";
+import { boxConstants } from "../../constants";
+import { history } from "../../helpers";
 
-class MakeCoordinator extends React.Component {
+class GetCampaignDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            address: "",
+            campaignId: 0,
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -18,13 +20,14 @@ class MakeCoordinator extends React.Component {
     clearForm(event) {
         event.preventDefault();
         this.setState({
-            address: "",
+            campaignId: 0,
             submitted: false
         });
     }
 
     handleChange(event) {
-        const { name, value } = event.target;
+        let { name, value } = event.target;
+        value = value.trim();
         this.setState({
             [name]: value
         });
@@ -40,36 +43,33 @@ class MakeCoordinator extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        this.setState({  submitted: true });
-        const { address } = this.state;
-        if (address) {
-            await this.props.makeCoordinator(address);
+        this.setState({ submitted: true });
+        const { campaignId } = this.state;
+        if (campaignId > 0) {
+            history.push("/campaign/"+campaignId);
         }
     }
 
     render() {
-        const { address, submitted } = this.state;
+        const { campaignId, submitted } = this.state;
         return (
-            <div className="makeCoordinator form">
-                <span className="label">Coordinator Address</span>
+            <div className="getCampaignDetails form">
+                <span className="label">Campaign ID</span>
                 <input
                     className="input"
-                    type="text"
-                    name="address"
-                    placeholder="0x..."
-                    value={address}
+                    type="number"
+                    name="campaignId"
+                    value={campaignId}
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
-                {submitted && !address && (
-                    <div className="helpBlock">
-                        Coordinator Address is Required
-                    </div>
+                {submitted && campaignId == 0 && (
+                    <div className="helpBlock">CampaignId cannot be 0</div>
                 )}
                 <div className="submitForm">
                     <div className="submit">
                         <a href="#" onClick={this.handleSubmit}>
-                            Make
+                            Get
                         </a>
                     </div>
                     <div className="cancel">
@@ -88,8 +88,11 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    makeCoordinator: contractActions.makeCoordinator
+    getCampaignDetails: contractActions.getCampaignDetails
 };
 
-const connectedMakeCoordinator = connect(mapState, actionCreators)(MakeCoordinator);
-export { connectedMakeCoordinator as MakeCoordinator };
+const connectedGetCampaignDetails = connect(
+    mapState,
+    actionCreators
+)(GetCampaignDetails);
+export { connectedGetCampaignDetails as GetCampaignDetails };

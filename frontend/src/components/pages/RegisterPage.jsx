@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractConstants } from "../constants";
-import { authActions } from "../actions";
-import loading from "../assets/img/loading.gif";
+import { contractConstants } from "../../constants";
+import { authActions } from "../../actions";
 
 class RegisterPage extends React.Component {
     constructor(props) {

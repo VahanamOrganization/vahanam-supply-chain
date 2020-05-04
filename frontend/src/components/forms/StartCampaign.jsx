@@ -1,13 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractActions } from "../../../actions";
+import { contractActions } from "../../actions";
 
-class AddManufacturers extends React.Component {
+class StartCampaign extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             manufacturers: [],
-            campaignId: 0,
+            couriers: [],
+            receiver: "",
+            totalPLA: 0,
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -20,7 +22,9 @@ class AddManufacturers extends React.Component {
         event.preventDefault();
         this.setState({
             manufacturers: [],
-            campaignId: 0,
+            couriers: [],
+            receiver: "",
+            totalPLA: 0,
             submitted: false
         });
     }
@@ -47,23 +51,40 @@ class AddManufacturers extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
-        const { manufacturers, campaignId } = this.state;
+        const { couriers, manufacturers, receiver, totalPLA } = this.state;
         if (
+            couriers.length != 0 &&
             manufacturers.length != 0 &&
-            campaignId > 0
+            receiver &&
+            totalPLA > 0
         ) {
-            await this.props.addManufacturers(this.state);
+            await this.props.startCampaign(this.state);
         }
     }
 
     render() {
         const {
             manufacturers,
-            campaignId,
+            couriers,
+            receiver,
+            totalPLA,
             submitted
         } = this.state;
         return (
-            <div className="addManufacturer form">
+            <div className="startCampaign form">
+                <span className="label">Courier Addresses</span>
+                <input
+                    className="input"
+                    type="text"
+                    name="couriers"
+                    value={couriers}
+                    placeholder="0x..., 0x..., ..."
+                    onChange={this.handleChange}
+                    onKeyPress={this.handleEnter}
+                />
+                {submitted && couriers.length == 0 && (
+                    <div className="helpBlock">Courier Address Required</div>
+                )}
                 <span className="label">Manufacturer Addresses</span>
                 <input
                     className="input"
@@ -79,22 +100,35 @@ class AddManufacturers extends React.Component {
                         Manufacturer Address Required
                     </div>
                 )}
-                <span className="label">Campaign ID</span>
+                <span className="label">Receiver Address</span>
                 <input
                     className="input"
-                    type="number"
-                    name="campaignId"
-                    value={campaignId}
+                    type="text"
+                    name="receiver"
+                    value={receiver}
+                    placeholder="0x..."
                     onChange={this.handleChange}
                     onKeyPress={this.handleEnter}
                 />
-                {submitted && campaignId == 0 && (
-                    <div className="helpBlock">CampaignId cannot be 0</div>
+                {submitted && !receiver && (
+                    <div className="helpBlock">Receiver Address Required</div>
+                )}
+                <span className="label">Total PLA</span>
+                <input
+                    className="input"
+                    type="number"
+                    name="totalPLA"
+                    value={totalPLA}
+                    onChange={this.handleChange}
+                    onKeyPress={this.handleEnter}
+                />
+                {submitted && totalPLA == 0 && (
+                    <div className="helpBlock">Total PLA cannot be 0</div>
                 )}
                 <div className="submitForm">
                     <div className="submit">
                         <a href="#" onClick={this.handleSubmit}>
-                            Add
+                            Start
                         </a>
                     </div>
                     <div className="cancel">
@@ -113,8 +147,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    addManufacturers: contractActions.addManufacturers
+    startCampaign: contractActions.startCampaign
 };
 
-const connectedAddManufacturers = connect(mapState, actionCreators)(AddManufacturers);
-export { connectedAddManufacturers as AddManufacturers };
+const connectedStartCampaign = connect(mapState, actionCreators)(StartCampaign);
+export { connectedStartCampaign as StartCampaign };

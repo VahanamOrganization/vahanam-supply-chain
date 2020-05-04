@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { history } from "../helpers";
 import { web3Actions } from "../actions";
-import { PrivateRoute, HomePage, ProfilePage, NavBar, LoginPage, RegisterPage, QRCode, CampaignPage, LandingPage } from "../components";
+import { PrivateRoute, NavBar, QRCode } from "../components/common";
+import * as Pages from "../components/pages";
 
 class App extends React.Component {
     constructor(props) {
@@ -47,12 +48,13 @@ class App extends React.Component {
                 <Router history={history}>
                     <NavBar />
                     <Switch>
-                        <PrivateRoute exact path="/home" component={HomePage} />
-                        <PrivateRoute exact path="/profile" component={ProfilePage} />
-                        <Route exact path="/" component={LandingPage} />
-                        <Route exact path="/login" component={LoginPage} />
-                        <Route exact path="/register" component={RegisterPage} />
-                        <Route exact path="/campaign/:id" component={CampaignPage} />
+                        <PrivateRoute exact path="/home" component={Pages.HomePage} />
+                        {/*TODO: make profile route private */}
+                        <Route exact path="/profile" component={Pages.ProfilePage} />
+                        <Route exact path="/" component={Pages.LandingPage} />
+                        <Route exact path="/login" component={Pages.LoginPage} />
+                        <Route exact path="/register" component={Pages.RegisterPage} />
+                        <Route exact path="/campaign/:id" component={Pages.CampaignPage} />
                         <Redirect from="*" to="/" />
                     </Switch>
                 </Router>

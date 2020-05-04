@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractConstants } from "../../../constants";
-import { contractActions, alertActions } from "../../../actions";
+import { contractConstants } from "../../constants";
+import { contractActions, alertActions } from "../../actions";
 import QrReader from "react-qr-reader";
-import { getQRValue } from "../../../helpers";
+import { getQRValue } from "../../helpers";
 
-class ConfirmMasksReceived extends React.Component {
+class ConfirmPLAReceived extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,7 +42,7 @@ class ConfirmMasksReceived extends React.Component {
     toggleScanner() {
         this.setState({ showScanner: !this.state.showScanner });
     }
-
+    
     handleError(err) {
         this.props.error("QR Scanner Error: " + err.toString());
     }
@@ -81,7 +81,7 @@ class ConfirmMasksReceived extends React.Component {
         this.setState({ submitted: true, showScanner: false });
         const { campaignId, batchId } = this.state;
         if (campaignId > 0 && batchId > 0) {
-            await this.props.confirmMasksReceived(campaignId, batchId);
+            await this.props.confirmPLAReceived(campaignId, batchId);
         }
     }
 
@@ -149,13 +149,13 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    confirmMasksReceived: contractActions.confirmMasksReceived,
+    confirmPLAReceived: contractActions.confirmPLAReceived,
     success: alertActions.success,
     error: alertActions.error
 };
 
-const connectedConfirmMasksReceived = connect(
+const connectedConfirmPLAReceived = connect(
     mapState,
     actionCreators
-)(ConfirmMasksReceived);
-export { connectedConfirmMasksReceived as ConfirmMasksReceived };
+)(ConfirmPLAReceived);
+export { connectedConfirmPLAReceived as ConfirmPLAReceived };

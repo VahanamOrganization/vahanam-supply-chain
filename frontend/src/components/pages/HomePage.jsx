@@ -2,9 +2,9 @@ import React from "react";
 import config from "config";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractActions } from "../actions";
-import loading from "../assets/img/loading.gif";
-import * as Views from "./views";
+import { contractActions } from "../../actions";
+import loading from "../../assets/img/loading.gif";
+import * as Views from "../views";
 
 class HomePage extends React.Component {
     constructor(props) {

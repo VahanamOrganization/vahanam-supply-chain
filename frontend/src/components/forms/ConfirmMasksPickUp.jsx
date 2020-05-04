@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractConstants } from "../../../constants";
-import { contractActions, alertActions } from "../../../actions";
+import { contractConstants } from "../../constants";
+import { contractActions, alertActions } from "../../actions";
 import QrReader from "react-qr-reader";
-import { getQRValue } from "../../../helpers";
+import { getQRValue } from "../../helpers";
 
-class ConfirmPLAPickUp extends React.Component {
+class ConfirmMasksPickUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -81,7 +81,7 @@ class ConfirmPLAPickUp extends React.Component {
         this.setState({ submitted: true, showScanner: false });
         const { campaignId, batchId } = this.state;
         if (campaignId > 0 && batchId > 0) {
-            await this.props.confirmPLAPickedUp(campaignId, batchId);
+            await this.props.confirmMasksPickedUp(campaignId, batchId);
         }
     }
 
@@ -149,13 +149,13 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    confirmPLAPickedUp: contractActions.confirmPLAPickedUp,
+    confirmMasksPickedUp: contractActions.confirmMasksPickedUp,
     success: alertActions.success,
     error: alertActions.error
 };
 
-const connectedConfirmPLAPickUp = connect(
+const connectedConfirmMasksPickUp = connect(
     mapState,
     actionCreators
-)(ConfirmPLAPickUp);
-export { connectedConfirmPLAPickUp as ConfirmPLAPickUp };
+)(ConfirmMasksPickUp);
+export { connectedConfirmMasksPickUp as ConfirmMasksPickUp };
