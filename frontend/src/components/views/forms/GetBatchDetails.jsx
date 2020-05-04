@@ -36,11 +36,7 @@ class GetBatchDetails extends React.Component {
                 this.props.error(e.toString());
             }
         }
-        return {
-            campaignId: 0,
-            batchId: 0,
-            submitted: false
-        };
+        return null;
     }
 
     clearForm(event) {

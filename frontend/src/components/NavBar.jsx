@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { contractActions } from "../actions";
 import loading from "../assets/img/loading.gif";
-import homeIcon from "../assets/img/home.png";
-import chatIcon from "../assets/img/chat.png";
-import profileIcon from "../assets/img/profile.png";
-import searchIcon from "../assets/img/search.png";
+import { Icon, InlineIcon } from "@iconify/react";
+import homeIcon from "@iconify/icons-ant-design/home-outlined";
+import searchIcon from "@iconify/icons-ant-design/search-outlined";
+import chatIcon from "@iconify/icons-bi/chat";
+import profileIcon from "@iconify/icons-bi/person";
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -26,13 +27,13 @@ class NavBar extends React.Component {
                     {loggedIn ? (
                         <div className="barInner loggedIn">
                             <div className="barIconContainer">
-                                <Link to="/">
-                                    <img className="barIcon" src={homeIcon} />
+                                <Link to="/home">
+                                    <Icon className="barIcon" icon={homeIcon} />
                                 </Link>
                             </div>
                             <div className="barIconContainer">
-                                <Link to="/">
-                                    <img className="barIcon" src={searchIcon} />
+                                <Link to="/home">
+                                    <Icon className="barIcon" icon={searchIcon} />
                                 </Link>
                             </div>
                             <div className="barIconContainer plus">
@@ -40,22 +41,19 @@ class NavBar extends React.Component {
                             </div>
                             <div className="barIconContainer">
                                 <Link to="/profile">
-                                    <img className="barIcon" src={chatIcon} />
+                                    <Icon className="barIcon" icon={chatIcon} />
                                 </Link>
                             </div>
                             <div className="barIconContainer">
                                 <Link to="/profile">
-                                    <img
-                                        className="barIcon"
-                                        src={profileIcon}
-                                    />
+                                    <Icon className="barIcon" icon={profileIcon} />
                                 </Link>
                             </div>
                         </div>
                     ) : (
                         <div className="barInner needLogin">
                             <Link to="/login">Login</Link>
-                            <Link to="/login">Register</Link>
+                            <Link to="/campaign/1">Register</Link>
                         </div>
                     )}
                 </div>

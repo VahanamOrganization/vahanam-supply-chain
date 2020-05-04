@@ -24,7 +24,7 @@ function login(account) {
         }
         dispatch(loaded({box, space, loggedIn: true}));
         dispatch(alertActions.success("Login with 3Box Successful"));
-        history.push("/");
+        history.push("/home");
     };
 }
 

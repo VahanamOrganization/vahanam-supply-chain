@@ -3,7 +3,13 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode: "development",
-    entry: ["babel-polyfill", "./src/index.jsx"],
+    entry: {
+        app: ["babel-polyfill", "./src/index.jsx"]
+    },
+    output: {
+        filename: "bundle.[hash].js",
+        publicPath: "/"
+    },
     resolve: {
         extensions: [".js", ".jsx"]
     },
@@ -12,12 +18,19 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-env", "@babel/preset-react"]
+                use: [
+                    // style-loader
+                    { loader: "react-hot-loader/webpack" },
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            presets: [
+                                "@babel/preset-env",
+                                "@babel/preset-react"
+                            ]
+                        }
                     }
-                }
+                ]
             },
             {
                 test: /\.css$/i,
@@ -40,10 +53,10 @@ module.exports = {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
                 use: [
                     {
-                        loader: 'file-loader',
+                        loader: "file-loader",
                         options: {
-                            name: '[name].[ext]',
-                            outputPath: 'fonts/'
+                            name: "[name].[ext]",
+                            outputPath: "fonts/"
                         }
                     }
                 ]
@@ -57,12 +70,10 @@ module.exports = {
     ],
     devServer: {
         historyApiFallback: true,
-        //http2: true,
-        //https: {
-        //    key: fs.readFileSync('./keys/server.key'),
-        //    cert: fs.readFileSync('./keys/server.crt'),
-        //    ca: fs.readFileSync('./keys/server.pem'),
-        //}
+        hot: true,
+        open: true,
+        host: "localhost",
+        port: 3000
     },
     externals: {
         // global app config object
@@ -74,5 +85,6 @@ module.exports = {
             //networkId: 4447,
             //contractAddress: "0xCfEB869F69431e42cdB54A4F4f105C19C080A601"
         })
-    }
+    },
+    devtool: "inline-source-map"
 };

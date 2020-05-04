@@ -1,7 +1,6 @@
 import { campaignConstants } from "../constants";
 import { campaignService } from "../services";
 import { alertActions } from "./";
-import { history } from "../helpers";
 
 export const campaignActions = {
     getAll,

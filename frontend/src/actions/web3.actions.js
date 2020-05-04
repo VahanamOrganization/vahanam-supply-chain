@@ -1,6 +1,5 @@
 import Web3 from "web3";
 import config from "config";
-import { history } from "../helpers";
 import { alertActions } from "./";
 import { web3Constants } from "../constants";
 import campaignGenerator from "../assets/contracts/CampaignGenerator.json";

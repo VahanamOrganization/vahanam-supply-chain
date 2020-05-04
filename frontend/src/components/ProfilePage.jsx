@@ -7,7 +7,7 @@ class ProfilePage extends React.Component {
         const { profile, role, account } = this.props;
         return (
             <div className="profilePage page">
-                <div className="profilePageInner pageInner">
+                <div className="profilePageInner">
                     <div className="title">
                         <span>Profile</span>
                     </div>

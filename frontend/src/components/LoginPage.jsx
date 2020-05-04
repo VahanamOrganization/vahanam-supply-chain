@@ -53,9 +53,9 @@ class LoginPage extends React.Component {
         const { submitted } = this.state;
         return (
             <div className="loginPage page">
-                <div className="loginPageInner pageInner">
+                <div className="loginPageInner">
                     <div className="title">
-                        <span>3D Printed Masks</span>
+                        Login
                     </div>
                     <div className="loginForm form">
                         <span className="label">Account</span>

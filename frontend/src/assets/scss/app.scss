@@ -2,6 +2,19 @@
 
 :root {
     font-size: 3.5vw;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+
 }
 .app {
     font-family: Consolas, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -11,6 +24,7 @@
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
+    overflow-y: hidden;
     color: $grey;
 }
 

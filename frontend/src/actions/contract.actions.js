@@ -5,6 +5,7 @@ import { contractConstants } from "../constants";
 
 export const contractActions = {
     getRole,
+    clean,
     makeCoordinator,
     startCampaign,
     addManufacturers,
@@ -18,6 +19,14 @@ export const contractActions = {
     confirmMasksPickedUp,
     confirmMasksReceived
 };
+
+function clean() {
+    return async (dispatch, getState) => {
+        dispatch({
+            type: contractConstants.TRANSACTION_CLEAN
+        });
+    };
+}
 
 function getRole() {
     return async (dispatch, getState) => {
@@ -441,7 +450,7 @@ function createNewBatch(batch) {
                     "Created & Packed Batch ID: " + event.returnValues.branchId
                 )
             );
-            dispatch(result({newBatchId: event.returnValues.branchId}));
+            dispatch(result({ newBatchId: event.returnValues.branchId }));
         } else {
             printReceipt(receipt);
             dispatch(failure(receipt.toString()));

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { contractActions } from "../../../actions";
 import { boxConstants } from "../../../constants";
-import ThreeBoxComments from "3box-comments-react";
+import { history } from "../../../helpers";
 
 class GetCampaignDetails extends React.Component {
     constructor(props) {
@@ -46,13 +46,12 @@ class GetCampaignDetails extends React.Component {
         this.setState({ submitted: true });
         const { campaignId } = this.state;
         if (campaignId > 0) {
-            await this.props.getCampaignDetails(campaignId);
+            history.push("/campaign/"+campaignId);
         }
     }
 
     render() {
         const { campaignId, submitted } = this.state;
-        const { inProgress, campaign } = this.props;
         return (
             <div className="getCampaignDetails form">
                 <span className="label">Campaign ID</span>
@@ -79,59 +78,13 @@ class GetCampaignDetails extends React.Component {
                         </a>
                     </div>
                 </div>
-                {!inProgress && submitted && campaign ? (
-                    <CampaignDisplay
-                        campaign={campaign}
-                        campaignId={campaignId}
-                        box={this.props.box}
-                        account={this.props.account}
-                    />
-                ) : null}
             </div>
         );
     }
 }
 
-function CampaignDisplay(props) {
-    let threadName =
-        boxConstants.SPACE_NAME + ":campaign:" + props.campaignId.toString();
-    return (
-        <div className="campaignDisplay display">
-            <span className="label">Coordinator</span>
-            <p className="data">{props.campaign.coordinator}</p>
-            <span className="label">Couriers</span>
-            <ul className="data">
-                {props.campaign.couriers.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
-            <span className="label">Manufacturers</span>
-            <ul className="data">
-                {props.campaign.manufacturers.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
-            <span className="label">Total PLA</span>
-            <p className="data">{props.campaign.totalPLA}</p>
-
-            <div className="box-comments">
-                <ThreeBoxComments
-                    spaceName={boxConstants.SPACE_NAME}
-                    threadName={threadName}
-                    adminEthAddr={boxConstants.ADMIN_ACCOUNT}
-                    box={props.box}
-                    currentUserAddr={props.account}
-                />
-            </div>
-        </div>
-    );
-}
-
 function mapState(state) {
-    const { inProgress, campaign } = state.contract;
-    const { box } = state.box;
-    const { account } = state.web3;
-    return { inProgress, campaign, box, account };
+    return { };
 }
 
 const actionCreators = {
