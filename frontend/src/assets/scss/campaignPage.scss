@@ -8,8 +8,7 @@
     justify-content: flex-start;
     padding: 2vw;
     width: 96vw;
-    min-height: 100vh;
-    overflow-y: scroll;
+    height: 100vh;
     overflow-x: hidden;
     .back {
         a {
@@ -76,6 +75,9 @@
         overflow: hidden;
     }
     .actionBar {
+        padding-bottom: 2vw;
+        border-style: none none solid none;
+        border-color: $grey_;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -113,14 +115,16 @@
         }
     }
     .tabBar {
-        margin-top: 2vw;
         display: flex;
         justify-content: space-around;
         align-items: center;
         height: 10vw;
         width: 100%;
-        border-style: solid none solid none;
+        border-style: none none solid none;
         border-color: $grey_;
+        background: $white;
+        opacity: 1;
+        z-index: 1;
         border-width: 1px;
         position: sticky;
         top: 0;
@@ -134,12 +138,16 @@
             width: 26vw;
             font-size: 6vw;
             font-weight: bold;
-            opacity: 0.5;
+            .tabIcon {
+                opacity: 0.5;
+            }
             transition: 0.25s;
             &.selected {
                 border-style: none none solid none;
                 border-width: 7px;
-                opacity: 1;
+                .tabIcon {
+                    opacity: 1;
+                }
             }
         }
     }
@@ -149,12 +157,9 @@
         .tabDataInner {
             position: absolute;
             top: 0;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.25s;
+            display: none;
             &.selected {
-                visibility: visible;
-                opacity: 1;
+                display: block
             }
         }
     }

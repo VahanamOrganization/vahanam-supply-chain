@@ -34,8 +34,7 @@ class CampaignPage extends React.Component {
     render() {
         const { campaign, role, box, account, inProgress } = this.props;
         const title = "Hellas covid19";
-        const description =
-            "We are making masks everwhere, yes we are! We are making masks everwhere, yes we are!";
+        const description = "We are making masks everwhere, yes we are!";
         const status = 50;
 
         return (
@@ -86,7 +85,7 @@ class CampaignPage extends React.Component {
                                 }
                                 onClick={() => this.setState({ selected: 0 })}
                             >
-                                <Icon icon={gearIcon} />
+                                <Icon className="tabIcon" icon={gearIcon} />
                             </div>
                             <div
                                 className={
@@ -96,7 +95,7 @@ class CampaignPage extends React.Component {
                                 }
                                 onClick={() => this.setState({ selected: 1 })}
                             >
-                                <Icon icon={detailsIcon} />
+                                <Icon className="tabIcon" icon={detailsIcon} />
                             </div>
                             <div
                                 className={
@@ -106,7 +105,7 @@ class CampaignPage extends React.Component {
                                 }
                                 onClick={() => this.setState({ selected: 2 })}
                             >
-                                <Icon icon={peopleIcon} />
+                                <Icon className="tabIcon" icon={peopleIcon} />
                             </div>
                         </div>
                         <div className="tabData">
@@ -126,7 +125,7 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                <CampaignDisplay
+                                <DetailsDisplay
                                     campaign={campaign}
                                     campaignId={this.campaignId}
                                     box={box}
@@ -140,7 +139,7 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                PEOPLE HERE
+                                PEOPLE HERE<br/>
                             </div>
                         </div>
                     </div>
@@ -150,7 +149,7 @@ class CampaignPage extends React.Component {
     }
 }
 
-function CampaignDisplay(props) {
+function DetailsDisplay(props) {
     //let threadName = boxConstants.SPACE_NAME + ":campaign:" + props.campaignId.toString();
     return (
         <div className="campaignDisplay display">

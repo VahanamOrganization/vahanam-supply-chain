@@ -38,15 +38,17 @@
         align-self: flex-start;
     }
     input {
-        padding: 0;
-        border: 0;
+        padding: 1vw;
         width: 100%;
         font-size: 4vw;
+        border-style: solid;
     }
     .react-datepicker-wrapper {
         width: 100%;
         input {
+            padding: 1vw;
             width: 100%;
+            border-style: solid;
         }
     }
     select {
