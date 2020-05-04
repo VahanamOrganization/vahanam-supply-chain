@@ -9,21 +9,15 @@ export const authActions = {
     register
 };
 
-function login(username, password) {
+function login(username) {
     return dispatch => {
         dispatch(request({ username }));
-
-        authService.login(username, password).then(
-            user => {
-                dispatch(success(user));
-                history.push("/");
-                dispatch(alertActions.success("Login successful"));
-            },
-            error => {
-                dispatch(failure(error.toString()));
-                dispatch(alertActions.error(error.toString()));
-            }
-        );
+        /*
+        dispatch(success({displayName: "displayName", address: username}));
+        history.push("/");
+        */
+        dispatch(alertActions.success("Login successful"));
+        return;
     };
 
     function request(user) {
@@ -39,7 +33,6 @@ function login(username, password) {
 
 function logout() {
     return dispatch => {
-        authService.logout();
         dispatch({ type: authConstants.LOGOUT });
     };
 }
@@ -47,7 +40,7 @@ function logout() {
 function register(user) {
     return dispatch => {
         dispatch(request(user));
-
+        /*
         authService.register(user).then(
             user => {
                 dispatch(success(user));
@@ -59,6 +52,7 @@ function register(user) {
                 dispatch(alertActions.error(error.toString()));
             }
         );
+        */
     };
 
     function request(user) {

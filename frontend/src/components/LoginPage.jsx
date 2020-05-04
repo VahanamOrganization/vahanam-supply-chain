@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { history } from "../helpers";
-import { contractActions, web3Actions, authActions } from "../actions";
+import { contractActions, boxActions, authActions } from "../actions";
 import loading from "../assets/img/loading.gif";
 
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            password: "",
             submitted: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -38,17 +36,21 @@ class LoginPage extends React.Component {
 
     async handleSubmit(event) {
         event.preventDefault();
+        if (this.props.inProgress) {
+            return;
+        }
         this.setState({ submitted: true });
-        const { password } = this.state;
         const { account } = this.props;
-        if (account && password) {
-            await this.props.login(account, password);
+        if (account) {
+            await this.props.loadBoxProfile(account);
+            await this.props.loadBox(account);
+            await this.props.getRole();
         }
     }
 
     render() {
         const { inProgress, account } = this.props;
-        const { password, submitted } = this.state;
+        const { submitted } = this.state;
         return (
             <div className="loginPage page">
                 <div className="loginPageInner pageInner">
@@ -74,30 +76,13 @@ class LoginPage extends React.Component {
                                 MetaMask connected
                             </div>
                         )}
-                        <span className="label">Password</span>
-                        <input
-                            className="input"
-                            type="password"
-                            name="password"
-                            value={password}
-                            onChange={this.handleChange}
-                            onKeyPress={this.handleEnter}
-                        />
-                        {submitted && !password && (
-                            <div className="helpBlock">
-                                Password is required
-                            </div>
-                        )}
                         <a
                             className="login"
                             href="#"
                             onClick={this.handleSubmit}
                         >
-                            Login
+                            Login with 3box
                         </a>
-                        <Link className="register" to="/register">
-                            Register
-                        </Link>
                     </div>
                 </div>
             </div>
@@ -107,13 +92,18 @@ class LoginPage extends React.Component {
 
 function mapState(state) {
     const { account } = state.web3;
-    let inProgress = state.web3.inProgress || state.authentication.inProgress;
+    let inProgress =
+        state.web3.inProgress ||
+        state.box.inProgress ||
+        state.contract.inProgress;
     return { inProgress, account };
 }
 
 const actionCreators = {
-    login: authActions.login,
-    logout: authActions.logout
+    logout: authActions.logout,
+    loadBoxProfile: boxActions.loadProfile,
+    loadBox: boxActions.login,
+    getRole: contractActions.getRole
 };
 
 const connectedLoginPage = connect(mapState, actionCreators)(LoginPage);

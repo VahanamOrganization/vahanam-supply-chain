@@ -1,0 +1,7 @@
+export const boxConstants = {
+    BOX_STARTED: "3BOX_STARTED",
+    BOX_LOADED: "3BOX_LOADED",
+    BOX_ERROR: "3BOX_ERROR",
+    ADMIN_ACCOUNT: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+    SPACE_NAME: "dSupply"
+};

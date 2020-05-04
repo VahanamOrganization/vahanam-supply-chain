@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { contractActions } from "../../../actions";
+import { boxConstants } from "../../../constants";
+import ThreeBoxComments from "3box-comments-react";
 
 class GetCampaignDetails extends React.Component {
     constructor(props) {
@@ -78,7 +80,12 @@ class GetCampaignDetails extends React.Component {
                     </div>
                 </div>
                 {!inProgress && submitted && campaign ? (
-                    <CampaignDisplay campaign={campaign} />
+                    <CampaignDisplay
+                        campaign={campaign}
+                        campaignId={campaignId}
+                        box={this.props.box}
+                        account={this.props.account}
+                    />
                 ) : null}
             </div>
         );
@@ -86,6 +93,8 @@ class GetCampaignDetails extends React.Component {
 }
 
 function CampaignDisplay(props) {
+    let threadName =
+        boxConstants.SPACE_NAME + ":campaign:" + props.campaignId.toString();
     return (
         <div className="campaignDisplay display">
             <span className="label">Coordinator</span>
@@ -104,13 +113,25 @@ function CampaignDisplay(props) {
             </ul>
             <span className="label">Total PLA</span>
             <p className="data">{props.campaign.totalPLA}</p>
+
+            <div className="box-comments">
+                <ThreeBoxComments
+                    spaceName={boxConstants.SPACE_NAME}
+                    threadName={threadName}
+                    adminEthAddr={boxConstants.ADMIN_ACCOUNT}
+                    box={props.box}
+                    currentUserAddr={props.account}
+                />
+            </div>
         </div>
     );
 }
 
 function mapState(state) {
     const { inProgress, campaign } = state.contract;
-    return { inProgress, campaign };
+    const { box } = state.box;
+    const { account } = state.web3;
+    return { inProgress, campaign, box, account };
 }
 
 const actionCreators = {

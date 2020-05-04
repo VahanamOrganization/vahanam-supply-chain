@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { contractActions } from "../actions";
 import loading from "../assets/img/loading.gif";
-import profile from "../assets/img/profile.png";
+import profileImage from "../assets/img/profile.png";
 import * as Views from "./views";
 
 class NavBar extends React.Component {
@@ -26,7 +26,7 @@ class NavBar extends React.Component {
     }
 
     render() {
-        const { account, user, loggedIn, role, inProgress } = this.props;
+        const { account, name, loggedIn, role, inProgress } = this.props;
         return (
             <div className="navBar">
                 <div className="topBar">
@@ -49,12 +49,9 @@ class NavBar extends React.Component {
                     {loggedIn ? (
                         <div className="sliderInner" ref={this.sliderInner}>
                             <Link className="user" to="/profile">
-                                <img
-                                    className="profile"
-                                    src={profile}
-                                />
+                                <img className="profile" src={profileImage} />
                                 <span className="displayName">
-                                    {user.displayName}
+                                    {name.split(" ")[0]}
                                 </span>
                             </Link>
                             <NavLink activeClassName="active" exact to="/">
@@ -72,6 +69,7 @@ class NavBar extends React.Component {
                             <NavLink activeClassName="active" exact to="/login">
                                 Login
                             </NavLink>
+                            {/*
                             <NavLink
                                 activeClassName="active"
                                 exact
@@ -79,6 +77,7 @@ class NavBar extends React.Component {
                             >
                                 Register
                             </NavLink>
+                            */}
                         </div>
                     )}
                 </div>
@@ -89,12 +88,13 @@ class NavBar extends React.Component {
 function mapState(state) {
     const { role } = state.contract;
     const { account } = state.web3;
-    const { user, loggedIn } = state.authentication;
+    const { profile, loggedIn } = state.box;
+    const { name } = profile;
     const inProgress =
         state.contract.inProgress ||
-        state.authentication.inProgress ||
+        state.box.inProgress ||
         state.web3.inProgress;
-    return { account, user, loggedIn, role, inProgress };
+    return { account, name, loggedIn, role, inProgress };
 }
 
 const actionCreators = {};

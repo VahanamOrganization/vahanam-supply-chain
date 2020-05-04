@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 class ProfilePage extends React.Component {
     render() {
-        const { user, role, account } = this.props;
+        const { profile, role, account } = this.props;
         return (
             <div className="profilePage page">
                 <div className="profilePageInner pageInner">
@@ -12,8 +12,8 @@ class ProfilePage extends React.Component {
                         <span>Profile</span>
                     </div>
                     <div className="display">
-                        <span className="label">Display Name</span>
-                        <p className="data">{user.displayName}</p>
+                        <span className="label">Name</span>
+                        <p className="data">{profile.name}</p>
                         <span className="label">Account</span>
                         <p className="data">{account}</p>
                         <span className="label">Role</span>
@@ -28,8 +28,8 @@ class ProfilePage extends React.Component {
 function mapState(state) {
     const { account } = state.web3;
     const { role } = state.contract;
-    const { user } = state.authentication;
-    return { user, role, account };
+    const { profile } = state.box;
+    return { profile, role, account };
 }
 
 const actionCreators = {};

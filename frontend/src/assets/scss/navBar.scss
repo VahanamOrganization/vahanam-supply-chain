@@ -1,9 +1,11 @@
 @import 'config';
 
 .navBar {
+    z-index: 1;
     color: black;
     font-size: 4vw;
     .topBar {
+        z-index: 1;
         padding-left: 2vw;
         padding-right: 2vw;
         box-shadow: 0 0.5vh 1vh black;
@@ -19,6 +21,7 @@
         justify-content: space-between;
         align-items: center;
         .iconContainer {
+            z-index: 1;
             display: flex;
             align-items: center;
             img {
@@ -29,6 +32,7 @@
         }
     }
     .slider {
+        z-index: 1;
         background: $grey_;
         display: flex;
         justify-content: flex-start;
@@ -42,10 +46,12 @@
         transition: transform 0.5s;
         transform: translateX(-100%);
         &.open {
+            z-index: 1;
             transition: 1s;
             transform: translateX(0%);
         }
         .sliderInner {
+            z-index: 1;
             font-size: 5vw;
             display: flex;
             flex-direction: column;
@@ -72,6 +78,7 @@
                 }
                 .displayName {
                     font-weight: bold;
+                    color: $white;
                 }
 
             }
