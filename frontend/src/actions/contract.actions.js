@@ -21,7 +21,7 @@ export const contractActions = {
 };
 
 function clean() {
-    return async (dispatch, getState) => {
+    return (dispatch) => {
         dispatch({
             type: contractConstants.TRANSACTION_CLEAN
         });

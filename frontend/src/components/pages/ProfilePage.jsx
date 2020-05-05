@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { web3Actions, boxActions, contractActions } from "../../actions";
 import tempProfile from "../../assets/img/profile.webp";
+import { getImageUrl } from "../../helpers";
 
 class ProfilePage extends React.Component {
     componentDidMount() {
@@ -24,9 +25,10 @@ class ProfilePage extends React.Component {
                     <div className="photo">
                         <div className="photoInner">
                             {profile.image ? (
-                                <img src={"https://ipfs.infura.io/ipfs/"+profile.image[0].contentUrl["/"]} />
-                            ): (
-                            <img src={tempProfile} />)}
+                                <img src={getImageUrl(profile.image)} />
+                            ) : (
+                                <img src={tempProfile} />
+                            )}
                         </div>
                     </div>
                     <div className="titleBar">

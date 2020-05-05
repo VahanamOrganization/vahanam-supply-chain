@@ -14,6 +14,12 @@ export function box(state = initialState, action) {
                 inProgress: false,
                 ...action
             };
+        case boxConstants.BOX_CLEAN:
+            return {
+                ...state,
+                inProgress: false,
+                data: undefined
+            };
         case boxConstants.BOX_ERROR:
             return {
                 ...state,

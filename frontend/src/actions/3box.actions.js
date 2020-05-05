@@ -5,7 +5,9 @@ import { history } from "../helpers";
 
 export const boxActions = {
     login,
-    loadProfile
+    loadProfile,
+    getProfiles,
+    clean
 };
 
 function login(account) {
@@ -13,8 +15,8 @@ function login(account) {
         dispatch(started());
         let box, space;
         try {
-            box = await Box.openBox(account, window.ethereum)
-            space = await box.openSpace(boxConstants.SPACE_NAME)
+            box = await Box.openBox(account, window.ethereum);
+            space = await box.openSpace(boxConstants.SPACE_NAME);
         } catch (e) {
             console.log(e);
             dispatch(failure(e.toString()));
@@ -22,7 +24,7 @@ function login(account) {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({box, space, loggedIn: true}));
+        dispatch(loaded({ box, space, loggedIn: true }));
         dispatch(alertActions.success("Login with 3Box Successful"));
         history.push("/home");
     };
@@ -41,10 +43,34 @@ function loadProfile(account) {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({profile}));
+        dispatch(loaded({ profile }));
     };
 }
 
+function getProfiles(accounts) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let profiles;
+        try {
+            profiles = await Promise.all(
+                accounts.map(account => Box.getProfile(account))
+            );
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            return;
+        }
+        dispatch(loaded({ data: { profiles } }));
+    };
+}
+
+function clean() {
+    return dispatch => {
+        dispatch({
+            type: boxConstants.BOX_CLEAN
+        });
+    };
+}
 
 function started() {
     return {

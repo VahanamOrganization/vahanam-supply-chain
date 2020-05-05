@@ -46,7 +46,7 @@ class GetCampaignDetails extends React.Component {
         this.setState({ submitted: true });
         const { campaignId } = this.state;
         if (campaignId > 0) {
-            history.push("/campaign/"+campaignId);
+            history.push("/campaign/" + campaignId);
         }
     }
 
@@ -84,12 +84,10 @@ class GetCampaignDetails extends React.Component {
 }
 
 function mapState(state) {
-    return { };
+    return {};
 }
 
-const actionCreators = {
-    getCampaignDetails: contractActions.getCampaignDetails
-};
+const actionCreators = {};
 
 const connectedGetCampaignDetails = connect(
     mapState,

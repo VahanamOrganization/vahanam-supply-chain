@@ -163,11 +163,52 @@
         width: 96vw;
         position: relative;
         .tabDataInner {
+            padding-bottom: 15vw;
             position: absolute;
             top: 0;
             display: none;
             &.selected {
                 display: block;
+            }
+            .peopleList {
+                margin-top: 2vw;
+                width: 96vw;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .person {
+                    width: 96vw;
+                    height: 25vw;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    .details {
+                        width: 70vw;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-start;
+                        font-size: 4vw;
+                    }
+                    .photo {
+                        width: 25vw;
+                        height: 25vw;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .photoInner {
+                            border-radius: 50%;
+                            overflow: hidden;
+                            width: 20vw;
+                            height: 20vw;
+                            img {
+                                width: 100%;
+                                height: auto;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

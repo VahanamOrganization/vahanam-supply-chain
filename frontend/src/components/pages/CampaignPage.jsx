@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { contractActions, web3Actions } from "../../actions";
 import { history } from "../../helpers";
@@ -9,6 +8,7 @@ import peopleIcon from "@iconify/icons-eva/people-fill";
 import detailsIcon from "@iconify/icons-ic/baseline-assignment";
 import arrowDownIcon from "@iconify/icons-dashicons/arrow-down-alt2";
 import tempProfile from "../../assets/img/profile.webp";
+import * as Displays from "./displays";
 
 class CampaignPage extends React.Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class CampaignPage extends React.Component {
     }
 
     async init() {
-        await this.props.clean();
+        this.props.clean();
         //TODO: remove this extra call
         await this.props.loadWeb3();
         await this.props.getCampaignDetails(this.campaignId);
@@ -128,11 +128,8 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                <DetailsDisplay
+                                <Displays.CampaignDetails
                                     campaign={campaign}
-                                    campaignId={this.campaignId}
-                                    box={box}
-                                    account={account}
                                 />
                             </div>
                             <div
@@ -142,8 +139,9 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                PEOPLE HERE
-                                <br />
+                                <Displays.PeopleList
+                                    campaign={campaign}
+                                />
                             </div>
                         </div>
                     </div>
@@ -153,41 +151,6 @@ class CampaignPage extends React.Component {
     }
 }
 
-function DetailsDisplay(props) {
-    //let threadName = boxConstants.SPACE_NAME + ":campaign:" + props.campaignId.toString();
-    return (
-        <div className="campaignDisplay display">
-            <span className="label">Coordinator</span>
-            <p className="data">{props.campaign.coordinator}</p>
-            <span className="label">Couriers</span>
-            <ul className="data">
-                {props.campaign.couriers.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
-            <span className="label">Manufacturers</span>
-            <ul className="data">
-                {props.campaign.manufacturers.map((item, index) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
-            <span className="label">Total PLA</span>
-            <p className="data">{props.campaign.totalPLA}</p>
-
-            <div className="box-comments">
-                {/*
-                <ThreeBoxComments
-                    spaceName={boxConstants.SPACE_NAME}
-                    threadName={threadName}
-                    adminEthAddr={boxConstants.ADMIN_ACCOUNT}
-                    box={props.box}
-                    currentUserAddr={props.account}
-                />
-                */}
-            </div>
-        </div>
-    );
-}
 
 function mapState(state) {
     const { role, campaign, inProgress } = state.contract;
