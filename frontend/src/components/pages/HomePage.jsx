@@ -1,9 +1,5 @@
 import React from "react";
-import config from "config";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractActions } from "../../actions";
-import loading from "../../assets/img/loading.gif";
 import * as Views from "../views";
 
 class HomePage extends React.Component {
@@ -35,22 +31,8 @@ function RoleBasedView(props) {
             return <Views.ManufacturerView />;
         case "RECEIVER":
             return <Views.ReceiverView />;
-        case "ROLE NOT FOUND":
-            return (
-                <div className="view">
-                    <div className="viewInner">
-                        <div className="display">
-                            <span className="label">ROLE NOT FOUND.</span>
-                            <p className="data">
-                                Please contact a local coordinator to get a role
-                                assigned.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            );
         default:
-            return null;
+            return <Views.VisitorView />;
     }
 }
 
