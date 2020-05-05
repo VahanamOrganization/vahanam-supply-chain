@@ -7,9 +7,9 @@ module.exports = {
         app: ["babel-polyfill", "./src/index.jsx"]
     },
     output: {
-        filename: "[name].[hash].js",
-        chunkFilename: "[name].[hash].js",
-        path: __dirname+"/dist/",
+        filename: "[name].[hash].bundle.js",
+        chunkFilename: "[name].[hash].chunk.js",
+        path: __dirname + "/dist/",
         publicPath: "/"
     },
     resolve: {
@@ -88,5 +88,27 @@ module.exports = {
             //contractAddress: "0xCfEB869F69431e42cdB54A4F4f105C19C080A601"
         })
     },
-    devtool: "inline-source-map"
+    devtool: "inline-source-map",
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                default: false,
+                vendors: false,
+                vendor: {
+                    name: "vendor",
+                    chunks: "all",
+                    test: /node_modules/,
+                    priority: 20
+                },
+                common: {
+                    name: "common",
+                    minChunks: 2,
+                    chunks: "async",
+                    priority: 10,
+                    reuseExistingChunk: true,
+                    enforce: true
+                }
+            }
+        }
+    }
 };
