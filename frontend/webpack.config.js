@@ -88,7 +88,6 @@ module.exports = {
             //contractAddress: "0xCfEB869F69431e42cdB54A4F4f105C19C080A601"
         })
     },
-    devtool: "inline-source-map",
     optimization: {
         splitChunks: {
             cacheGroups: {
