@@ -198,4 +198,4 @@ const actionCreators = {
 };
 
 const connectedRegisterPage = connect(mapState, actionCreators)(RegisterPage);
-export { connectedRegisterPage as RegisterPage };
+export default connectedRegisterPage;

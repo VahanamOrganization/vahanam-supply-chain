@@ -5,7 +5,17 @@ import { ToastContainer } from "react-toastify";
 import { history } from "../helpers";
 import { web3Actions } from "../actions";
 import { PrivateRoute, NavBar, QRCode } from "../components/common";
-import * as Pages from "../components/pages";
+import loading from "../assets/img/loading.gif";
+const LoginPage = React.lazy(() => import("../components/pages/LoginPage"));
+const RegisterPage = React.lazy(() =>
+    import("../components/pages/RegisterPage")
+);
+const ProfilePage = React.lazy(() => import("../components/pages/ProfilePage"));
+const LandingPage = React.lazy(() => import("../components/pages/LandingPage"));
+const HomePage = React.lazy(() => import("../components/pages/HomePage"));
+const CampaignPage = React.lazy(() =>
+    import("../components/pages/CampaignPage")
+);
 
 class App extends React.Component {
     constructor(props) {
@@ -18,7 +28,7 @@ class App extends React.Component {
         if (this.props.web3) {
             await this.props.loadAccount();
         }
-        if (!["/login", "/register"].includes(history.location.pathname)){
+        if (!["/login", "/register"].includes(history.location.pathname)) {
             history.push("/login");
         }
     }
@@ -26,7 +36,7 @@ class App extends React.Component {
         if (this.props.web3) {
             await this.props.loadNetwork();
         }
-        if (!["/login", "/register"].includes(history.location.pathname)){
+        if (!["/login", "/register"].includes(history.location.pathname)) {
             history.push("/login");
         }
     }
@@ -43,20 +53,47 @@ class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <ToastContainer closeButton={false} autoClose={5000}/>
-                <QRCode open={this.props.open}/>
+                <ToastContainer closeButton={false} autoClose={5000} />
+                <QRCode open={this.props.open} />
                 <Router history={history}>
                     <NavBar />
-                    <Switch>
-                        <PrivateRoute exact path="/home" component={Pages.HomePage} />
-                        {/*TODO: make profile route private */}
-                        <Route exact path="/profile" component={Pages.ProfilePage} />
-                        <Route exact path="/" component={Pages.LandingPage} />
-                        <Route exact path="/login" component={Pages.LoginPage} />
-                        <Route exact path="/register" component={Pages.RegisterPage} />
-                        <Route exact path="/campaign/:id" component={Pages.CampaignPage} />
-                        <Redirect from="*" to="/" />
-                    </Switch>
+                    <React.Suspense
+                        fallback={
+                            <div className="suspense">
+                                <img
+                                    className="loading"
+                                    src={loading}
+                                />
+                            </div>
+                        }
+                    >
+                        <Switch>
+                            <PrivateRoute
+                                exact
+                                path="/home"
+                                component={HomePage}
+                            />
+                            {/*TODO: make profile route private */}
+                            <Route
+                                exact
+                                path="/profile"
+                                component={ProfilePage}
+                            />
+                            <Route exact path="/" component={LandingPage} />
+                            <Route exact path="/login" component={LoginPage} />
+                            <Route
+                                exact
+                                path="/register"
+                                component={RegisterPage}
+                            />
+                            <Route
+                                exact
+                                path="/campaign/:id"
+                                component={CampaignPage}
+                            />
+                            <Redirect from="*" to="/" />
+                        </Switch>
+                    </React.Suspense>
                 </Router>
             </div>
         );

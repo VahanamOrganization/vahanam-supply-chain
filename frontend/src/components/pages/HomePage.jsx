@@ -62,4 +62,4 @@ function mapState(state) {
 const actionCreators = {};
 
 const connectedHomePage = connect(mapState, actionCreators)(HomePage);
-export { connectedHomePage as HomePage };
+export default connectedHomePage;

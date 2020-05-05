@@ -19,4 +19,4 @@ class LandingPage extends React.Component {
     }
 }
 
-export { LandingPage };
+export default LandingPage;

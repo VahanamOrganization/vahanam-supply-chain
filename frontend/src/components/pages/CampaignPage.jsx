@@ -166,4 +166,4 @@ const actionCreators = {
 };
 
 const connectedCampaignPage = connect(mapState, actionCreators)(CampaignPage);
-export { connectedCampaignPage as CampaignPage };
+export default connectedCampaignPage;

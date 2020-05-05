@@ -106,4 +106,4 @@ const actionCreators = {
 };
 
 const connectedLoginPage = connect(mapState, actionCreators)(LoginPage);
-export { connectedLoginPage as LoginPage };
+export default connectedLoginPage;

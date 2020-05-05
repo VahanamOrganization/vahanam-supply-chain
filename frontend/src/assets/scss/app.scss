@@ -1,4 +1,4 @@
-@import 'config';
+@import "config";
 
 :root {
     font-size: 3.5vw;
@@ -13,10 +13,10 @@
     position: fixed;
     top: 0;
     left: 0;
-
 }
 .app {
-    font-family: Consolas, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: Consolas, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: $white;
@@ -24,6 +24,18 @@
     height: 100vh;
     overflow-x: hidden;
     color: $grey;
+    .suspense {
+        .loading {
+            z-index: 5;
+            position: fixed;
+            top: 0;
+            right: 0;
+            margin-top: 2vw;
+            margin-right: 2vw;
+            height: 8vw;
+            width: 8vw;
+        }
+    }
 }
 
 .alert {

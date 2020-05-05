@@ -61,4 +61,4 @@ const actionCreators = {
 };
 
 const connectedProfilePage = connect(mapState, actionCreators)(ProfilePage);
-export { connectedProfilePage as ProfilePage };
+export default connectedProfilePage;
