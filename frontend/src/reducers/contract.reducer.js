@@ -12,6 +12,11 @@ export function contract(state = {}, action) {
                 ...state,
                 inProgress: false
             };
+        case contractConstants.TRANSACTION_CLEAN:
+            return {
+                role: state.role,
+                inProgress: false,
+            };
         case contractConstants.TRANSACTION_ERROR:
             return {
                 role: state.role,

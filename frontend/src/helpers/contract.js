@@ -12,7 +12,7 @@ export const getStringFromRole = role => {
         case contractConstants.RECEIVER_ROLE:
             return "RECEIVER";
         default:
-            throw "Unknown Role Found";
+            return "ROLE NOT FOUND";
     }
 };
 
@@ -30,5 +30,21 @@ export const getRoleFromString = role => {
             return contractConstants.RECEIVER_ROLE;
         default:
             throw "Unknown Role Found";
+    }
+};
+
+const qrRegex = new RegExp("[0-9]*:[0-9]*");
+export const getQRString = (campaignId, batchId) => {
+    return campaignId.toString() + ":" + batchId.toString();
+};
+
+export const getQRValue = qrString => {
+    if (qrRegex.test(qrString)) {
+        let [campaignId, batchId] = qrString.split(":");
+        campaignId = parseInt(campaignId);
+        batchId = parseInt(batchId);
+        return { campaignId, batchId };
+    } else {
+        throw "Invalid QR Code";
     }
 };

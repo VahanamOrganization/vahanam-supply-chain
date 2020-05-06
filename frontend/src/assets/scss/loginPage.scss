@@ -1,46 +1,41 @@
+@import 'config';
+
 .loginPage {
-    width: 100vw;
-    height: 100vh;
-    font-size: 4vh;
+    position: relative;
+    z-index: 5;
+}
+
+.loginPageInner {
+    z-index: 5;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    .loginPageInner {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 60%;
-        width: 80%;
-        .title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 5vh;
-            font-weight: bold;
-            img {
-                height: 6vh;
-                width: 6vh;
-            }
-        }
-        .account {
-            font-size: 2vh;
-        }
-        a {
-            margin-top: 2vh;
-            margin-bottom: 2vh;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            background: blue;
-            padding: 5px;
-            color: white;
-            border-radius: 5%;
-            &:hover {
-                background: darkblue;
-            }
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-top: 5vh;
+    height: 100vh;
+    width: 92vw;
+    .title {
+        width: 100%;
+        font-size: 9vw;
+    }
+    .account {
+        font-size: 3vw;
+    }
+    a {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        background: $grey;
+        padding: 5px;
+        color: $white;
+        border-radius: 2vw;
+        &:hover {
+            background: $blue2;
         }
     }
 }
+

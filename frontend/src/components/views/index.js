@@ -1,3 +1,4 @@
+export * from "./VisitorView";
 export * from "./AdminView";
 export * from "./CoordinatorView";
 export * from "./CourierView";

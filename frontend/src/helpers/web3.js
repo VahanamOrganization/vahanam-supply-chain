@@ -14,3 +14,9 @@ export const formatTokens = (input) => {
 export const toTokens = (input) => {
   return web3.utils.toWei(input.toString(), 'ether')
 }
+
+
+export const getAccountString = (account) => {
+    const len = account.length;
+    return account.substr(0, 5) + '...' + account.substr(len-3,len-1);
+}

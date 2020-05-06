@@ -1,32 +1,19 @@
-.registerPage {
-    width: 100vw;
-    height: 100vh;
-    font-size: 4vh;
+.registerPageInner {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .registerPageInner {
+    height: 60%;
+    width: 80%;
+    .title {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 60%;
-        width: 80%;
-        .title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 5vh;
-            font-weight: bold;
-            img {
-                height: 6vh;
-                width: 6vh;
-            }
-        }
-        .account {
-            font-size: 2vh;
-        }
+        font-size: 9vw;
+        font-weight: bold;
+    }
+    .account {
+        font-size: 3vw;
     }
 }

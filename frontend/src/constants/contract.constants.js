@@ -10,10 +10,10 @@ export const contractConstants = {
     STAGES: [
         "PLAPacked",
         "PLAPickedUpByCourier1",
-        "PLARecivedByManufaturer",
+        "PLAReceivedByManufacturer",
         "MasksReady",
         "MasksPickedUpByCourier2",
-        "MasksRceivedByReceiver", 
+        "MasksReceivedByReceiver", 
         "MasksVerifiedForQuality"
     ],
 
@@ -31,6 +31,7 @@ export const contractConstants = {
 
     TRANSACTION_STARTED: "TRANSACTION_STARTED",
     TRANSACTION_DONE: "TRANSACTION_DONE",
+    TRANSACTION_CLEAN: "TRANSACTION_CLEAN",
     TRANSACTION_ERROR: "TRANSACTION_ERROR",
     TRANSACTION_RESULT: "TRANSACTION_RESULT"
 };

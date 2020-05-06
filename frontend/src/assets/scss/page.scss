@@ -1,0 +1,21 @@
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    font-size: 6vw;
+}
+
+.pageInner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 15vw;
+    margin-bottom: 15vw;
+}
+
