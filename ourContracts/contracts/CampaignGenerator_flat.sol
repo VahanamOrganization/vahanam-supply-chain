@@ -333,6 +333,7 @@ library Address {
 
 
 
+
 /**
  * @dev Contract module that allows children to implement role-based access
  * control mechanisms.
@@ -373,8 +374,8 @@ abstract contract AccessControl is Context {
         bytes32 adminRole;
     }
 
-    mapping (bytes32 => RoleData) private _roles;
-    mapping(address=>bytes32) public whichRole;
+    mapping(bytes32 => RoleData) private _roles;
+    mapping(address => bytes32) public whichRole;
 
     bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
 
@@ -384,7 +385,11 @@ abstract contract AccessControl is Context {
      * `sender` is the account that originated the contract call, an admin role
      * bearer except when using {_setupRole}.
      */
-    event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);
+    event RoleGranted(
+        bytes32 indexed role,
+        address indexed account,
+        address indexed sender
+    );
 
     /**
      * @dev Emitted when `account` is revoked `role`.
@@ -393,7 +398,11 @@ abstract contract AccessControl is Context {
      *   - if using `revokeRole`, it is the admin role bearer
      *   - if using `renounceRole`, it is the role bearer (i.e. `account`)
      */
-    event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
+    event RoleRevoked(
+        bytes32 indexed role,
+        address indexed account,
+        address indexed sender
+    );
 
     /**
      * @dev Returns `true` if `account` has been granted `role`.
@@ -422,7 +431,11 @@ abstract contract AccessControl is Context {
      * https://forum.openzeppelin.com/t/iterating-over-elements-on-enumerableset-in-openzeppelin-contracts/2296[forum post]
      * for more information.
      */
-    function getRoleMember(bytes32 role, uint256 index) public view returns (address) {
+    function getRoleMember(bytes32 role, uint256 index)
+        public
+        view
+        returns (address)
+    {
         return _roles[role].members.at(index);
     }
 
@@ -446,8 +459,11 @@ abstract contract AccessControl is Context {
      *
      * - the caller must have ``role``'s admin role.
      */
-    function grantRole(bytes32 role, address account) internal virtual {
-        require(hasRole(_roles[role].adminRole, _msgSender()), "AccessControl: sender must be an admin to grant");
+    function grantRole(bytes32 role, address account) public virtual {
+        require(
+            hasRole(_roles[role].adminRole, _msgSender()),
+            "AccessControl: sender must be an admin to grant"
+        );
         _grantRole(role, account);
     }
 
@@ -461,7 +477,10 @@ abstract contract AccessControl is Context {
      * - the caller must have ``role``'s admin role.
      */
     function revokeRole(bytes32 role, address account) internal virtual {
-        require(hasRole(_roles[role].adminRole, _msgSender()), "AccessControl: sender must be an admin to revoke");
+        require(
+            hasRole(_roles[role].adminRole, _msgSender()),
+            "AccessControl: sender must be an admin to revoke"
+        );
 
         _revokeRole(role, account);
     }
@@ -481,7 +500,10 @@ abstract contract AccessControl is Context {
      * - the caller must be `account`.
      */
     function renounceRole(bytes32 role, address account) public virtual {
-        require(account == _msgSender(), "AccessControl: can only renounce roles for self");
+        require(
+            account == _msgSender(),
+            "AccessControl: can only renounce roles for self"
+        );
 
         _revokeRole(role, account);
     }
@@ -503,7 +525,6 @@ abstract contract AccessControl is Context {
      * ====
      */
     function _setupRole(bytes32 role, address account) internal virtual {
-
         _grantRole(role, account);
     }
 
@@ -515,7 +536,11 @@ abstract contract AccessControl is Context {
     }
 
     function _grantRole(bytes32 role, address account) private {
-        require(whichRole[account] == 0x0000000000000000000000000000000000000000000000000000000000000000,"User already has a role(see whichRole method)");
+        require(
+            whichRole[account] ==
+                0x0000000000000000000000000000000000000000000000000000000000000000,
+            "User already has a role(see whichRole method)"
+        );
         whichRole[account] = role;
         if (_roles[role].members.add(account)) {
             emit RoleGranted(role, account, _msgSender());
@@ -766,12 +791,13 @@ contract Roles is AccessControl {
     bytes32 public constant MANUFATURER_ROLE = 0xb528929ed79eb79a87ae6f578d3125509c91bfea9ac8b7fb9f69aa0bc28298dd;
     //keccka256("receiver")
     bytes32 public constant RECIVER_ROLE = 0x5e784e45feb63c375016d4ce5c52a57b0a48b8a170bc2e31463be0d03d1c4db6;
+
     constructor(address _admin) public {
         _setupRole(ADMIN_ROLE, _admin);
         _setRoleAdmin(COORDINATOR_ROLE, ADMIN_ROLE);
         _setRoleAdmin(COURIER_ROLE, COORDINATOR_ROLE);
         _setRoleAdmin(MANUFATURER_ROLE, COORDINATOR_ROLE);
-        _setRoleAdmin(RECIVER_ROLE,COORDINATOR_ROLE);
+        _setRoleAdmin(RECIVER_ROLE, COORDINATOR_ROLE);
     }
 
     modifier onlyAdmin() {
@@ -851,15 +877,13 @@ contract Storage {
         AddressSet manufacturers;
         AddressSet couriers;
         mapping(uint256 => Batch) batches;
-        mapping(address=>uint256[]) belongsToBatch;
+        mapping(address => uint256[]) belongsToBatch;
         // uint256 batchSize;
     }
 
     mapping(uint256 => Campaign) campaigns; //campaign's Index in the campaigns array + 1 (becuse 0 means it is not in the array)
     uint256 public campaignCounter = 1;
     mapping(address => uint256[]) belongsToCampign;
-    
-    
 }
 
 
@@ -895,7 +919,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         Campaign storage campaign = campaigns[campaignId];
         campaignCounter = campaignCounter.add(1);
 
-         belongsToCampign[_msgSender()].push(campaignId);
+        belongsToCampign[_msgSender()].push(campaignId);
         //In future iteration campaign id can be deterministically generated form title and description of the campaign i.e. keccak(title+description)
 
         campaign.coordinator = _msgSender();
@@ -915,7 +939,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         campaign.couriers.addresses = _couriers;
 
         //add receiver
-        grantRole(RECIVER_ROLE,_receiver);
+        grantRole(RECIVER_ROLE, _receiver);
         campaign.receiver = _receiver;
         belongsToCampign[_receiver].push(campaignId);
         campaign.batchCounter = 0;
@@ -964,7 +988,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
             campaign.couriers.addressIndex[_couriers[i]] = arrayLength.add(
                 i.add(1)
             );
-             belongsToCampign[_couriers[i]].push(_campaignId);
+            belongsToCampign[_couriers[i]].push(_campaignId);
         }
     }
 
@@ -978,7 +1002,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         address _courier1,
         address _courier2,
         address _manufacturer
-    ) public onlyCoordinator() returns(uint256 batchId){
+    ) public onlyCoordinator() returns (uint256 batchId) {
         require(
             campaigns[_campaignId].coordinator == _msgSender(),
             "Only coordinator of camapignId is allowed"
@@ -992,7 +1016,8 @@ contract CampaignGenerator is Ownable, Roles, Storage {
             "add courier to campaign first"
         );
         require(
-            campaigns[_campaignId].manufacturers.addressIndex[_manufacturer] != 0,
+            campaigns[_campaignId].manufacturers.addressIndex[_manufacturer] !=
+                0,
             "add manufaturer to campaign first"
         );
         campaigns[_campaignId].batchCounter = campaigns[_campaignId]
@@ -1002,7 +1027,9 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         batchId = campaigns[_campaignId].batchCounter;
         Batch storage batch = campaigns[_campaignId].batches[batchId];
         //substract the PLA from currentPLA
-        campaigns[_campaignId].currentPLA = campaigns[_campaignId].currentPLA.sub(_amountOfPLA);
+        campaigns[_campaignId].currentPLA = campaigns[_campaignId]
+            .currentPLA
+            .sub(_amountOfPLA);
         //update the batchStage
         batch.stage = BatchStages.PLAPacked;
 
@@ -1207,7 +1234,6 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         totalBatches = campaigns[_campaignId].batchCounter;
         manufacturers = campaigns[_campaignId].manufacturers.addresses;
         couriers = campaigns[_campaignId].couriers.addresses;
-
     }
 
     function getBatchDetails(uint256 _campaignId, uint256 _batchId)
@@ -1217,12 +1243,22 @@ contract CampaignGenerator is Ownable, Roles, Storage {
     {
         batch = campaigns[_campaignId].batches[_batchId];
     }
+
     //given the address returns all the campaigns it is part of
-    function partOfWhichCampaigns(address _who) public view returns(uint256[] memory){
+    function partOfWhichCampaigns(address _who)
+        public
+        view
+        returns (uint256[] memory)
+    {
         return belongsToCampign[_who];
     }
+
     //given campaignId and address returns all the batches it is part of for that capaign
-    function partOfWhichBatches(uint256 _campaignId,address _who)public view returns(uint256[] memory){
+    function partOfWhichBatches(uint256 _campaignId, address _who)
+        public
+        view
+        returns (uint256[] memory)
+    {
         return campaigns[_campaignId].belongsToBatch[_who];
     }
 }

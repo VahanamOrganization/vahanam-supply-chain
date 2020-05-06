@@ -60,15 +60,13 @@ contract Storage {
         AddressSet manufacturers;
         AddressSet couriers;
         mapping(uint256 => Batch) batches;
-        mapping(address=>uint256[]) belongsToBatch;
+        mapping(address => uint256[]) belongsToBatch;
         // uint256 batchSize;
     }
 
     mapping(uint256 => Campaign) campaigns; //campaign's Index in the campaigns array + 1 (becuse 0 means it is not in the array)
     uint256 public campaignCounter = 1;
     mapping(address => uint256[]) belongsToCampign;
-    
-    
 }
 
 
@@ -104,7 +102,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         Campaign storage campaign = campaigns[campaignId];
         campaignCounter = campaignCounter.add(1);
 
-         belongsToCampign[_msgSender()].push(campaignId);
+        belongsToCampign[_msgSender()].push(campaignId);
         //In future iteration campaign id can be deterministically generated form title and description of the campaign i.e. keccak(title+description)
 
         campaign.coordinator = _msgSender();
@@ -124,7 +122,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         campaign.couriers.addresses = _couriers;
 
         //add receiver
-        grantRole(RECIVER_ROLE,_receiver);
+        grantRole(RECIVER_ROLE, _receiver);
         campaign.receiver = _receiver;
         belongsToCampign[_receiver].push(campaignId);
         campaign.batchCounter = 0;
@@ -173,7 +171,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
             campaign.couriers.addressIndex[_couriers[i]] = arrayLength.add(
                 i.add(1)
             );
-             belongsToCampign[_couriers[i]].push(_campaignId);
+            belongsToCampign[_couriers[i]].push(_campaignId);
         }
     }
 
@@ -187,7 +185,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         address _courier1,
         address _courier2,
         address _manufacturer
-    ) public onlyCoordinator() returns(uint256 batchId){
+    ) public onlyCoordinator() returns (uint256 batchId) {
         require(
             campaigns[_campaignId].coordinator == _msgSender(),
             "Only coordinator of camapignId is allowed"
@@ -201,7 +199,8 @@ contract CampaignGenerator is Ownable, Roles, Storage {
             "add courier to campaign first"
         );
         require(
-            campaigns[_campaignId].manufacturers.addressIndex[_manufacturer] != 0,
+            campaigns[_campaignId].manufacturers.addressIndex[_manufacturer] !=
+                0,
             "add manufaturer to campaign first"
         );
         campaigns[_campaignId].batchCounter = campaigns[_campaignId]
@@ -211,7 +210,9 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         batchId = campaigns[_campaignId].batchCounter;
         Batch storage batch = campaigns[_campaignId].batches[batchId];
         //substract the PLA from currentPLA
-        campaigns[_campaignId].currentPLA = campaigns[_campaignId].currentPLA.sub(_amountOfPLA);
+        campaigns[_campaignId].currentPLA = campaigns[_campaignId]
+            .currentPLA
+            .sub(_amountOfPLA);
         //update the batchStage
         batch.stage = BatchStages.PLAPacked;
 
@@ -416,7 +417,6 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         totalBatches = campaigns[_campaignId].batchCounter;
         manufacturers = campaigns[_campaignId].manufacturers.addresses;
         couriers = campaigns[_campaignId].couriers.addresses;
-
     }
 
     function getBatchDetails(uint256 _campaignId, uint256 _batchId)
@@ -426,12 +426,22 @@ contract CampaignGenerator is Ownable, Roles, Storage {
     {
         batch = campaigns[_campaignId].batches[_batchId];
     }
+
     //given the address returns all the campaigns it is part of
-    function partOfWhichCampaigns(address _who) public view returns(uint256[] memory){
+    function partOfWhichCampaigns(address _who)
+        public
+        view
+        returns (uint256[] memory)
+    {
         return belongsToCampign[_who];
     }
+
     //given campaignId and address returns all the batches it is part of for that capaign
-    function partOfWhichBatches(uint256 _campaignId,address _who)public view returns(uint256[] memory){
+    function partOfWhichBatches(uint256 _campaignId, address _who)
+        public
+        view
+        returns (uint256[] memory)
+    {
         return campaigns[_campaignId].belongsToBatch[_who];
     }
 }
