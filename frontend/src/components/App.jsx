@@ -16,6 +16,9 @@ const HomePage = React.lazy(() => import("../components/pages/HomePage"));
 const CampaignPage = React.lazy(() =>
     import("../components/pages/CampaignPage")
 );
+const BatchPage = React.lazy(() =>
+    import("../components/pages/BatchPage")
+);
 
 class App extends React.Component {
     constructor(props) {
@@ -91,6 +94,10 @@ class App extends React.Component {
                                 path="/campaign/:id"
                                 component={CampaignPage}
                             />
+                            <Route
+                                path="/batch"
+                                component={BatchPage}
+                            />
                             <Redirect from="*" to="/" />
                         </Switch>
                     </React.Suspense>
@@ -113,4 +120,4 @@ const actionCreators = {
 };
 
 const connectedApp = connect(mapState, actionCreators)(App);
-export { connectedApp as App };
+export default connectedApp;

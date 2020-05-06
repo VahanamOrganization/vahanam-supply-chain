@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { contractConstants } from "../../constants";
 import { contractActions, qrCodeActions, alertActions } from "../../actions";
-import QRCode from "qrcode";
-import { getQRString } from "../../helpers";
+import { history } from "../../helpers";
 
 class GetBatchDetails extends React.Component {
     constructor(props) {
@@ -64,7 +62,7 @@ class GetBatchDetails extends React.Component {
         }
     }
 
-    async handleSubmit(event) {
+    handleSubmit(event) {
         event.preventDefault();
         if (this.props.inProgress) {
             return;
@@ -72,7 +70,9 @@ class GetBatchDetails extends React.Component {
         this.setState({ submitted: true, showScanner: false });
         const { campaignId, batchId } = this.state;
         if (campaignId > 0 && batchId > 0) {
-            await this.props.getBatchDetails(campaignId, batchId);
+            history.push(
+                "/batch?campaignId" + campaignId + "&batchId=" + batchId
+            );
         }
     }
 
@@ -117,81 +117,11 @@ class GetBatchDetails extends React.Component {
                         </a>
                     </div>
                 </div>
-                {!inProgress && submitted && batch ? (
-                    <BatchDisplay
-                        batch={batch}
-                        campaignId={campaignId}
-                        batchId={batchId}
-                    />
-                ) : (
-                    <div className="display">
-                        <a href="#" onClick={this.props.toggleScanner}>
-                            Scan QR Code
-                        </a>
-                    </div>
-                )}
-            </div>
-        );
-    }
-}
-
-class BatchDisplay extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loaded: false,
-            dataURI: ""
-        };
-    }
-    async componentDidMount() {
-        const qrString = getQRString(this.props.campaignId, this.props.batchId);
-        const dataURI = await QRCode.toDataURL(qrString);
-        this.setState({ loaded: true, dataURI });
-    }
-    render() {
-        return (
-            <div className="batchDisplay display">
-                {this.state.loaded ? (
-                    <img
-                        className="qrcode"
-                        alt="qrcode"
-                        src={this.state.dataURI}
-                    />
-                ) : null}
-                <span className="label">Stage</span>
-                <p className="data">
-                    {this.props.batch.stage +
-                        " => " +
-                        contractConstants.STAGES[this.props.batch.stage]}
-                </p>
-                <span className="label">Amount of PLA</span>
-                <p className="data">{this.props.batch.amountOfPLA}</p>
-                <span className="label">Expected Amount of Masks</span>
-                <p className="data">{this.props.batch.amountOfMasksMade}</p>
-                <span className="label">Expected Date of PLA Delivery</span>
-                <p className="data">
-                    {new Date(
-                        this.props.batch.tfForDeliveryToManufacturer * 1000
-                    ).toString()}
-                </p>
-                <span className="label">Expected Date of Masks Made</span>
-                <p className="data">
-                    {new Date(
-                        this.props.batch.tfForMakingMasks * 1000
-                    ).toString()}
-                </p>
-                <span className="label">Expected Date of Masks Delivery</span>
-                <p className="data">
-                    {new Date(
-                        this.props.batch.tfForDeliveryToReciver * 1000
-                    ).toString()}
-                </p>
-                <span className="label">Courier 1</span>
-                <p className="data">{this.props.batch.courier1}</p>
-                <span className="label">Courier 2</span>
-                <p className="data">{this.props.batch.courier2}</p>
-                <span className="label">Manufacturer</span>
-                <p className="data">{this.props.batch.manufacturer}</p>
+                <div className="display">
+                    <a href="#" onClick={this.props.toggleScanner}>
+                        Scan QR Code
+                    </a>
+                </div>
             </div>
         );
     }

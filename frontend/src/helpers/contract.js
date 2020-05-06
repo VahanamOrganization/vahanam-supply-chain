@@ -48,3 +48,68 @@ export const getQRValue = qrString => {
         throw "Invalid QR Code";
     }
 };
+
+export const getBatchStatusString = status => {
+    status = parseInt(status);
+    switch (status) {
+        case 0:
+            return "Ready for Pickup";
+        case 1:
+            return "Out for Delivery";
+        case 2:
+            return "Manufacturing Masks";
+        case 3:
+            return "Ready for Pickup";
+        case 4:
+            return "Out for Delivery";
+        case 5:
+            return "Reached Destination";
+        case 6:
+            return "Reached Destination";
+        default:
+            return "Status Unknown: " + status.toString();
+    }
+};
+
+export const getBatchDateString = batch => {
+    const status = parseInt(batch.stage);
+    const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
+    switch (status) {
+        case 0:
+            return new Date(
+                batch.tfForDeliveryToManufacturer * 1000
+            ).toLocaleDateString(undefined, options);
+        case 1:
+            return new Date(
+                batch.tfForDeliveryToManufacturer * 1000
+            ).toLocaleDateString(undefined, options);
+        case 2:
+            return new Date(batch.tfForMakingMasks * 1000).toLocaleDateString(
+                undefined,
+                options
+            );
+        case 3:
+            return new Date(
+                batch.tfForDeliveryToReciver * 1000
+            ).toLocaleDateString(undefined, options);
+        case 4:
+            return new Date(
+                batch.tfForDeliveryToReciver * 1000
+            ).toLocaleDateString(undefined, options);
+        case 5:
+            return new Date(
+                batch.tfForDeliveryToReciver * 1000
+            ).toLocaleDateString(undefined, options);
+        case 6:
+            return new Date(
+                batch.tfForDeliveryToReciver * 1000
+            ).toLocaleDateString(undefined, options);
+        default:
+            return "Status Unknown: " + status.toString();
+    }
+};

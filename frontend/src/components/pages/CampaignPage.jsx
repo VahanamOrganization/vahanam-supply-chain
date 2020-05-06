@@ -33,7 +33,7 @@ class CampaignPage extends React.Component {
     }
 
     render() {
-        const { campaign, role, box, account, inProgress } = this.props;
+        const { campaign, inProgress } = this.props;
         const title = "Hellas covid19";
         const description = "We are making masks everwhere, yes we are!";
         const status = 50;
@@ -128,9 +128,7 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                <Displays.CampaignDetails
-                                    campaign={campaign}
-                                />
+                                <Displays.CampaignDetails campaign={campaign} />
                             </div>
                             <div
                                 className={
@@ -139,9 +137,7 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                <Displays.PeopleList
-                                    campaign={campaign}
-                                />
+                                <Displays.PeopleList campaign={campaign} />
                             </div>
                         </div>
                     </div>
@@ -151,12 +147,9 @@ class CampaignPage extends React.Component {
     }
 }
 
-
 function mapState(state) {
-    const { role, campaign, inProgress } = state.contract;
-    const { account } = state.web3;
-    const { box } = state.box;
-    return { role, campaign, account, box };
+    const { campaign, inProgress } = state.contract;
+    return { campaign, inProgress };
 }
 
 const actionCreators = {
