@@ -45,6 +45,7 @@ abstract contract AccessControl is Context {
     }
 
     mapping (bytes32 => RoleData) private _roles;
+    mapping(address=>bytes32) public whichRole;
 
     bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
 
@@ -118,7 +119,6 @@ abstract contract AccessControl is Context {
      */
     function grantRole(bytes32 role, address account) internal virtual {
         require(hasRole(_roles[role].adminRole, _msgSender()), "AccessControl: sender must be an admin to grant");
-
         _grantRole(role, account);
     }
 
@@ -174,6 +174,7 @@ abstract contract AccessControl is Context {
      * ====
      */
     function _setupRole(bytes32 role, address account) internal virtual {
+
         _grantRole(role, account);
     }
 
@@ -185,12 +186,15 @@ abstract contract AccessControl is Context {
     }
 
     function _grantRole(bytes32 role, address account) private {
+        require(whichRole[account] == 0x0000000000000000000000000000000000000000000000000000000000000000,"User already has a role(see whichRole method)");
+        whichRole[account] = role;
         if (_roles[role].members.add(account)) {
             emit RoleGranted(role, account, _msgSender());
         }
     }
 
     function _revokeRole(bytes32 role, address account) private {
+        whichRole[account] = 0x0000000000000000000000000000000000000000000000000000000000000000;
         if (_roles[role].members.remove(account)) {
             emit RoleRevoked(role, account, _msgSender());
         }

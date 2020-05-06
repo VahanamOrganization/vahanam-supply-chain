@@ -374,6 +374,7 @@ abstract contract AccessControl is Context {
     }
 
     mapping (bytes32 => RoleData) private _roles;
+    mapping(address=>bytes32) public whichRole;
 
     bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
 
@@ -447,7 +448,6 @@ abstract contract AccessControl is Context {
      */
     function grantRole(bytes32 role, address account) internal virtual {
         require(hasRole(_roles[role].adminRole, _msgSender()), "AccessControl: sender must be an admin to grant");
-
         _grantRole(role, account);
     }
 
@@ -503,6 +503,7 @@ abstract contract AccessControl is Context {
      * ====
      */
     function _setupRole(bytes32 role, address account) internal virtual {
+
         _grantRole(role, account);
     }
 
@@ -514,12 +515,15 @@ abstract contract AccessControl is Context {
     }
 
     function _grantRole(bytes32 role, address account) private {
+        require(whichRole[account] == 0x0000000000000000000000000000000000000000000000000000000000000000,"User already has a role(see whichRole method)");
+        whichRole[account] = role;
         if (_roles[role].members.add(account)) {
             emit RoleGranted(role, account, _msgSender());
         }
     }
 
     function _revokeRole(bytes32 role, address account) private {
+        whichRole[account] = 0x0000000000000000000000000000000000000000000000000000000000000000;
         if (_roles[role].members.remove(account)) {
             emit RoleRevoked(role, account, _msgSender());
         }
@@ -760,12 +764,14 @@ contract Roles is AccessControl {
     bytes32 public constant COURIER_ROLE = 0x7fc3771f539a03c47afbbf258702c19273ef5e735e24ee7978081dc07288c687;
     //keccak256("manufaturer")
     bytes32 public constant MANUFATURER_ROLE = 0xb528929ed79eb79a87ae6f578d3125509c91bfea9ac8b7fb9f69aa0bc28298dd;
-
+    //keccka256("receiver")
+    bytes32 public constant RECIVER_ROLE = 0x5e784e45feb63c375016d4ce5c52a57b0a48b8a170bc2e31463be0d03d1c4db6;
     constructor(address _admin) public {
         _setupRole(ADMIN_ROLE, _admin);
         _setRoleAdmin(COORDINATOR_ROLE, ADMIN_ROLE);
         _setRoleAdmin(COURIER_ROLE, COORDINATOR_ROLE);
         _setRoleAdmin(MANUFATURER_ROLE, COORDINATOR_ROLE);
+        _setRoleAdmin(RECIVER_ROLE,COORDINATOR_ROLE);
     }
 
     modifier onlyAdmin() {
@@ -796,6 +802,7 @@ contract Roles is AccessControl {
 
 contract Storage {
     enum BatchStages {
+        NotStarted,
         PLAPacked,
         PLAPickedUpByCourier1, //states chages to this with sig of coordinator and courier both
         PLARecivedByManufaturer, //states chages to this with sig of courier and manufaturer both
@@ -837,18 +844,22 @@ contract Storage {
     struct Campaign {
         // CampaignStages stage,
         uint256 totalPLA;
+        uint256 currentPLA;
         uint256 batchCounter;
         address coordinator;
         address receiver;
         AddressSet manufacturers;
         AddressSet couriers;
         mapping(uint256 => Batch) batches;
-
+        mapping(address=>uint256[]) belongsToBatch;
         // uint256 batchSize;
     }
 
     mapping(uint256 => Campaign) campaigns; //campaign's Index in the campaigns array + 1 (becuse 0 means it is not in the array)
     uint256 public campaignCounter = 1;
+    mapping(address => uint256[]) belongsToCampign;
+    
+    
 }
 
 
@@ -884,6 +895,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         Campaign storage campaign = campaigns[campaignId];
         campaignCounter = campaignCounter.add(1);
 
+         belongsToCampign[_msgSender()].push(campaignId);
         //In future iteration campaign id can be deterministically generated form title and description of the campaign i.e. keccak(title+description)
 
         campaign.coordinator = _msgSender();
@@ -891,18 +903,25 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         for (uint256 i = 0; i < _manufacturers.length; i = i.add(1)) {
             grantRole(MANUFATURER_ROLE, _manufacturers[i]);
             campaign.manufacturers.addressIndex[_manufacturers[i]] = i.add(1);
+            belongsToCampign[_manufacturers[i]].push(campaignId);
         }
         for (uint256 i = 0; i < _couriers.length; i = i.add(1)) {
             grantRole(COURIER_ROLE, _couriers[i]);
             campaign.couriers.addressIndex[_couriers[i]] = i.add(1);
+            belongsToCampign[_couriers[i]].push(campaignId);
         }
 
         campaign.manufacturers.addresses = _manufacturers;
         campaign.couriers.addresses = _couriers;
+
+        //add receiver
+        grantRole(RECIVER_ROLE,_receiver);
         campaign.receiver = _receiver;
+        belongsToCampign[_receiver].push(campaignId);
         campaign.batchCounter = 0;
 
         campaign.totalPLA = _totalPLA;
+        campaign.currentPLA = _totalPLA;
         emit CampaignStarted(campaignId);
     }
 
@@ -923,6 +942,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
             campaign.manufacturers.addresses.push(_manufacturers[i]);
             campaign.manufacturers.addressIndex[_manufacturers[i]] = arrayLength
                 .add(i.add(1));
+            belongsToCampign[_manufacturers[i]].push(_campaignId);
         }
     }
 
@@ -944,20 +964,21 @@ contract CampaignGenerator is Ownable, Roles, Storage {
             campaign.couriers.addressIndex[_couriers[i]] = arrayLength.add(
                 i.add(1)
             );
+             belongsToCampign[_couriers[i]].push(_campaignId);
         }
     }
 
     function createNewBatch(
         uint256 _campaignId,
         uint256 _amountOfPLA,
-        uint256 _amountOfMasksMade,
+        uint256 _amountOfExpectedMasks,
         uint256 _tfForDeliveryToManufacturer,
         uint256 _tfForMakingMasks,
         uint256 _tfForDeliveryToReciver,
         address _courier1,
         address _courier2,
         address _manufacturer
-    ) public onlyCoordinator() {
+    ) public onlyCoordinator() returns(uint256 batchId){
         require(
             campaigns[_campaignId].coordinator == _msgSender(),
             "Only coordinator of camapignId is allowed"
@@ -971,19 +992,22 @@ contract CampaignGenerator is Ownable, Roles, Storage {
             "add courier to campaign first"
         );
         require(
-            campaigns[_campaignId].couriers.addressIndex[_manufacturer] != 0,
+            campaigns[_campaignId].manufacturers.addressIndex[_manufacturer] != 0,
             "add manufaturer to campaign first"
         );
         campaigns[_campaignId].batchCounter = campaigns[_campaignId]
             .batchCounter
             .add(1);
 
-        uint256 batchId = campaigns[_campaignId].batchCounter;
+        batchId = campaigns[_campaignId].batchCounter;
         Batch storage batch = campaigns[_campaignId].batches[batchId];
+        //substract the PLA from currentPLA
+        campaigns[_campaignId].currentPLA = campaigns[_campaignId].currentPLA.sub(_amountOfPLA);
+        //update the batchStage
         batch.stage = BatchStages.PLAPacked;
 
         batch.amountOfPLA = _amountOfPLA;
-        batch.amountOfMasksMade = _amountOfMasksMade;
+        batch.amountOfExpectedMasks = _amountOfExpectedMasks;
 
         batch.tfForDeliveryToManufacturer = _tfForDeliveryToManufacturer;
 
@@ -992,10 +1016,14 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         batch.tfForDeliveryToReciver = _tfForDeliveryToReciver;
 
         batch.courier1 = _courier1;
+        campaigns[_campaignId].belongsToBatch[_courier1].push(batchId);
 
         batch.courier2 = _courier2;
+        campaigns[_campaignId].belongsToBatch[_courier2].push(batchId);
 
         batch.manufacturer = _manufacturer;
+        campaigns[_campaignId].belongsToBatch[_manufacturer].push(batchId);
+
         emit PLAPacked(_campaignId, batchId);
     }
 
@@ -1163,29 +1191,23 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         public
         view
         returns (
-            address coordinator,
             uint256 totalPLA,
+            uint256 currentPLA,
+            uint256 totalBatches,
+            address coordinator,
+            address receiver,
             address[] memory manufacturers,
-            address[] memory couriers,
-            uint256 lastOfManufactures,
-            uint256 lastOfCaouriers
+            address[] memory couriers
         )
     {
         coordinator = campaigns[_campaignId].coordinator;
         totalPLA = campaigns[_campaignId].totalPLA;
+        currentPLA = campaigns[_campaignId].currentPLA;
+        receiver = campaigns[_campaignId].receiver;
+        totalBatches = campaigns[_campaignId].batchCounter;
         manufacturers = campaigns[_campaignId].manufacturers.addresses;
         couriers = campaigns[_campaignId].couriers.addresses;
-        lastOfManufactures = campaigns[_campaignId]
-            .manufacturers
-            .addressIndex[campaigns[_campaignId]
-            .manufacturers
-            .addresses[campaigns[_campaignId].manufacturers.addresses.length -
-            1]];
-        lastOfCaouriers = campaigns[_campaignId]
-            .couriers
-            .addressIndex[campaigns[_campaignId]
-            .couriers
-            .addresses[campaigns[_campaignId].couriers.addresses.length - 1]];
+
     }
 
     function getBatchDetails(uint256 _campaignId, uint256 _batchId)
@@ -1194,5 +1216,13 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         returns (Batch memory batch)
     {
         batch = campaigns[_campaignId].batches[_batchId];
+    }
+    //given the address returns all the campaigns it is part of
+    function partOfWhichCampaigns(address _who) public view returns(uint256[] memory){
+        return belongsToCampign[_who];
+    }
+    //given campaignId and address returns all the batches it is part of for that capaign
+    function partOfWhichBatches(uint256 _campaignId,address _who)public view returns(uint256[] memory){
+        return campaigns[_campaignId].belongsToBatch[_who];
     }
 }
