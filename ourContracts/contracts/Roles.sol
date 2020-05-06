@@ -13,12 +13,15 @@ contract Roles is AccessControl {
     bytes32 public constant COURIER_ROLE = 0x7fc3771f539a03c47afbbf258702c19273ef5e735e24ee7978081dc07288c687;
     //keccak256("manufaturer")
     bytes32 public constant MANUFATURER_ROLE = 0xb528929ed79eb79a87ae6f578d3125509c91bfea9ac8b7fb9f69aa0bc28298dd;
+    //keccka256("receiver")
+    bytes32 public constant RECIVER_ROLE = 0x5e784e45feb63c375016d4ce5c52a57b0a48b8a170bc2e31463be0d03d1c4db6;
 
     constructor(address _admin) public {
         _setupRole(ADMIN_ROLE, _admin);
         _setRoleAdmin(COORDINATOR_ROLE, ADMIN_ROLE);
         _setRoleAdmin(COURIER_ROLE, COORDINATOR_ROLE);
         _setRoleAdmin(MANUFATURER_ROLE, COORDINATOR_ROLE);
+        _setRoleAdmin(RECIVER_ROLE, COORDINATOR_ROLE);
     }
 
     modifier onlyAdmin() {
