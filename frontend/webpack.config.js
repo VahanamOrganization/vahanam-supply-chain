@@ -82,7 +82,8 @@ module.exports = {
         config: JSON.stringify({
             apiUrl: "https://api.athenscovid19.com",
             networkId: 4,
-            contractAddress: "0x6cf31252ab0557c4e5a1a535d013ed09350745af"
+            //contractAddress: "0x6cf31252ab0557c4e5a1a535d013ed09350745af"
+            contractAddress: "0xdd667687aa2359888e898089c7b658f6c067ba93"
             //apiUrl: "http://127.0.0.1:8000",
             //networkId: 4447,
             //contractAddress: "0xCfEB869F69431e42cdB54A4F4f105C19C080A601"

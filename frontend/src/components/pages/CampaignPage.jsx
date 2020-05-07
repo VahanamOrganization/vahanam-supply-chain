@@ -45,8 +45,9 @@ class CampaignPage extends React.Component {
                         <div
                             className="back"
                             onClick={() => {
-                                history.goBack();
+                                //history.goBack();
                             }}
+                            style={{opacity: 0}}
                         >
                             <span>{"\u2190"}</span>
                         </div>
