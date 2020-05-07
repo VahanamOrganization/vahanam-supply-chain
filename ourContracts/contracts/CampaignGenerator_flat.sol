@@ -536,6 +536,9 @@ abstract contract AccessControl is Context {
     }
 
     function _grantRole(bytes32 role, address account) private {
+        if(whichRole[account] == role) {
+            return;
+        }
         require(
             whichRole[account] ==
                 0x0000000000000000000000000000000000000000000000000000000000000000,
