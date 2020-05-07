@@ -71,7 +71,7 @@ class GetBatchDetails extends React.Component {
         const { campaignId, batchId } = this.state;
         if (campaignId > 0 && batchId > 0) {
             history.push(
-                "/batch?campaignId" + campaignId + "&batchId=" + batchId
+                "/batch?campaignId=" + campaignId + "&batchId=" + batchId
             );
         }
     }

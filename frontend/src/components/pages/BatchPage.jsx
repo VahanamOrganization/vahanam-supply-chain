@@ -68,7 +68,7 @@ class BatchPage extends React.Component {
                             <div className="date">
                                 {getBatchDateString(batch)}
                             </div>
-                            <ProgressBar stage={parseInt(batch.stage)} />
+                            <ProgressBar stage={parseInt(batch.stage)-1} />
                         </div>
                         <div className="details">
                             <div className="id">Campaign #{this.campaignId} {"\u27A2"} Batch #{this.batchId}</div>
@@ -94,10 +94,17 @@ class BatchPage extends React.Component {
 }
 
 function ProgressBar(props) {
-    const { stage } = props;
+    let { stage } = props;
     const initStage = "Source";
     const midStage = "Manufacturer";
     const endStage = "Destination";
+    //TODO: make this cleaner
+    if (stage == 2 || stage  == 3) {
+        stage = 2;
+    } else if (stage >= 3) {
+        stage = stage-1;
+        
+    }
     return (
         <div className="progress">
             <div className="bar">

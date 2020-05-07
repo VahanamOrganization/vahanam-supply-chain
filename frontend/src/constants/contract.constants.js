@@ -8,6 +8,7 @@ export const contractConstants = {
     ],
 
     STAGES: [
+        "Not Started",
         "PLA Packed by Coordinator",
         "PLA Picked-up by Courier",
         "PLA Received by Manufacturer",
