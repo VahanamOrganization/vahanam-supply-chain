@@ -82,7 +82,7 @@ module.exports = {
             apiUrl: "https://api.athenscovid19.com",
             networkId: 4,
             //OLD contractAddress: "0x6cf31252ab0557c4e5a1a535d013ed09350745af"
-            contractAddress: "0xEe147CE90122688cB698Bb2F4F60756F698AD2Da"
+            contractAddress: "0xA9436982Cc1Fd693b864E68C39E28840ce920b0d"
             //apiUrl: "http://127.0.0.1:8000",
             //networkId: 4447,
             //contractAddress: "0xCfEB869F69431e42cdB54A4F4f105C19C080A601"
