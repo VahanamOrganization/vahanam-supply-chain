@@ -76,20 +76,28 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 40vw;
+        height: 65vw;
         flex-direction: column;
         width: 100%;
         .qrcode {
-            width: 40vw;
-            height: 40vw;
+            width: 65vw;
+            height: 65vw;
         }
     }
-    .batchDetails {
+    .details {
         padding: 2vw;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
+        height: 40vw;
         flex-direction: column;
         width: 92vw;
+        text-align: center;
+        .id {
+            font-size: 6vw;
+        }
+        .from, .to{
+            font-size: 4vw;
+        }
     }
 }
