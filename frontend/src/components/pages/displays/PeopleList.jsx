@@ -14,6 +14,7 @@ class PeopleList extends React.Component {
         const { campaign } = this.props;
         this.accounts = [
             campaign.coordinator,
+            campaign.receiver,
             ...campaign.couriers,
             ...campaign.manufacturers
         ];
@@ -37,11 +38,13 @@ class PeopleList extends React.Component {
                             profile={profile}
                             account={this.accounts[index]}
                             role={
-                                index > 0
-                                    ? index <= numCouriers
+                                index > 1
+                                    ? index <= numCouriers + 1
                                         ? "COURIER"
                                         : "MANUFACTURER"
-                                    : "COORDINATOR"
+                                    : index == 0
+                                    ? "COORDINATOR"
+                                    : "RECEIVER"
                             }
                         />
                     ))}
