@@ -108,7 +108,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         campaign.coordinator = _msgSender();
 
         for (uint256 i = 0; i < _manufacturers.length; i = i.add(1)) {
-            grantRole(MANUFATURER_ROLE, _manufacturers[i]);
+            grantRole(MANUFACTURER_ROLE, _manufacturers[i]);
             campaign.manufacturers.addressIndex[_manufacturers[i]] = i.add(1);
             belongsToCampign[_manufacturers[i]].push(campaignId);
         }
@@ -122,7 +122,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         campaign.couriers.addresses = _couriers;
 
         //add receiver
-        grantRole(RECIVER_ROLE, _receiver);
+        grantRole(RECEIVER_ROLE, _receiver);
         campaign.receiver = _receiver;
         belongsToCampign[_receiver].push(campaignId);
         campaign.batchCounter = 0;
@@ -144,7 +144,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         uint256 arrayLength = campaign.manufacturers.addresses.length;
 
         for (uint256 i = 0; i < _manufacturers.length; i = i.add(1)) {
-            grantRole(MANUFATURER_ROLE, _manufacturers[i]);
+            grantRole(MANUFACTURER_ROLE, _manufacturers[i]);
 
             campaign.manufacturers.addresses.push(_manufacturers[i]);
             campaign.manufacturers.addressIndex[_manufacturers[i]] = arrayLength
@@ -165,7 +165,7 @@ contract CampaignGenerator is Ownable, Roles, Storage {
         uint256 arrayLength = campaign.couriers.addresses.length;
 
         for (uint256 i = 0; i < _couriers.length; i = i.add(1)) {
-            grantRole(MANUFATURER_ROLE, _couriers[i]);
+            grantRole(MANUFACTURER_ROLE, _couriers[i]);
 
             campaign.couriers.addresses.push(_couriers[i]);
             campaign.couriers.addressIndex[_couriers[i]] = arrayLength.add(

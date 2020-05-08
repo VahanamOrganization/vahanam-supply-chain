@@ -1,0 +1,103 @@
+@import "config";
+
+.batchPageInner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2vw;
+    width: 96vw;
+    height: 100vh;
+    overflow-x: hidden;
+    .back {
+        a {
+            text-decoration: none;
+            color: $grey;
+        }
+        justify-self: flex-start;
+        align-self: flex-start;
+        margin: 2vw;
+        font-size: 8vw;
+    }
+    .titleBar {
+        padding: 2vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 5vw;
+        flex-direction: column;
+        width: 92vw;
+        .title {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 8vw;
+        }
+        .location {
+            width: 100%;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 4vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        overflow: hidden;
+    }
+    .statusBar {
+        padding: 2vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 25vw;
+        flex-direction: column;
+        width: 92vw;
+        .status {
+            width: 100%;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 4vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .date {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 6vw;
+        }
+    }
+    .qrDisplay {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 65vw;
+        flex-direction: column;
+        width: 100%;
+        .qrcode {
+            width: 65vw;
+            height: 65vw;
+        }
+    }
+    .details {
+        padding: 2vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40vw;
+        flex-direction: column;
+        width: 92vw;
+        text-align: center;
+        .id {
+            font-size: 6vw;
+        }
+        .from, .to{
+            font-size: 4vw;
+        }
+    }
+}

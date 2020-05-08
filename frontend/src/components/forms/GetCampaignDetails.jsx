@@ -41,7 +41,7 @@ class GetCampaignDetails extends React.Component {
         }
     }
 
-    async handleSubmit(event) {
+    handleSubmit(event) {
         event.preventDefault();
         this.setState({ submitted: true });
         const { campaignId } = this.state;

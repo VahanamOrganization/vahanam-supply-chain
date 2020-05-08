@@ -8,13 +8,14 @@ export const contractConstants = {
     ],
 
     STAGES: [
-        "PLAPacked",
-        "PLAPickedUpByCourier1",
-        "PLAReceivedByManufacturer",
-        "MasksReady",
-        "MasksPickedUpByCourier2",
-        "MasksReceivedByReceiver", 
-        "MasksVerifiedForQuality"
+        "Not Started",
+        "PLA Packed by Coordinator",
+        "PLA Picked-up by Courier",
+        "PLA Received by Manufacturer",
+        "Masks Ready for Pick-up",
+        "Masks Picked-up by Courier",
+        "Masks Received by Receiver", 
+        "Masks Verified for Quality"
     ],
 
     ADMIN_ROLE:
@@ -26,7 +27,7 @@ export const contractConstants = {
     MANUFACTURER_ROLE:
         "0xb528929ed79eb79a87ae6f578d3125509c91bfea9ac8b7fb9f69aa0bc28298dd",
     RECEIVER_ROLE:
-        "0xb914ce1854b65b7506ae428aeca250f95704e80b73c091b55e0e8c805a63c657",
+        "0x5e784e45feb63c375016d4ce5c52a57b0a48b8a170bc2e31463be0d03d1c4db6",
 
 
     TRANSACTION_STARTED: "TRANSACTION_STARTED",

@@ -5,6 +5,12 @@ export const CampaignDetails = (props) => {
     const { campaign } = props;
     return (
         <div className="campaignDetails display">
+            <span className="label">Total PLA</span>
+            <p className="data">{campaign.totalPLA}</p>
+            <span className="label">Current PLA</span>
+            <p className="data">{campaign.currentPLA}</p>
+            <span className="label">Total Batches</span>
+            <p className="data">{campaign.totalBatches}</p>
             <span className="label">Coordinator</span>
             <p className="data">{campaign.coordinator}</p>
             <span className="label">Couriers</span>
@@ -19,8 +25,8 @@ export const CampaignDetails = (props) => {
                     <li key={index}>{item}</li>
                 ))}
             </ul>
-            <span className="label">Total PLA</span>
-            <p className="data">{campaign.totalPLA}</p>
+            <span className="label">Receiver</span>
+            <p className="data">{campaign.receiver}</p>
 
         </div>
     );
