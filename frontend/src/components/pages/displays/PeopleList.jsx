@@ -59,7 +59,7 @@ function Person(props) {
         <div className="person">
             <div className="photo">
                 <div className="photoInner">
-                    {profile.image ? (
+                    {profile.image && profile.image.length >= 1 ? (
                         <img src={getImageUrl(profile.image)} />
                     ) : (
                         <img src={tempProfile} />

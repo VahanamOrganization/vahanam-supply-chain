@@ -1,15 +1,6 @@
 @import 'config';
 
 .profilePageInner {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-top: 5vh;
-    height: 100vh;
-    width: 92vw;
     .photo {
         width: 25vw;
         height: 25vw;
@@ -18,6 +9,9 @@
         align-items: center;
         .photoInner {
             border-radius: 50%;
+            border-style: solid;
+            border-color: $grey_;
+            border-width: 1px;
             overflow: hidden;
             width: 20vw;
             height: 20vw;

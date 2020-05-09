@@ -2,22 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import { contractActions, web3Actions } from "../../actions";
 import {
-    history,
     getBatchStatusString,
     getBatchDateString,
     getQRString
 } from "../../helpers";
 import QRCode from "qrcode";
 import * as Displays from "./displays";
-import queryString from "query-string";
 
 class BatchPage extends React.Component {
     constructor(props) {
         super(props);
-
-        const values = queryString.parse(this.props.location.search);
-        this.campaignId = parseInt(values.campaignId) || 1;
-        this.batchId = parseInt(values.batchId) || 1;
+        this.campaignId = this.props.match.params.campaign;
+        this.batchId = this.props.match.params.batch;
         this.state = {
             loaded: false,
             dataURI: ""
@@ -48,16 +44,7 @@ class BatchPage extends React.Component {
         return (
             <div className="batchPage page">
                 {this.state.loaded && !inProgress && batch && (
-                    <div className="batchPageInner">
-                        <div
-                            className="back"
-                            onClick={() => {
-                                //history.goBack();
-                            }}
-                            style={{opacity: 0}}
-                        >
-                            <span>{"\u2190"}</span>
-                        </div>
+                    <div className="batchPageInner pageInner">
                         <div className="titleBar">
                             <div className="title">{title}</div>
                         </div>

@@ -12,12 +12,12 @@
         justify-content: flex-start;
         align-items: center;
         height: 100%;
-        width: 80%;
+        width: 100%;
         .chooseForm {
             margin-top: 2vh;
             font-size: 6vw;
             font-weight: bold;
-            width: 100%;
+            width: 90%;
             option {
                 font-size: 2vw;
             }
@@ -27,7 +27,7 @@
 
 .form {
     margin-bottom: 2vh;
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -102,7 +102,7 @@
 
 .display {
     margin-top: 2vh;
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;

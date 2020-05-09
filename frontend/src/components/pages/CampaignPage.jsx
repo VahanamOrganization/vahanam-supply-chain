@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { contractActions, web3Actions } from "../../actions";
-import { history } from "../../helpers";
 import { Icon, InlineIcon } from "@iconify/react";
 import gearIcon from "@iconify/icons-octicon/gear";
 import peopleIcon from "@iconify/icons-eva/people-fill";
@@ -41,16 +40,7 @@ class CampaignPage extends React.Component {
         return (
             <div className="campaignPage page">
                 {this.state.loaded && !inProgress && campaign && (
-                    <div className="campaignPageInner">
-                        <div
-                            className="back"
-                            onClick={() => {
-                                //history.goBack();
-                            }}
-                            style={{opacity: 0}}
-                        >
-                            <span>{"\u2190"}</span>
-                        </div>
+                    <div className="campaignPageInner pageInner">
                         <div className="topBar">
                             <div className="photo">
                                 <div className="photoInner">

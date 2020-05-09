@@ -1,17 +1,6 @@
 @import "config";
 
 .campaignPageInner {
-    .iconify {
-        color: $grey;
-    }
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 2vw;
-    width: 96vw;
-    height: 100vh;
-    overflow-x: hidden;
     .back {
         a {
             text-decoration: none;

@@ -52,7 +52,7 @@ class LoginPage extends React.Component {
         const { submitted } = this.state;
         return (
             <div className="loginPage page">
-                <div className="loginPageInner">
+                <div className="loginPageInner pageInner">
                     <div className="title">
                         Login
                     </div>

@@ -21,7 +21,7 @@ class ProfilePage extends React.Component {
         let { profile, role, account } = this.props;
         return (
             <div className="profilePage page">
-                <div className="profilePageInner">
+                <div className="profilePageInner pageInner">
                     <div className="photo">
                         <div className="photoInner">
                             {profile.image ? (
