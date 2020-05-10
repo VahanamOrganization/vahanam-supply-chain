@@ -117,20 +117,20 @@ function loadWeb3() {
 
 function started() {
     return {
-        type: web3Constants.WEB3_STARTED
+        type: web3Constants.STARTED
     };
 }
 
 function loaded(web3) {
     return {
-        type: web3Constants.WEB3_LOADED,
+        type: web3Constants.LOADED,
         ...web3
     };
 }
 
 function failure(error) {
     return {
-        type: web3Constants.WEB3_ERROR,
+        type: web3Constants.ERROR,
         error
     };
 }

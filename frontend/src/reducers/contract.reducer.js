@@ -1,34 +1,41 @@
 import { contractConstants, authConstants } from "../constants";
 
-export function contract(state = {}, action) {
+export function contract(state = {data: {}}, action) {
     switch (action.type) {
-        case contractConstants.TRANSACTION_STARTED:
+        case contractConstants.STARTED:
             return {
                 ...state,
                 inProgress: true
             };
-        case contractConstants.TRANSACTION_DONE:
+        case contractConstants.DONE:
             return {
                 ...state,
                 inProgress: false
             };
-        case contractConstants.TRANSACTION_CLEAN:
+        case contractConstants.CLEAN:
             return {
-                role: state.role,
+                ...state,
+                data: {},
                 inProgress: false,
             };
-        case contractConstants.TRANSACTION_ERROR:
+        case contractConstants.ERROR:
             return {
                 role: state.role,
                 inProgress: false,
                 error: action.error
             };
-        case contractConstants.TRANSACTION_RESULT:
-            return {
+        case contractConstants.RESULT:
+            const newState = {
                 ...state,
                 inProgress: false,
-                ...action
+                ...action,
+                data: {
+                    ...action.data,
+                    ...state.data
+                }
             };
+            console.log({state, action, newState});
+            return newState;
         case authConstants.LOGOUT:
             return {};
         default:

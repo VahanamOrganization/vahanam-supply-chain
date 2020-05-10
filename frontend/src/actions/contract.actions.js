@@ -13,6 +13,7 @@ export const contractActions = {
     getCampaignDetails,
     createNewBatch,
     getBatchDetails,
+    getBatches,
     confirmPLAPickedUp,
     confirmPLAReceived,
     confirmMasksMade,
@@ -21,9 +22,9 @@ export const contractActions = {
 };
 
 function clean() {
-    return (dispatch) => {
+    return dispatch => {
         dispatch({
-            type: contractConstants.TRANSACTION_CLEAN
+            type: contractConstants.CLEAN
         });
     };
 }
@@ -45,7 +46,6 @@ function getRole() {
             return;
         }
         dispatch(result({ role }));
-        dispatch(done());
         return role;
     };
 }
@@ -66,8 +66,7 @@ function getCampaignDetails(campaignId) {
             return;
         }
         dispatch(alertActions.success("Got Campaign"));
-        dispatch(result({ campaign }));
-        dispatch(done());
+        dispatch(result({ data: { campaign } }));
     };
 }
 
@@ -87,8 +86,30 @@ function getBatchDetails(campaignId, batchId) {
             return;
         }
         dispatch(alertActions.success("Got Batch"));
-        dispatch(result({ batch }));
-        dispatch(done());
+        dispatch(result({ data: { batch } }));
+    };
+}
+
+function getBatches(campaignId, totalBatches) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let batches;
+        try {
+            const { account, contract } = getState().web3;
+            batches = await Promise.all(
+                Array(totalBatches).fill(1).map((el, i) =>
+                    contract.methods
+                        .getBatchDetails(campaignId, i + 1)
+                        .call({ from: account })
+                )
+            );
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            dispatch(alertActions.error("Error Getting Batches"));
+            return;
+        }
+        dispatch(result({ data: { batches } }));
     };
 }
 
@@ -450,7 +471,14 @@ function createNewBatch(batch) {
                     "Created & Packed Batch ID: " + event.returnValues.branchId
                 )
             );
-            dispatch(result({ newBatchId: event.returnValues.branchId }));
+            dispatch(
+                result({
+                    data: {
+                        newBatchId: event.returnValues.branchId,
+                        newCampaignId: event.returnValues.campaignId
+                    }
+                })
+            );
         } else {
             printReceipt(receipt);
             dispatch(failure(receipt.toString()));
@@ -461,26 +489,26 @@ function createNewBatch(batch) {
 
 function started() {
     return {
-        type: contractConstants.TRANSACTION_STARTED
+        type: contractConstants.STARTED
     };
 }
 
 function done() {
     return {
-        type: contractConstants.TRANSACTION_DONE
+        type: contractConstants.DONE
     };
 }
 
 function result(result) {
     return {
-        type: contractConstants.TRANSACTION_RESULT,
+        type: contractConstants.RESULT,
         ...result
     };
 }
 
 function failure(error) {
     return {
-        type: contractConstants.TRANSACTION_ERROR,
+        type: contractConstants.ERROR,
         error
     };
 }

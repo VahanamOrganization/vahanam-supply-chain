@@ -7,7 +7,7 @@ import {
     getQRString
 } from "../../helpers";
 import QRCode from "qrcode";
-import * as Displays from "./displays";
+import * as Displays from "../displays";
 
 class BatchPage extends React.Component {
     constructor(props) {
@@ -19,7 +19,6 @@ class BatchPage extends React.Component {
             dataURI: ""
         };
     }
-    async componentDidMount() {}
 
     componentDidMount() {
         this.init();
@@ -36,14 +35,14 @@ class BatchPage extends React.Component {
     }
 
     render() {
-        const { batch, inProgress } = this.props;
+        const { batch } = this.props;
         const title = "Athens covid19";
         const location = "Greece";
         const status = 50;
 
         return (
             <div className="batchPage page">
-                {this.state.loaded && !inProgress && batch && (
+                {this.state.loaded && batch && (
                     <div className="batchPageInner pageInner">
                         <div className="titleBar">
                             <div className="title">{title}</div>
@@ -127,8 +126,8 @@ function ProgressBar(props) {
 }
 
 function mapState(state) {
-    const { batch, inProgress } = state.contract;
-    return { batch, inProgress };
+    const { batch } = state.contract.data;
+    return { batch };
 }
 
 const actionCreators = {

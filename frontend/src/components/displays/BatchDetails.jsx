@@ -1,7 +1,7 @@
 import React from "react";
 import QRCode from "qrcode";
-import { getQRString } from "../../../helpers";
-import { contractConstants } from "../../../constants";
+import { getQRString } from "../../helpers";
+import { contractConstants } from "../../constants";
 
 export class BatchDetails extends React.Component {
     constructor(props) {
