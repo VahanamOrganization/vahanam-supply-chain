@@ -41,16 +41,12 @@ class CampaignDetails extends React.Component {
         }
         return (
             <div className="campaignDetails">
-                <div className="title">
-                    State
-                </div>
+                <div className="title">State</div>
                 <div className="pie">
-                            <div className="center">
-                                <span className="label">Total</span>
-                                <span className="data">
-                                    {campaign.totalPLA}
-                                </span>
-                            </div>
+                    <div className="center">
+                        <span className="label">Total</span>
+                        <span className="data">{campaign.totalPLA}</span>
+                    </div>
                     <PieChart
                         style={{
                             fontSize: "8px"
@@ -61,9 +57,7 @@ class CampaignDetails extends React.Component {
                             pointerEvents: "none"
                         }}
                         animate
-                        label={({ dataEntry }) =>
-                            dataEntry.value
-                        }
+                        label={({ dataEntry }) => dataEntry.value}
                         labelPosition={70}
                         labelStyle={{
                             fill: "#fbfbfb",
@@ -85,20 +79,21 @@ class CampaignDetails extends React.Component {
                     />
                 </div>
                 <div className="pieDetails">
-                    <div className="remain">
-                        Remaining
-                    </div>
-                    <div className="inProgress">
-                        In Progress
-                    </div>
-                    <div className="done">
-                        Done
-                    </div>
+                    <div className="remain">Remaining</div>
+                    <div className="inProgress">In Progress</div>
+                    <div className="done">Done</div>
                 </div>
                 {batches &&
                     batches.map((batch, i) => (
                         <div className="batch" key={i + 1}>
-                            <Link to={"/batch/" + campaignId + "/" + i + 1}>
+                            <Link
+                                to={
+                                    "/batch/" +
+                                    campaignId +
+                                    "/" +
+                                    (i + 1).toString()
+                                }
+                            >
                                 <Icon icon={packageIcon} className="icon" />
                                 <div className="inner">
                                     Batch #{i + 1}
@@ -113,7 +108,7 @@ class CampaignDetails extends React.Component {
                                     Delivery: {getBatchDateString(batch)}
                                     <br />
                                     <span className="details">
-                                        View Details
+                                        View Details {"\u2197"}
                                     </span>
                                 </div>
                             </Link>

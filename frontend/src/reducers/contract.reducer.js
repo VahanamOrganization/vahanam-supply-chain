@@ -24,17 +24,25 @@ export function contract(state = {data: {}}, action) {
                 inProgress: false,
                 error: action.error
             };
+        case contractConstants.CLEAN_SELECTED:
+            return {
+                ...state,
+                ...action,
+                data: {
+                    ...state.data,
+                    ...action.data
+                }
+            };
         case contractConstants.RESULT:
-            const newState = {
+            return {
                 ...state,
                 inProgress: false,
                 ...action,
                 data: {
-                    ...action.data,
-                    ...state.data
+                    ...state.data,
+                    ...action.data
                 }
             };
-            return newState;
         case authConstants.LOGOUT:
         default:
             return state;

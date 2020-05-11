@@ -19,8 +19,8 @@ export function box(state = initialState, action) {
                 inProgress: false,
                 ...action,
                 data: {
-                    ...action.data,
-                    ...state.data
+                    ...state.data,
+                    ...action.data
                 }
             };
         case boxConstants.CLEAN:

@@ -1,16 +1,6 @@
 @import "config";
 
 .campaignPageInner {
-    .back {
-        a {
-            text-decoration: none;
-            color: $grey;
-        }
-        justify-self: flex-start;
-        align-self: flex-start;
-        margin: 2vw;
-        font-size: 8vw;
-    }
     .topBar {
         display: flex;
         justify-content: space-around;

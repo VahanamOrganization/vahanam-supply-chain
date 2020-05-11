@@ -20,6 +20,7 @@ export const contractActions = {
     confirmMasksPickedUp,
     confirmMasksReceived,
     getMyCampaigns,
+    cleanMyBatches,
     getMyBatches
 };
 
@@ -76,10 +77,7 @@ function getMyCampaigns() {
         let campaigns;
         try {
             const { account, contract } = getState().web3;
-            campaigns = await contractService.getMyCampaigns(
-                contract,
-                account
-            );
+            campaigns = await contractService.getMyCampaigns(contract, account);
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
@@ -90,10 +88,16 @@ function getMyCampaigns() {
     };
 }
 
+function cleanMyBatches() {
+    return async dispatch => {
+        dispatch(cleanSelected({ data: { batches: undefined } }));
+    }
+}
+
 function getMyBatches(campaignId) {
     return async (dispatch, getState) => {
         dispatch(started());
-        let batches;
+        let batches = undefined;
         try {
             const { account, contract } = getState().web3;
             batches = await contractService.getMyBatches(
@@ -108,6 +112,9 @@ function getMyBatches(campaignId) {
             return;
         }
         dispatch(result({ data: { batches } }));
+        if (batches.length === 0) {
+            dispatch(alertActions.success("No Batches Found"));
+        }
     };
 }
 
@@ -535,6 +542,13 @@ function started() {
 function done() {
     return {
         type: contractConstants.DONE
+    };
+}
+
+function cleanSelected(result) {
+    return {
+        type: contractConstants.CLEAN_SELECTED,
+        ...result
     };
 }
 

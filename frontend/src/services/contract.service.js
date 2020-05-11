@@ -205,7 +205,7 @@ async function getMyCampaigns(contract, account) {
 
 async function getMyBatches(contract, account, campaignId) {
     const batchIds = await contract.methods
-        .partOfWhichBatches(account)
+        .partOfWhichBatches(campaignId, account)
         .call({ from: account });
     return Promise.all(
         batchIds.map(id =>
