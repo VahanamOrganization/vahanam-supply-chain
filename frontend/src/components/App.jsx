@@ -66,7 +66,6 @@ class App extends React.Component {
                 <QRCode open={this.props.open} />
                 <Router history={history}>
                     <ErrorBoundary key={location.pathname}>
-                        <NavBar />
                         <React.Suspense
                             fallback={
                                 <div className="suspense">
@@ -124,6 +123,7 @@ class App extends React.Component {
                                 <Redirect from="*" to="/" />
                             </Switch>
                         </React.Suspense>
+                        <NavBar />
                     </ErrorBoundary>
                 </Router>
             </div>

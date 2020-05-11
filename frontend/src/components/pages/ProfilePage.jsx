@@ -18,7 +18,7 @@ class ProfilePage extends React.Component {
     }
 
     render() {
-        let { profile, role, account } = this.props;
+        let { profile, role, account, loggedIn } = this.props;
         return (
             <div className="profilePage page">
                 <div className="profilePageInner pageInner">
@@ -41,6 +41,7 @@ class ProfilePage extends React.Component {
                         <span className="label">Role</span>
                         <p className="data">{role}</p>
                     </div>
+                    {loggedIn && <Link to="/login">Logout</Link>}
                 </div>
             </div>
         );
@@ -50,8 +51,8 @@ class ProfilePage extends React.Component {
 function mapState(state) {
     const { account } = state.web3;
     const { role } = state.contract;
-    const { profile } = state.box;
-    return { profile, role, account };
+    const { profile, loggedIn } = state.box;
+    return { profile, role, account, loggedIn };
 }
 
 const actionCreators = {

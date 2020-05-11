@@ -42,5 +42,35 @@
         }
         overflow: hidden;
     }
+    .display {
+        padding: 3vw;
+        width: 94vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 4vw;
+        .label {
+            font-weight: bold;
+            color: $grey;
+            opacity: 0.5;
+        }
+    }
+    a {
+
+        margin-top: auto;
+        margin-bottom: 2vw;
+        padding: 2vw;
+        font-size: 5vw;
+        width: 30vw;
+        text-align: center;
+        text-decoration: none;
+        background: $grey;
+        color: $white;
+        border-radius: 2vw;
+        &:hover {
+            background: $blue2;
+        }
+    }
 }
 
