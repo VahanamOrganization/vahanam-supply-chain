@@ -34,10 +34,8 @@ export function contract(state = {data: {}}, action) {
                     ...state.data
                 }
             };
-            console.log({state, action, newState});
             return newState;
         case authConstants.LOGOUT:
-            return {};
         default:
             return state;
     }

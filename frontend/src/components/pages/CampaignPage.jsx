@@ -14,7 +14,6 @@ class CampaignPage extends React.Component {
         super(props);
         this.campaignId = this.props.match.params.id;
         this.state = {
-            loaded: false,
             selected: 1
         };
     }
@@ -25,10 +24,8 @@ class CampaignPage extends React.Component {
 
     async init() {
         this.props.clean();
-        //TODO: remove this extra call
         await this.props.loadWeb3();
         await this.props.getCampaignDetails(this.campaignId);
-        this.setState({ loaded: true });
     }
 
     render() {
@@ -38,7 +35,7 @@ class CampaignPage extends React.Component {
 
         return (
             <div className="campaignPage page">
-                {this.state.loaded && campaign && (
+                {campaign && (
                     <div className="campaignPageInner pageInner">
                         <div className="topBar">
                             <div className="photo">
@@ -53,7 +50,9 @@ class CampaignPage extends React.Component {
                                 <span className="label">Total</span>
                             </div>
                             <div className="status">
-                                <span className="data">{campaign.totalPLA - campaign.currentPLA}</span>
+                                <span className="data">
+                                    {campaign.totalPLA - campaign.currentPLA}
+                                </span>
                                 <span className="label">Packed</span>
                             </div>
                         </div>
@@ -118,7 +117,10 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                <Displays.CampaignDetails campaignId={this.campaignId} campaign={campaign} />
+                                <Displays.CampaignDetails
+                                    campaignId={this.campaignId}
+                                    campaign={campaign}
+                                />
                             </div>
                             <div
                                 className={

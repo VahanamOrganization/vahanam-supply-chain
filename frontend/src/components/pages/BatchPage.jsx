@@ -15,7 +15,6 @@ class BatchPage extends React.Component {
         this.campaignId = this.props.match.params.campaign;
         this.batchId = this.props.match.params.batch;
         this.state = {
-            loaded: false,
             dataURI: ""
         };
     }
@@ -31,18 +30,16 @@ class BatchPage extends React.Component {
         await this.props.getBatchDetails(this.campaignId, this.batchId);
         const qrString = getQRString(this.campaignId, this.batchId);
         const dataURI = await QRCode.toDataURL(qrString);
-        this.setState({ loaded: true, dataURI });
     }
 
     render() {
         const { batch } = this.props;
         const title = "Athens covid19";
         const location = "Greece";
-        const status = 50;
 
         return (
             <div className="batchPage page">
-                {this.state.loaded && batch && (
+                {batch && (
                     <div className="batchPageInner pageInner">
                         <div className="titleBar">
                             <div className="title">{title}</div>
@@ -54,15 +51,20 @@ class BatchPage extends React.Component {
                             <div className="date">
                                 {getBatchDateString(batch)}
                             </div>
-                            <ProgressBar stage={parseInt(batch.stage)-1} />
+                            <ProgressBar stage={parseInt(batch.stage) - 1} />
                         </div>
                         <div className="details">
-                            <div className="id">Campaign #{this.campaignId} {"\u27A2"} Batch #{this.batchId}</div>
+                            <div className="id">
+                                Campaign #{this.campaignId} {"\u27A2"} Batch #
+                                {this.batchId}
+                            </div>
                             <div className="from">
-                                From: Mpotasi 6, Athens 104 33 on 27th May 2020, 5:00PM
+                                From: Mpotasi 6, Athens 104 33 on 27th May 2020,
+                                5:00PM
                             </div>
                             <div className="to">
-                                To: Ministry of Health, +1 232 545 4533 Aristotelous 17, Athens 104 33
+                                To: Ministry of Health, +1 232 545 4533
+                                Aristotelous 17, Athens 104 33
                             </div>
                         </div>
                         <div className="qrDisplay">
@@ -85,11 +87,10 @@ function ProgressBar(props) {
     const midStage = "Manufacturer";
     const endStage = "Destination";
     //TODO: make this cleaner
-    if (stage == 2 || stage  == 3) {
+    if (stage == 2 || stage == 3) {
         stage = 2;
     } else if (stage >= 3) {
-        stage = stage-1;
-        
+        stage = stage - 1;
     }
     return (
         <div className="progress">
