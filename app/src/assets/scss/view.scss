@@ -1,0 +1,106 @@
+@import "config";
+
+.view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 15vw;
+    .viewInner {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        .chooseForm {
+            margin-top: 2vh;
+            font-size: 6vw;
+            font-weight: bold;
+            width: 90%;
+            option {
+                font-size: 2vw;
+            }
+        }
+    }
+}
+
+.form {
+    margin-bottom: 2vh;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .label {
+        margin-top: 2vh;
+        font-size: 5vw;
+        align-self: flex-start;
+    }
+    input {
+        padding: 1vw;
+        width: 100%;
+        font-size: 4vw;
+        border-style: solid;
+    }
+    .react-datepicker-wrapper {
+        width: 100%;
+        input {
+            padding: 1vw;
+            width: 100%;
+            border-style: solid;
+        }
+    }
+    select {
+        width: 100%;
+        font-size: 5vw;
+        option {
+            font-size: 3vw;
+        }
+    }
+    .helpBlock {
+        width: 100%;
+        color: red;
+        font-size: 3vw;
+    }
+    .successBlock {
+        width: 100%;
+        color: green;
+        font-size: 3vw;
+    }
+    .submitForm {
+        margin-top: 2vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .submit {
+            width: 45%;
+            display: flex;
+        }
+        .cancel {
+            width: 45%;
+            display: flex;
+        }
+    }
+    .qrScan {
+        margin-top: 2vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    a {
+        padding-left: 2vw;
+        padding-right: 2vw;
+        font-size: 6vw;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        background: $grey;
+        color: $white;
+        border-radius: 2vw;
+        &:hover {
+            background: $blue2;
+        }
+    }
+}

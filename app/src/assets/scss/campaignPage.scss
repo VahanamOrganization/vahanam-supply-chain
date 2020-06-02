@@ -1,0 +1,310 @@
+@import "config";
+
+.campaignPageInner {
+    .topBar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 10vh;
+        width: 100%;
+        .photo {
+            width: 30vw;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .photoInner {
+                border-radius: 50%;
+                overflow: hidden;
+                width: 20vw;
+                height: 20vw;
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+        }
+        .goal,
+        .status {
+            width: 30vw;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .data {
+                font-size: 5vw;
+                font-weight: bold;
+                margin-bottom: 1vw;
+            }
+            .label {
+                margin-top: 1vw;
+                text-transform: uppercase;
+                font-size: 3.5vw;
+            }
+        }
+    }
+    .titleBar {
+        padding: 2vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 25vw;
+        flex-direction: column;
+        width: 92vw;
+        .title {
+            width: 100%;
+            font-size: 8vw;
+        }
+        .description {
+            width: 100%;
+            text-transform: uppercase;
+            font-size: 4vw;
+        }
+        overflow: hidden;
+    }
+    .actionBar {
+        padding-bottom: 2vw;
+        border-style: none none solid none;
+        border-color: $grey_;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 5vw;
+        width: 100%;
+        .action {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            border-radius: 2vw;
+            border-style: solid;
+            border-width: 1px;
+            border-color: $grey_;
+            text-transform: uppercase;
+            font-weight: bold;
+            width: 26vw;
+            font-size: 3vw;
+            background: white;
+        }
+        .other {
+            font-size: 4vw;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-width: 1px;
+            height: 100%;
+            border-radius: 2vw;
+            border-style: solid;
+            border-color: $grey_;
+            text-transform: uppercase;
+            width: 7vw;
+            background: white;
+        }
+    }
+    .tabBar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 10vw;
+        width: 100%;
+        border-style: none none solid none;
+        border-color: $grey_;
+        background: $white;
+        opacity: 1;
+        z-index: 1;
+        border-width: 1px;
+        position: sticky;
+        top: 0;
+
+        .tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-transform: uppercase;
+            width: 26vw;
+            font-size: 6vw;
+            font-weight: bold;
+            .tabIcon {
+                opacity: 0.5;
+            }
+            transition: 0.25s;
+            &.selected {
+                border-style: none none solid none;
+                border-width: 7px;
+                .tabIcon {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .tabData {
+        width: 96vw;
+        position: relative;
+        .tabDataInner {
+            padding-bottom: 15vw;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: none;
+            &.selected {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .peopleList {
+                margin-top: 2vw;
+                width: 96vw;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .person {
+                    width: 96vw;
+                    height: 25vw;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    .details {
+                        width: 70vw;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: flex-start;
+                        font-size: 4vw;
+                    }
+                    .photo {
+                        width: 25vw;
+                        height: 25vw;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .photoInner {
+                            border-radius: 50%;
+                            overflow: hidden;
+                            width: 20vw;
+                            height: 20vw;
+                            img {
+                                width: 100%;
+                                height: auto;
+                            }
+                        }
+                    }
+                }
+            }
+            .campaignDetails {
+                font-size: 4vw;
+                margin-top: 2vw;
+                width: 96vw;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .title {
+                    margin-top: 2vw;
+                    text-transform: uppercase;
+                    font-size: 4vw;
+                    font-weight: bold;
+                }
+                .pie {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    height: 50vw;
+                    margin-bottom: 2vw;
+                    .center {
+                        position: absolute;
+            width: 30vw;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .data {
+                font-size: 5vw;
+                font-weight: bold;
+                margin-bottom: 1vw;
+            }
+            .label {
+                margin-top: 1vw;
+                text-transform: uppercase;
+                font-size: 3.5vw;
+            }
+                    }
+                }
+                .pieDetails {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    height: 10vw;
+                    width: 100%;
+                    div {
+                        text-transform: uppercase;
+                        font-size: 3vw;
+                    display: flex;
+                    justify-content: center;
+                    border-radius: 1vw;
+                    align-items: center;
+                        width: 25vw;
+                        height: 6vw;
+                        color: $white;
+                        &.remain {
+                            background: purple;
+                        }
+                        &.inProgress {
+                            background: $blue2;
+                        }
+                        &.done {
+                            background: $red;
+                        }
+                    }
+                }
+                .batch {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 96vw;
+                    height: 30vw;
+
+                    border-style: solid none none none;
+                    border-width: 1px;
+                    border-color: $grey_;
+                    a {
+                        text-decoration: none;
+                        color: $grey;
+                        padding: 2vw;
+                        width: 92vw;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            .icon {
+                                align-self: flex-start;
+                                width: 10vw;
+                                font-size: 6vw;
+                            }
+                        .inner {
+                            flex: 1;
+                            color: $grey_8;
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: flex-start;
+                            flex-direction: column;
+                            .details {
+                                color: $grey;
+                                font-weight: bold;
+                                margin-top: 2vw;
+                                font-size: 3.5vw;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

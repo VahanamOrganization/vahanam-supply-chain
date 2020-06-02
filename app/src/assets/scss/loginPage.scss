@@ -1,0 +1,22 @@
+@import 'config';
+
+.loginPageInner {
+    .account {
+        font-size: 3vw;
+    }
+    a {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        background: $grey;
+        padding: 5px;
+        color: $white;
+        border-radius: 2vw;
+        &:hover {
+            background: $blue2;
+        }
+    }
+}
+

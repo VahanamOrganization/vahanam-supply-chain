@@ -1,0 +1,76 @@
+@import 'config';
+
+.profilePageInner {
+    .photo {
+        width: 25vw;
+        height: 25vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .photoInner {
+            border-radius: 50%;
+            border-style: solid;
+            border-color: $grey_;
+            border-width: 1px;
+            overflow: hidden;
+            width: 20vw;
+            height: 20vw;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+    .titleBar {
+        padding: 2vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 15vw;
+        flex-direction: column;
+        width: 92vw;
+        .name {
+            text-align: center;
+            width: 100%;
+            font-size: 8vw;
+        }
+        .location {
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 4vw;
+        }
+        overflow: hidden;
+    }
+    .display {
+        padding: 3vw;
+        width: 94vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 4vw;
+        .label {
+            font-weight: bold;
+            color: $grey;
+            opacity: 0.5;
+        }
+    }
+    a {
+
+        margin-top: auto;
+        margin-bottom: 2vw;
+        padding: 2vw;
+        font-size: 5vw;
+        width: 30vw;
+        text-align: center;
+        text-decoration: none;
+        background: $grey;
+        color: $white;
+        border-radius: 2vw;
+        &:hover {
+            background: $blue2;
+        }
+    }
+}
+
