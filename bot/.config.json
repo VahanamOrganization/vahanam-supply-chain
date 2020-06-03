@@ -1,0 +1,1190 @@
+{
+ "contextProviders": {},
+ "nodes": {
+  "node-red": {
+   "name": "node-red",
+   "version": "1.0.6",
+   "local": false,
+   "nodes": {
+    "inject": {
+     "name": "inject",
+     "types": [
+      "inject"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/20-inject.js"
+    },
+    "debug": {
+     "name": "debug",
+     "types": [
+      "debug"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/21-debug.js"
+    },
+    "complete": {
+     "name": "complete",
+     "types": [
+      "complete"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/24-complete.js"
+    },
+    "catch": {
+     "name": "catch",
+     "types": [
+      "catch"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/25-catch.js"
+    },
+    "status": {
+     "name": "status",
+     "types": [
+      "status"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/25-status.js"
+    },
+    "link": {
+     "name": "link",
+     "types": [
+      "link in",
+      "link out"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/60-link.js"
+    },
+    "comment": {
+     "name": "comment",
+     "types": [
+      "comment"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/90-comment.js"
+    },
+    "unknown": {
+     "name": "unknown",
+     "types": [
+      "unknown"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/common/98-unknown.js"
+    },
+    "function": {
+     "name": "function",
+     "types": [
+      "function"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/10-function.js"
+    },
+    "switch": {
+     "name": "switch",
+     "types": [
+      "switch"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/10-switch.js"
+    },
+    "change": {
+     "name": "change",
+     "types": [
+      "change"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/15-change.js"
+    },
+    "range": {
+     "name": "range",
+     "types": [
+      "range"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/16-range.js"
+    },
+    "template": {
+     "name": "template",
+     "types": [
+      "template"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/80-template.js"
+    },
+    "delay": {
+     "name": "delay",
+     "types": [
+      "delay"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/89-delay.js"
+    },
+    "trigger": {
+     "name": "trigger",
+     "types": [
+      "trigger"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/89-trigger.js"
+    },
+    "exec": {
+     "name": "exec",
+     "types": [
+      "exec"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/function/90-exec.js"
+    },
+    "tls": {
+     "name": "tls",
+     "types": [
+      "tls-config"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/05-tls.js"
+    },
+    "httpproxy": {
+     "name": "httpproxy",
+     "types": [
+      "http proxy"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/06-httpproxy.js"
+    },
+    "mqtt": {
+     "name": "mqtt",
+     "types": [
+      "mqtt in",
+      "mqtt out",
+      "mqtt-broker"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/10-mqtt.js"
+    },
+    "httpin": {
+     "name": "httpin",
+     "types": [
+      "http in",
+      "http response"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/21-httpin.js"
+    },
+    "httprequest": {
+     "name": "httprequest",
+     "types": [
+      "http request"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/21-httprequest.js"
+    },
+    "websocket": {
+     "name": "websocket",
+     "types": [
+      "websocket in",
+      "websocket out",
+      "websocket-listener",
+      "websocket-client"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/22-websocket.js"
+    },
+    "tcpin": {
+     "name": "tcpin",
+     "types": [
+      "tcp in",
+      "tcp out",
+      "tcp request"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/31-tcpin.js"
+    },
+    "udp": {
+     "name": "udp",
+     "types": [
+      "udp in",
+      "udp out"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/network/32-udp.js"
+    },
+    "CSV": {
+     "name": "CSV",
+     "types": [
+      "csv"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/parsers/70-CSV.js"
+    },
+    "HTML": {
+     "name": "HTML",
+     "types": [
+      "html"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/parsers/70-HTML.js"
+    },
+    "JSON": {
+     "name": "JSON",
+     "types": [
+      "json"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/parsers/70-JSON.js"
+    },
+    "XML": {
+     "name": "XML",
+     "types": [
+      "xml"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/parsers/70-XML.js"
+    },
+    "YAML": {
+     "name": "YAML",
+     "types": [
+      "yaml"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/parsers/70-YAML.js"
+    },
+    "split": {
+     "name": "split",
+     "types": [
+      "split",
+      "join"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/sequence/17-split.js"
+    },
+    "sort": {
+     "name": "sort",
+     "types": [
+      "sort"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/sequence/18-sort.js"
+    },
+    "batch": {
+     "name": "batch",
+     "types": [
+      "batch"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/sequence/19-batch.js"
+    },
+    "file": {
+     "name": "file",
+     "types": [
+      "file",
+      "file in"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/storage/10-file.js"
+    },
+    "watch": {
+     "name": "watch",
+     "types": [
+      "watch"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red",
+     "file": "/usr/lib/node_modules/node-red/node_modules/@node-red/nodes/core/storage/23-watch.js"
+    }
+   }
+  },
+  "node-red-contrib-chatbot": {
+   "name": "node-red-contrib-chatbot",
+   "version": "0.18.15",
+   "local": true,
+   "nodes": {
+    "chatbot-redbot": {
+     "name": "chatbot-redbot",
+     "types": [],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-redbot.js"
+    },
+    "redbot-config": {
+     "name": "redbot-config",
+     "types": [],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/redbot.config.js"
+    },
+    "chatbot-telegram-receive": {
+     "name": "chatbot-telegram-receive",
+     "types": [
+      "chatbot-telegram-node",
+      "chatbot-telegram-receive",
+      "chatbot-telegram-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-telegram-receive.js"
+    },
+    "chatbot-universal-receive": {
+     "name": "chatbot-universal-receive",
+     "types": [
+      "chatbot-universal-node",
+      "chatbot-universal-receive",
+      "chatbot-universal-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-universal-receive.js"
+    },
+    "chatbot-slack-receive": {
+     "name": "chatbot-slack-receive",
+     "types": [
+      "chatbot-slack-node",
+      "chatbot-slack-receive",
+      "chatbot-slack-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-slack-receive.js"
+    },
+    "chatbot-twilio-receive": {
+     "name": "chatbot-twilio-receive",
+     "types": [
+      "chatbot-twilio-node",
+      "chatbot-twilio-receive",
+      "chatbot-twilio-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-twilio-receive.js"
+    },
+    "chatbot-routee-receive": {
+     "name": "chatbot-routee-receive",
+     "types": [
+      "chatbot-routee-node",
+      "chatbot-routee-receive",
+      "chatbot-routee-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-routee-receive.js"
+    },
+    "chatbot-msteams-receive": {
+     "name": "chatbot-msteams-receive",
+     "types": [
+      "chatbot-msteams-node",
+      "chatbot-msteams-receive",
+      "chatbot-msteams-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-msteams-receive.js"
+    },
+    "chatbot-facebook-receive": {
+     "name": "chatbot-facebook-receive",
+     "types": [
+      "chatbot-facebook-node",
+      "chatbot-facebook-receive",
+      "chatbot-facebook-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-facebook-receive.js"
+    },
+    "chatbot-viber-receive": {
+     "name": "chatbot-viber-receive",
+     "types": [
+      "chatbot-viber-node",
+      "chatbot-viber-receive",
+      "chatbot-viber-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-viber-receive.js"
+    },
+    "chatbot-alexa-receive": {
+     "name": "chatbot-alexa-receive",
+     "types": [
+      "chatbot-alexa-node",
+      "chatbot-alexa-receive",
+      "chatbot-alexa-send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-receive.js"
+    },
+    "chatbot-message": {
+     "name": "chatbot-message",
+     "types": [
+      "chatbot-message"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-message.js"
+    },
+    "chatbot-analytics": {
+     "name": "chatbot-analytics",
+     "types": [
+      "chatbot-analytics"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-analytics.js"
+    },
+    "chatbot-context": {
+     "name": "chatbot-context",
+     "types": [
+      "chatbot-context"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-context.js"
+    },
+    "chatbot-topic": {
+     "name": "chatbot-topic",
+     "types": [
+      "chatbot-topic"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-topic.js"
+    },
+    "chatbot-voice": {
+     "name": "chatbot-voice",
+     "types": [
+      "chatbot-voice"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-voice.js"
+    },
+    "chatbot-language": {
+     "name": "chatbot-language",
+     "types": [
+      "chatbot-language"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-language.js"
+    },
+    "chatbot-listen": {
+     "name": "chatbot-listen",
+     "types": [
+      "chatbot-listen"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-listen.js"
+    },
+    "chatbot-listen-lexicon": {
+     "name": "chatbot-listen-lexicon",
+     "types": [
+      "chatbot-listen-lexicon"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-listen-lexicon.js"
+    },
+    "chatbot-parse": {
+     "name": "chatbot-parse",
+     "types": [
+      "chatbot-parse"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-parse.js"
+    },
+    "chatbot-command": {
+     "name": "chatbot-command",
+     "types": [
+      "chatbot-command"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-command.js"
+    },
+    "chatbot-document": {
+     "name": "chatbot-document",
+     "types": [
+      "chatbot-document"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-document.js"
+    },
+    "chatbot-video": {
+     "name": "chatbot-video",
+     "types": [
+      "chatbot-video"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-video.js"
+    },
+    "chatbot-image": {
+     "name": "chatbot-image",
+     "types": [
+      "chatbot-image"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-image.js"
+    },
+    "chatbot-sticker": {
+     "name": "chatbot-sticker",
+     "types": [
+      "chatbot-sticker"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-sticker.js"
+    },
+    "chatbot-animation": {
+     "name": "chatbot-animation",
+     "types": [
+      "chatbot-animation"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-animation.js"
+    },
+    "chatbot-audio": {
+     "name": "chatbot-audio",
+     "types": [
+      "chatbot-audio"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-audio.js"
+    },
+    "chatbot-location": {
+     "name": "chatbot-location",
+     "types": [
+      "chatbot-location"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-location.js"
+    },
+    "chatbot-ask": {
+     "name": "chatbot-ask",
+     "types": [
+      "chatbot-ask"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-ask.js"
+    },
+    "chatbot-inline-buttons": {
+     "name": "chatbot-inline-buttons",
+     "types": [
+      "chatbot-inline-buttons"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-inline-buttons.js"
+    },
+    "chatbot-quick-replies": {
+     "name": "chatbot-quick-replies",
+     "types": [
+      "chatbot-quick-replies"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-quick-replies.js"
+    },
+    "chatbot-generic-template": {
+     "name": "chatbot-generic-template",
+     "types": [
+      "chatbot-generic-template"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-generic-template.js"
+    },
+    "chatbot-list-template": {
+     "name": "chatbot-list-template",
+     "types": [
+      "chatbot-list-template"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-list-template.js"
+    },
+    "chatbot-request": {
+     "name": "chatbot-request",
+     "types": [
+      "chatbot-request"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-request.js"
+    },
+    "chatbot-log": {
+     "name": "chatbot-log",
+     "types": [
+      "chatbot-log"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-log.js"
+    },
+    "chatbot-qrcode": {
+     "name": "chatbot-qrcode",
+     "types": [
+      "chatbot-qrcode"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-qrcode.js"
+    },
+    "chatbot-conversation": {
+     "name": "chatbot-conversation",
+     "types": [
+      "chatbot-conversation"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-conversation.js"
+    },
+    "chatbot-debug": {
+     "name": "chatbot-debug",
+     "types": [
+      "chatbot-debug"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-debug.js"
+    },
+    "chatbot-waiting": {
+     "name": "chatbot-waiting",
+     "types": [
+      "chatbot-waiting"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-waiting.js"
+    },
+    "chatbot-authorized": {
+     "name": "chatbot-authorized",
+     "types": [
+      "chatbot-authorized"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-authorized.js"
+    },
+    "chatbot-transport": {
+     "name": "chatbot-transport",
+     "types": [
+      "chatbot-transport"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-transport.js"
+    },
+    "chatbot-rivescript": {
+     "name": "chatbot-rivescript",
+     "types": [
+      "chatbot-rivescript"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-rivescript.js"
+    },
+    "chatbot-messenger-menu": {
+     "name": "chatbot-messenger-menu",
+     "types": [
+      "chatbot-messenger-menu"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-messenger-menu.js"
+    },
+    "chatbot-context-store": {
+     "name": "chatbot-context-store",
+     "types": [
+      "chatbot-context-store"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-context-store.js"
+    },
+    "chatbot-inline-query": {
+     "name": "chatbot-inline-query",
+     "types": [
+      "chatbot-inline-query"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-inline-query.js"
+    },
+    "chatbot-dialog": {
+     "name": "chatbot-dialog",
+     "types": [
+      "chatbot-dialog"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-dialog.js"
+    },
+    "chatbot-rules": {
+     "name": "chatbot-rules",
+     "types": [
+      "chatbot-rules"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-rules.js"
+    },
+    "chatbot-params": {
+     "name": "chatbot-params",
+     "types": [
+      "chatbot-params"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-params.js"
+    },
+    "chatbot-recast": {
+     "name": "chatbot-recast",
+     "types": [
+      "chatbot-recast-token",
+      "chatbot-recast"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-recast.js"
+    },
+    "chatbot-dialogflow": {
+     "name": "chatbot-dialogflow",
+     "types": [
+      "chatbot-dialogflow-token",
+      "chatbot-dialogflow"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-dialogflow.js"
+    },
+    "chatbot-invoice": {
+     "name": "chatbot-invoice",
+     "types": [
+      "chatbot-invoice"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-invoice.js"
+    },
+    "chatbot-invoice-shipping": {
+     "name": "chatbot-invoice-shipping",
+     "types": [
+      "chatbot-invoice-shipping"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-invoice-shipping.js"
+    },
+    "chatbot-extend": {
+     "name": "chatbot-extend",
+     "types": [
+      "chatbot-extend"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-extend.js"
+    },
+    "chatbot-support-table": {
+     "name": "chatbot-support-table",
+     "types": [
+      "chatbot-support-table"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-support-table.js"
+    },
+    "chatbot-alexa-card": {
+     "name": "chatbot-alexa-card",
+     "types": [
+      "chatbot-alexa-card"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-card.js"
+    },
+    "chatbot-alexa-directive": {
+     "name": "chatbot-alexa-directive",
+     "types": [
+      "chatbot-alexa-directive"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-directive.js"
+    },
+    "chatbot-broadcast": {
+     "name": "chatbot-broadcast",
+     "types": [
+      "chatbot-broadcast"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-broadcast.js"
+    },
+    "chatbot-alexa-speech": {
+     "name": "chatbot-alexa-speech",
+     "types": [
+      "chatbot-alexa-speech"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-speech.js"
+    },
+    "chatbot-slack-blocks": {
+     "name": "chatbot-slack-blocks",
+     "types": [
+      "chatbot-slack-blocks"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-slack-blocks.js"
+    },
+    "chatbot-nlp": {
+     "name": "chatbot-nlp",
+     "types": [
+      "chatbot-nlpjs"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp.js"
+    },
+    "chatbot-nlp-train": {
+     "name": "chatbot-nlp-train",
+     "types": [
+      "chatbot-nlpjs-train"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-train.js"
+    },
+    "chatbot-nlp-intent": {
+     "name": "chatbot-nlp-intent",
+     "types": [
+      "chatbot-nlpjs-intent"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-intent.js"
+    },
+    "chatbot-nlp-entity": {
+     "name": "chatbot-nlp-entity",
+     "types": [
+      "chatbot-nlpjs-entity"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-entity.js"
+    },
+    "chatbot-nlp-save": {
+     "name": "chatbot-nlp-save",
+     "types": [
+      "chatbot-nlpjs-save"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-save.js"
+    },
+    "chatbot-nlp-load": {
+     "name": "chatbot-nlp-load",
+     "types": [
+      "chatbot-nlpjs-load"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-chatbot",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-load.js"
+    }
+   }
+  },
+  "node-red-contrib-loop-processing": {
+   "name": "node-red-contrib-loop-processing",
+   "version": "0.4.0",
+   "local": true,
+   "nodes": {
+    "index-loop": {
+     "name": "index-loop",
+     "types": [
+      "counter-loop"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-loop-processing",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-loop-processing/counter-loop.js"
+    },
+    "array-loop": {
+     "name": "array-loop",
+     "types": [
+      "array-loop"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-loop-processing",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-loop-processing/array-loop.js"
+    },
+    "while-loop": {
+     "name": "while-loop",
+     "types": [
+      "while-loop"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-loop-processing",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-loop-processing/while-loop.js"
+    }
+   }
+  },
+  "node-red-contrib-simple-message-queue": {
+   "name": "node-red-contrib-simple-message-queue",
+   "version": "0.2.5",
+   "local": true,
+   "nodes": {
+    "simple-queue": {
+     "name": "simple-queue",
+     "types": [
+      "simple-queue"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-simple-message-queue",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-simple-message-queue/simple-message-queue.js"
+    }
+   }
+  },
+  "node-red-contrib-viseo-airtable": {
+   "name": "node-red-contrib-viseo-airtable",
+   "version": "0.1.4",
+   "local": true,
+   "nodes": {
+    "node-airtable": {
+     "name": "node-airtable",
+     "types": [
+      "node-airtable"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-viseo-airtable",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-viseo-airtable/node-airtable.js"
+    },
+    "config-airtable": {
+     "name": "config-airtable",
+     "types": [
+      "node-config-airtable"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-viseo-airtable",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-contrib-viseo-airtable/config-airtable.js"
+    }
+   }
+  },
+  "node-red-node-twitter": {
+   "name": "node-red-node-twitter",
+   "version": "1.1.6",
+   "local": true,
+   "nodes": {
+    "twitter": {
+     "name": "twitter",
+     "types": [
+      "twitter-credentials",
+      "twitter in",
+      "twitter out"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-node-twitter",
+     "file": "/media/dhiraj/code/vahanam/vahanam-supply-chain/bot/node_modules/node-red-node-twitter/27-twitter.js"
+    }
+   }
+  },
+  "node-red-node-rbe": {
+   "name": "node-red-node-rbe",
+   "version": "0.2.8",
+   "local": false,
+   "nodes": {
+    "rbe": {
+     "name": "rbe",
+     "types": [
+      "rbe"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-node-rbe",
+     "file": "/usr/lib/node_modules/node-red/node_modules/node-red-node-rbe/rbe.js"
+    }
+   }
+  },
+  "node-red-node-tail": {
+   "name": "node-red-node-tail",
+   "version": "0.1.1",
+   "local": false,
+   "nodes": {
+    "tail": {
+     "name": "tail",
+     "types": [
+      "tail"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-node-tail",
+     "file": "/usr/lib/node_modules/node-red/node_modules/node-red-node-tail/28-tail.js"
+    }
+   }
+  }
+ },
+ "_credentialSecret": "14c6bf39772b9e2e90dce34ace48f0a57460902bd6d985f35aac4855be44b7b3",
+ "users": {
+  "_": {
+   "editor": {
+    "view": {
+     "view-show-grid": true,
+     "view-snap-grid": true,
+     "view-grid-size": 20,
+     "view-node-status": true,
+     "view-node-show-label": true,
+     "view-show-tips": true
+    }
+   },
+   "menu-deploymenu-item-flow": false,
+   "menu-deploymenu-item-full": false,
+   "menu-deploymenu-item-node": true,
+   "menu-menu-item-palette": false
+  }
+ }
+}
