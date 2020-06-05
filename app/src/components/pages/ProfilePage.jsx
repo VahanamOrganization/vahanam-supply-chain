@@ -22,18 +22,18 @@ class ProfilePage extends React.Component {
         return (
             <div className="profilePage page">
                 <div className="profilePageInner pageInner">
-                    <div className="photo">
-                        <div className="photoInner">
+                    <div className="titleBar">
+                        <div className="photo">
                             {profile.image ? (
                                 <img src={getImageUrl(profile.image)} />
                             ) : (
                                 <img src={tempProfile} />
                             )}
                         </div>
-                    </div>
-                    <div className="titleBar">
-                        <div className="name">{profile.name}</div>
-                        <div className="location">{profile.location}</div>
+                        <div className="title">
+                            <div className="name">{profile.name}</div>
+                            <div className="location">{profile.location}</div>
+                        </div>
                     </div>
                     <div className="display">
                         <span className="label">Account</span>

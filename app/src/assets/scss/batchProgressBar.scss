@@ -1,5 +1,7 @@
 .statusBar {
     .progress {
+        width: 100%;
+        margin-top: 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -10,8 +12,8 @@
             align-items: center;
             .progress-check {
                 background: lightgrey;
-                width: 3vw;
-                height: 6vw;
+                width: 1rem;
+                height: 2rem;
                 border-radius: 50%;
                 &.done {
                     background: black;
@@ -21,11 +23,11 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 17vw;
+                width: 14vw;
                 .progress-check {
                     background: lightgrey;
-                    width: 3vw;
-                    height: 6vw;
+                    width: 1rem;
+                    height: 2rem;
                     border-radius: 50%;
                     &.done {
                         background: black;
@@ -33,7 +35,7 @@
                 }
                 .progress-bar {
                     width: 14vw;
-                    height: 1.5vw;
+                    height: 1vw;
                     background: lightgrey;
                     &.done {
                         background: black;
@@ -42,25 +44,25 @@
             }
         }
         .label {
-            width: 75vw;
+            width: 75%;
             display: block;
-            font-size: 3vw;
+            font-size: 1rem;
             position: relative;
             .init {
                 display: block;
-                width: 75vw;
+                width: 100%;
                 position: absolute;
                 text-align: left;
             }
             .mid {
                 display: block;
-                width: 75vw;
+                width: 100%;
                 position: absolute;
                 text-align: center;
             }
             .end {
                 display: block;
-                width: 78vw;
+                width: 100%;
                 position: absolute;
                 text-align: right;
             }

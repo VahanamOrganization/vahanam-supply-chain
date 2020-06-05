@@ -63,13 +63,11 @@ function Person(props) {
     return (
         <div className="person">
             <div className="photo">
-                <div className="photoInner">
-                    {profile.image && profile.image.length >= 1 ? (
-                        <img src={getImageUrl(profile.image)} />
-                    ) : (
-                        <img src={tempProfile} />
-                    )}
-                </div>
+                {profile.image && profile.image.length >= 1 ? (
+                    <img src={getImageUrl(profile.image)} />
+                ) : (
+                    <img src={tempProfile} />
+                )}
             </div>
             <div className="details">
                 <div className="name">

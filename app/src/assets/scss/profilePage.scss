@@ -1,55 +1,59 @@
-@import 'config';
+@import "config";
 
 .profilePageInner {
-    .photo {
-        width: 25vw;
-        height: 25vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .photoInner {
+    .titleBar {
+        .photo {
             border-radius: 50%;
             border-style: solid;
             border-color: $grey_;
             border-width: 1px;
             overflow: hidden;
-            width: 20vw;
-            height: 20vw;
+            width: 8rem;
+            position: relative;
+            &::after {
+              content: "";
+              display: block;
+              padding-bottom: 100%;
+            }
+
             img {
+                position: absolute;
+                left: 0;
+                top: 0;
                 width: 100%;
                 height: auto;
             }
         }
-    }
-    .titleBar {
-        padding: 2vw;
+        padding: 1rem;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        height: 15vw;
-        flex-direction: column;
-        width: 92vw;
-        .name {
-            text-align: center;
-            width: 100%;
-            font-size: 8vw;
-        }
-        .location {
-            width: 100%;
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 4vw;
+        flex-direction: row;
+        width: 100%;
+        .title {
+            padding-left: 1rem;
+            .name {
+                text-align: left;
+                width: 100%;
+                font-size: 2rem;
+            }
+            .location {
+                width: 100%;
+                text-align: left;
+                text-transform: uppercase;
+                font-size: 1.5rem;
+            }
         }
         overflow: hidden;
     }
     .display {
-        padding: 3vw;
-        width: 94vw;
+        padding: 1rem;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        font-size: 4vw;
+        font-size: 1rem;
         .label {
             font-weight: bold;
             color: $grey;
@@ -57,20 +61,18 @@
         }
     }
     a {
-
         margin-top: auto;
-        margin-bottom: 2vw;
-        padding: 2vw;
-        font-size: 5vw;
-        width: 30vw;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        font-size: 1.5rem;
+        width: 30%;
         text-align: center;
         text-decoration: none;
         background: $grey;
         color: $white;
-        border-radius: 2vw;
+        border-radius: 1rem;
         &:hover {
             background: $blue2;
         }
     }
 }
-

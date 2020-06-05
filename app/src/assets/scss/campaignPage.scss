@@ -1,105 +1,109 @@
 @import "config";
 
 .campaignPageInner {
+    font-size: 1rem;
     .topBar {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 10vh;
         width: 100%;
         .photo {
-            width: 30vw;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .photoInner {
-                border-radius: 50%;
-                overflow: hidden;
-                width: 20vw;
-                height: 20vw;
-                img {
-                    width: 100%;
-                    height: auto;
-                }
+            border-radius: 50%;
+            border-style: solid;
+            border-color: $grey_;
+            border-width: 1px;
+            overflow: hidden;
+            width: 8rem;
+            position: relative;
+            &::after {
+                content: "";
+                display: block;
+                padding-bottom: 100%;
+            }
+
+            img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: auto;
             }
         }
         .goal,
         .status {
-            width: 30vw;
+            width: 30%;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             .data {
-                font-size: 5vw;
+                font-size: 1.5rem;
                 font-weight: bold;
-                margin-bottom: 1vw;
+                margin-bottom: 0.5rem;
             }
             .label {
-                margin-top: 1vw;
+                margin-top: 0.5rem;
                 text-transform: uppercase;
-                font-size: 3.5vw;
+                font-size: 1rem;
             }
         }
     }
     .titleBar {
-        padding: 2vw;
+        padding: 1rem;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 25vw;
         flex-direction: column;
-        width: 92vw;
+        width: 100%;
         .title {
             width: 100%;
-            font-size: 8vw;
+            font-size: 2rem;
         }
         .description {
+            margin-top: 0.5rem;
             width: 100%;
-            text-transform: uppercase;
-            font-size: 4vw;
+            font-size: 1rem;
         }
         overflow: hidden;
     }
     .actionBar {
-        padding-bottom: 2vw;
+        padding-bottom: 1rem;
         border-style: none none solid none;
         border-color: $grey_;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 5vw;
+        height: 3rem;
         width: 100%;
         .action {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
-            border-radius: 2vw;
+            border-radius: 0.5rem;
             border-style: solid;
             border-width: 1px;
             border-color: $grey_;
             text-transform: uppercase;
             font-weight: bold;
-            width: 26vw;
-            font-size: 3vw;
+            width: 25%;
+            font-size: 1rem;
             background: white;
         }
         .other {
-            font-size: 4vw;
+            font-size: 1rem;
             font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
             border-width: 1px;
             height: 100%;
-            border-radius: 2vw;
+            border-radius: 0.5rem;
             border-style: solid;
             border-color: $grey_;
             text-transform: uppercase;
-            width: 7vw;
+            width: 7%;
             background: white;
         }
     }
@@ -107,7 +111,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 10vw;
+        height: 5rem;
         width: 100%;
         border-style: none none solid none;
         border-color: $grey_;
@@ -124,8 +128,8 @@
             align-items: center;
             height: 100%;
             text-transform: uppercase;
-            width: 26vw;
-            font-size: 6vw;
+            width: 25%;
+            font-size: 2.5rem;
             font-weight: bold;
             .tabIcon {
                 opacity: 0.5;
@@ -133,7 +137,7 @@
             transition: 0.25s;
             &.selected {
                 border-style: none none solid none;
-                border-width: 7px;
+                border-width: 6px;
                 .tabIcon {
                     opacity: 1;
                 }
@@ -141,10 +145,9 @@
         }
     }
     .tabData {
-        width: 96vw;
+        width: 100%;
         position: relative;
         .tabDataInner {
-            padding-bottom: 15vw;
             position: absolute;
             top: 0;
             width: 100%;
@@ -155,57 +158,69 @@
                 align-items: center;
             }
             .peopleList {
-                margin-top: 2vw;
-                width: 96vw;
+                margin-top: 1rem;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 .person {
-                    width: 96vw;
-                    height: 25vw;
+                    width: 100%;
+                    height: 8rem;
                     display: flex;
                     justify-content: space-around;
                     align-items: center;
                     .details {
-                        width: 70vw;
+                        flex: 1;
+                        margin-left: 1rem;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: flex-start;
-                        font-size: 4vw;
+                        .name {
+                            font-size: 1.5rem;
+                        }
+                        .role {
+                            font-size: 1rem;
+                            opacity: 0.5;
+                        }
                     }
                     .photo {
-                        width: 25vw;
-                        height: 25vw;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        .photoInner {
-                            border-radius: 50%;
-                            overflow: hidden;
-                            width: 20vw;
-                            height: 20vw;
-                            img {
-                                width: 100%;
-                                height: auto;
-                            }
+                        border-radius: 50%;
+                        border-style: solid;
+                        border-color: $grey_;
+                        border-width: 1px;
+                        overflow: hidden;
+                        width: 6rem;
+                        position: relative;
+                        &::after {
+                            content: "";
+                            display: block;
+                            padding-bottom: 100%;
+                        }
+
+                        img {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            height: auto;
                         }
                     }
                 }
             }
             .campaignDetails {
-                font-size: 4vw;
-                margin-top: 2vw;
-                width: 96vw;
+                margin-top: 1rem;
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 .title {
-                    margin-top: 2vw;
+                    margin-top: 1rem;
+                    margin-left: 2rem;
                     text-transform: uppercase;
-                    font-size: 4vw;
+                    font-size: 1.25rem;
                     font-weight: bold;
                 }
                 .pie {
@@ -215,43 +230,43 @@
                     flex-direction: column;
                     align-items: center;
                     width: 100%;
-                    height: 50vw;
-                    margin-bottom: 2vw;
+                    height: 16rem;
+                    margin-bottom: 1rem;
                     .center {
                         position: absolute;
-            width: 30vw;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            .data {
-                font-size: 5vw;
-                font-weight: bold;
-                margin-bottom: 1vw;
-            }
-            .label {
-                margin-top: 1vw;
-                text-transform: uppercase;
-                font-size: 3.5vw;
-            }
+                        width: 30%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        .data {
+                            font-size: 1.5rem;
+                            font-weight: bold;
+                            margin-bottom: 0.5rem;
+                        }
+                        .label {
+                            margin-top: 0.5rem;
+                            text-transform: uppercase;
+                            font-size: 1rem;
+                        }
                     }
                 }
                 .pieDetails {
                     display: flex;
                     justify-content: space-around;
                     align-items: center;
-                    height: 10vw;
+                    height: 4rem;
                     width: 100%;
                     div {
                         text-transform: uppercase;
-                        font-size: 3vw;
-                    display: flex;
-                    justify-content: center;
-                    border-radius: 1vw;
-                    align-items: center;
-                        width: 25vw;
-                        height: 6vw;
+                        font-size: 1rem;
+                        display: flex;
+                        justify-content: center;
+                        border-radius: 0.5rem;
+                        align-items: center;
+                        width: 28%;
+                        height: 2rem;
                         color: $white;
                         &.remain {
                             background: purple;
@@ -268,25 +283,26 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 96vw;
-                    height: 30vw;
+                    width: 100%;
+                    height: 10rem;
 
                     border-style: solid none none none;
                     border-width: 1px;
                     border-color: $grey_;
                     a {
+                        font-size: 1rem;
                         text-decoration: none;
                         color: $grey;
-                        padding: 2vw;
-                        width: 92vw;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            .icon {
-                                align-self: flex-start;
-                                width: 10vw;
-                                font-size: 6vw;
-                            }
+                        padding: 1rem;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        .icon {
+                            align-self: flex-start;
+                            width: 3rem;
+                            font-size: 2rem;
+                        }
                         .inner {
                             flex: 1;
                             color: $grey_8;
@@ -298,8 +314,8 @@
                             .details {
                                 color: $grey;
                                 font-weight: bold;
-                                margin-top: 2vw;
-                                font-size: 3.5vw;
+                                margin-top: 1rem;
+                                font-size: 1rem;
                             }
                         }
                     }

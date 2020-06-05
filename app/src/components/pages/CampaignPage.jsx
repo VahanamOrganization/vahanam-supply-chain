@@ -6,7 +6,7 @@ import gearIcon from "@iconify/icons-octicon/gear";
 import peopleIcon from "@iconify/icons-eva/people-fill";
 import detailsIcon from "@iconify/icons-ic/baseline-assignment";
 import arrowDownIcon from "@iconify/icons-dashicons/arrow-down-alt2";
-import tempProfile from "../../assets/img/profile.webp";
+import tempCampaign from "../../assets/img/tempCampaign.png";
 import * as Displays from "../displays";
 
 class CampaignPage extends React.Component {
@@ -30,8 +30,8 @@ class CampaignPage extends React.Component {
 
     render() {
         const { campaign } = this.props;
-        const title = "Hellas covid19";
-        const description = "We are making masks everwhere, yes we are!";
+        const title = "Campaign SuperNova";
+        const description = "We are making masks using 3d printers. You are welcome to join and help!";
 
         return (
             <div className="campaignPage page">
@@ -39,9 +39,7 @@ class CampaignPage extends React.Component {
                     <div className="campaignPageInner pageInner">
                         <div className="topBar">
                             <div className="photo">
-                                <div className="photoInner">
-                                    <img src={tempProfile} />
-                                </div>
+                                <img src={tempCampaign} />
                             </div>
                             <div className="goal">
                                 <span className="data">

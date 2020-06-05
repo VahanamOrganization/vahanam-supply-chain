@@ -2,26 +2,25 @@
 
 .batchPageInner {
     .titleBar {
-        padding: 2vw;
+        padding: 1rem;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 5vw;
         flex-direction: column;
-        width: 92vw;
+        width: 100%;
         .title {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            font-size: 8vw;
+            font-size: 2.5rem;
         }
         .location {
             width: 100%;
             text-transform: uppercase;
             text-align: center;
-            font-size: 4vw;
+            font-size: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,18 +28,17 @@
         overflow: hidden;
     }
     .statusBar {
-        padding: 2vw;
+        padding: 1rem;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 25vw;
         flex-direction: column;
-        width: 92vw;
+        width: 100%;
         .status {
             width: 100%;
             text-transform: uppercase;
             text-align: center;
-            font-size: 4vw;
+            font-size: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -51,35 +49,34 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            font-size: 6vw;
+            font-size: 2rem;
         }
     }
     .qrDisplay {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        height: 65vw;
+        height: 15rem;
         flex-direction: column;
         width: 100%;
         .qrcode {
-            width: 65vw;
-            height: 65vw;
+            width: 15rem;
+            height: 15rem;
         }
     }
     .details {
-        padding: 2vw;
+        padding: 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 40vw;
         flex-direction: column;
-        width: 92vw;
+        width: 100%;
         text-align: center;
         .id {
-            font-size: 6vw;
+            font-size: 2rem;
         }
         .from, .to{
-            font-size: 4vw;
+            font-size: 1rem;
         }
     }
 }

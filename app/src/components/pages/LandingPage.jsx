@@ -9,10 +9,10 @@ class LandingPage extends React.Component {
         return (
             <div className="landingPage">
                     <div className="title">
-                        Welcome to Decentralised Supply Chain
+                        Welcome to Vahanam
                     </div>
                     <div className="subtitle">
-                        Stop Covid-19
+                        A Decentralized Supply Chain
                     </div>
             </div>
         );

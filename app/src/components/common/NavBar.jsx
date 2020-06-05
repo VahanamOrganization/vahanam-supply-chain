@@ -1,16 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import loading from "../../assets/img/loading.gif";
 import { Icon, InlineIcon } from "@iconify/react";
-import homeIcon from "@iconify/icons-ant-design/home-outlined";
-import searchIcon from "@iconify/icons-ant-design/search-outlined";
-import chatIcon from "@iconify/icons-bi/chat";
-import profileIcon from "@iconify/icons-bi/person";
+import homeFill from "@iconify/icons-ant-design/home-fill";
+import homeOutline from "@iconify/icons-ant-design/home-outlined";
+import searchFill from "@iconify/icons-bx/bx-search-alt";
+import searchOutline from "@iconify/icons-bx/bx-search";
+import chatOutline from "@iconify/icons-bi/chat";
+import chatFill from "@iconify/icons-bi/chat-fill";
+import profileOutline from "@iconify/icons-bi/person";
+import profileFill from "@iconify/icons-bi/person-fill";
 
 class NavBar extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            pathname: this.props.location.pathname
+        };
+    }
+    static getDerivedStateFromProps(props, state) {
+        if (props.location.pathname !== state.pathname) {
+            return {
+                pathname: props.location.pathname
+            };
+        }
+        return null;
     }
 
     render() {
@@ -22,17 +37,37 @@ class NavBar extends React.Component {
                     src={loading}
                     style={inProgress ? { opacity: 1 } : { opacity: 0 }}
                 />
-                <div className="bottomBar">
+                <div
+                    className={
+                        this.state.pathname === "/login"
+                            ? "bottomBar hidden"
+                            : "bottomBar"
+                    }
+                >
                     {loggedIn ? (
                         <div className="barInner loggedIn">
                             <div className="barIconContainer">
                                 <Link to="/home">
-                                    <Icon className="barIcon" icon={homeIcon} />
+                                    <Icon
+                                        className="barIcon"
+                                        icon={
+                                            this.state.pathname === "/home"
+                                                ? homeFill
+                                                : homeOutline
+                                        }
+                                    />
                                 </Link>
                             </div>
                             <div className="barIconContainer">
                                 <Link to="/search">
-                                    <Icon className="barIcon" icon={searchIcon} />
+                                    <Icon
+                                        className="barIcon"
+                                        icon={
+                                            this.state.pathname === "/search"
+                                                ? searchFill
+                                                : searchOutline
+                                        }
+                                    />
                                 </Link>
                             </div>
                             <div className="barIconContainer plus">
@@ -42,12 +77,26 @@ class NavBar extends React.Component {
                             </div>
                             <div className="barIconContainer">
                                 <Link to="/chat">
-                                    <Icon className="barIcon" icon={chatIcon} />
+                                    <Icon
+                                        className="barIcon"
+                                        icon={
+                                            this.state.pathname === "/chat"
+                                                ? chatFill
+                                                : chatOutline
+                                        }
+                                    />
                                 </Link>
                             </div>
                             <div className="barIconContainer">
                                 <Link to="/profile">
-                                    <Icon className="barIcon" icon={profileIcon} />
+                                    <Icon
+                                        className="barIcon"
+                                        icon={
+                                            this.state.pathname === "/profile"
+                                                ? profileFill
+                                                : profileOutline
+                                        }
+                                    />
                                 </Link>
                             </div>
                         </div>
@@ -73,5 +122,5 @@ function mapState(state) {
 
 const actionCreators = {};
 
-const connectedNavBar = connect(mapState, actionCreators)(NavBar);
+const connectedNavBar = withRouter(connect(mapState, actionCreators)(NavBar));
 export { connectedNavBar as NavBar };

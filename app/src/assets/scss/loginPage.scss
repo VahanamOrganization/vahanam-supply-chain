@@ -2,18 +2,18 @@
 
 .loginPageInner {
     .account {
-        font-size: 3vw;
+        font-size: 1rem;
     }
     a {
-        margin-top: 2vh;
-        margin-bottom: 2vh;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
         width: 100%;
         text-align: center;
         text-decoration: none;
         background: $grey;
         padding: 5px;
         color: $white;
-        border-radius: 2vw;
+        border-radius: 1rem;
         &:hover {
             background: $blue2;
         }

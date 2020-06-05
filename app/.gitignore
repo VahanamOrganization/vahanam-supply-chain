@@ -4,7 +4,6 @@
 /keys
 /ipfs
 /orbitdb
-package-lock.json
 .firebase*
 *.swp
 *.log

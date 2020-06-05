@@ -37,7 +37,7 @@ class App extends React.Component {
         if (this.props.web3) {
             await this.props.loadAccount();
         }
-        if (!["/login", "/register"].includes(history.location.pathname)) {
+        if (!["/", "/login", "/register"].includes(history.location.pathname)) {
             history.push("/login");
         }
     }
@@ -45,7 +45,7 @@ class App extends React.Component {
         if (this.props.web3) {
             await this.props.loadNetwork();
         }
-        if (!["/login", "/register"].includes(history.location.pathname)) {
+        if (!["/", "/login", "/register"].includes(history.location.pathname)) {
             history.push("/login");
         }
     }
@@ -62,7 +62,7 @@ class App extends React.Component {
     render() {
         return (
             <div className="app">
-                <ToastContainer closeButton={false} autoClose={5000} />
+                <ToastContainer autoClose={4000} />
                 <QRCode open={this.props.open} />
                 <Router history={history}>
                     <ErrorBoundary key={location.pathname}>

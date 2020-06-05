@@ -6,6 +6,7 @@ import { contractConstants } from "../../constants";
 import { getBatchDateString } from "../../helpers";
 import { Icon, InlineIcon } from "@iconify/react";
 import packageIcon from "@iconify/icons-feather/package";
+import tempCampaign from "../../assets/img/tempCampaign.png";
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -44,12 +45,21 @@ class HomePage extends React.Component {
                         campaigns.map((campaign, i) => (
                             <div className="campaign" key={i + 1}>
                                 <div className="inner">
-                                    Campaign #{i + 1}
-                                    <br />
-                                    Total: {campaign.totalPLA}
-                                    <br />
-                                    Remaining: {campaign.currentPLA}
-                                    <br />
+                                    <Link
+                                        to={"/campaign/" + (i + 1).toString()}
+                                    >
+                                        <div className="photo">
+                                            <img src={tempCampaign} />
+                                        </div>
+                                    </Link>
+                                    <div className="details">
+                                        Campaign #{i + 1}
+                                        <br />
+                                        Total: {campaign.totalPLA}
+                                        <br />
+                                        Remaining: {campaign.currentPLA}
+                                        <br />
+                                    </div>
                                 </div>
                                 <div className="links">
                                     <Link
@@ -58,7 +68,7 @@ class HomePage extends React.Component {
                                         View Campaign Details {"\u2197"}
                                     </Link>
                                     <span onClick={() => this.setSelected(i)}>
-                                        View My Batches {"\u21A7"}
+                                        View Batches {"\u21A7"}
                                     </span>
                                 </div>
                                 <div

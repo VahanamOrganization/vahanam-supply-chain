@@ -30,6 +30,7 @@ class BatchPage extends React.Component {
         await this.props.getBatchDetails(this.campaignId, this.batchId);
         const qrString = getQRString(this.campaignId, this.batchId);
         const dataURI = await QRCode.toDataURL(qrString);
+        this.setState({dataURI});
     }
 
     render() {
