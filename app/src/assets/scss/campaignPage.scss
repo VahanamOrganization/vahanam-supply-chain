@@ -123,12 +123,13 @@
         top: 0;
 
         .tab {
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
             text-transform: uppercase;
-            width: 25%;
+            width: 28%;
             font-size: 2.5rem;
             font-weight: bold;
             .tabIcon {
@@ -220,7 +221,7 @@
                     margin-top: 1rem;
                     margin-left: 2rem;
                     text-transform: uppercase;
-                    font-size: 1.25rem;
+                    font-size: 1rem;
                     font-weight: bold;
                 }
                 .pie {
@@ -322,5 +323,11 @@
                 }
             }
         }
+    }
+}
+
+@media (max-width: 1000px), (max-height: 600px) {
+    .campaignPageInner {
+        font-size: 1rem;
     }
 }

@@ -22,8 +22,8 @@ export default function ChatPage(props) {
         email: "", // Your customer email address (Optional)
         redirectURL: "",
         hostURL: window.location.origin, // Required field
-        widgetHeight: '600px',
-        widgetWidth: '500px'
+        widgetHeight: '650px',
+        widgetWidth: '410px'
     });
 
     transak.init();

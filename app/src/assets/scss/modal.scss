@@ -1,0 +1,59 @@
+@import "config";
+
+.modal {
+    z-index: 10;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    transform: translateY(100%);
+    transition: transform 0.25s;
+    justify-content: center;
+    align-items: center;
+    &.open {
+        z-index: 10;
+    transform: translateY(0%);
+        background: $grey_8;
+    }
+    .qrCodeReader {
+        z-index: 10;
+        overflow: hidden;
+        height: calc(100% - 4rem);
+        width: calc(100% - 4rem);
+        margin: 1rem;
+        display: flex;
+        background: $grey;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 5px 5px 10px $grey; 
+        .close {
+            z-index: 10;
+            font-size: 2rem;
+            color: $white;
+            position: absolute;
+            cursor: pointer;
+            top: 3rem;
+            right: 3rem;
+        }
+        .title {
+            color: $white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            position: absolute;
+            top: 3rem;
+        }
+        .qrCodeInner {
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 25rem;
+            width: 25rem;
+        }
+    }
+}

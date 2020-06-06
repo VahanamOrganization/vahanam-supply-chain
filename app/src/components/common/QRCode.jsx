@@ -23,24 +23,22 @@ class QRCode extends React.Component {
 
     render() {
         return (
-            <div
-                className={
-                    this.props.open ? "qrCodeReader open" : "qrCodeReader"
-                }
-            >
-                <div className="close" onClick={this.props.toggle}>
-                    {"\u2715"}
-                </div>
-                <div className="qrCodeInner">
+            <div className={this.props.open ? "modal open" : "modal"}>
+                <div className="qrCodeReader">
+                    <div className="close" onClick={this.props.toggle}>
+                        {"\u2715"}
+                    </div>
                     <div className="title"> Scan QR Code </div>
-                    {this.props.open && (
-                        <QrReader
-                            delay={500}
-                            onError={this.onError}
-                            onScan={this.onScan}
-                            style={{ width: "100%" }}
-                        />
-                    )}
+                    <div className="qrCodeInner">
+                        {this.props.open && (
+                            <QrReader
+                                delay={500}
+                                onError={this.onError}
+                                onScan={this.onScan}
+                                style={{ width: "100%" }}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         );

@@ -68,7 +68,11 @@ class HomePage extends React.Component {
                                         View Campaign Details {"\u2197"}
                                     </Link>
                                     <span onClick={() => this.setSelected(i)}>
-                                        View Batches {"\u21A7"}
+                                    {
+                                        this.state.selected === i ?
+                                            "View Batches \u21A7":
+                                            "Close Batches \u21A5"
+                                        }
                                     </span>
                                 </div>
                                 <div
@@ -89,33 +93,34 @@ class HomePage extends React.Component {
                                                         (j + 1).toString()
                                                     }
                                                 >
-                                                    <Icon
-                                                        icon={packageIcon}
-                                                        className="icon"
-                                                    />
-                                                    <div className="inner">
-                                                        Batch #{j + 1}
-                                                        <br />
-                                                        Status:{" "}
-                                                        {
-                                                            contractConstants
-                                                                .STAGES[
-                                                                parseInt(
-                                                                    batch.stage
-                                                                )
-                                                            ]
-                                                        }
-                                                        <br />
-                                                        Delivery:{" "}
-                                                        {getBatchDateString(
-                                                            batch
-                                                        )}
-                                                        <br />
-                                                        <span className="details">
-                                                            View Batch Details{" "}
-                                                            {"\u2197"}
-                                                        </span>
+                                                    <div className="batchDetails">
+                                                        <Icon
+                                                            icon={packageIcon}
+                                                            className="icon"
+                                                        />
+                                                        <div className="inner">
+                                                            Batch #{j + 1}
+                                                            <br />
+                                                            Status:{" "}
+                                                            {
+                                                                contractConstants
+                                                                    .STAGES[
+                                                                    parseInt(
+                                                                        batch.stage
+                                                                    )
+                                                                ]
+                                                            }
+                                                            <br />
+                                                            Delivery:{" "}
+                                                            {getBatchDateString(
+                                                                batch
+                                                            )}
+                                                        </div>
                                                     </div>
+                                                    <span className="batchLink">
+                                                        View Batch Details{" "}
+                                                        {"\u2197"}
+                                                    </span>
                                                 </Link>
                                             </div>
                                         ))}
