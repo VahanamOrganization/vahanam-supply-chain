@@ -11,9 +11,9 @@
             width: 8rem;
             position: relative;
             &::after {
-              content: "";
-              display: block;
-              padding-bottom: 100%;
+                content: "";
+                display: block;
+                padding-bottom: 100%;
             }
 
             img {
@@ -43,6 +43,18 @@
                 text-transform: uppercase;
                 font-size: 1.5rem;
             }
+            .logout {
+                padding: 0.5rem;
+                font-size: 1rem;
+                text-align: center;
+                text-decoration: none;
+                background: $grey;
+                color: $white;
+                border-radius: 1rem;
+                &:hover {
+                    background: $blue2;
+                }
+            }
         }
         overflow: hidden;
     }
@@ -59,20 +71,15 @@
             color: $grey;
             opacity: 0.5;
         }
-    }
-    a {
-        margin-top: auto;
-        margin-bottom: 1rem;
-        padding: 1rem;
-        font-size: 1.5rem;
-        width: 30%;
-        text-align: center;
-        text-decoration: none;
-        background: $grey;
-        color: $white;
-        border-radius: 1rem;
-        &:hover {
-            background: $blue2;
+        .data {
+            color: $grey;
+            .copyIcon {
+                font-size: 1rem;
+                cursor: pointer;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
         }
     }
 }

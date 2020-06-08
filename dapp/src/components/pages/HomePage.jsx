@@ -23,14 +23,18 @@ class HomePage extends React.Component {
 
     async init() {
         this.props.clean();
-        await this.props.getMyCampaigns();
+        await this.props.getAllCampaigns();
     }
 
     setSelected(selected) {
-        this.props.cleanMyBatches();
+        this.props.cleanDataBatches();
         selected = selected == this.state.selected ? undefined : selected;
         if (selected >= 0) {
-            this.props.getMyBatches(selected + 1);
+            const campaignId = selected + 1;
+            const totalBatches = this.props.data.campaigns[selected]
+                .totalBatches;
+
+            this.props.getBatches(campaignId, totalBatches);
         }
         this.setState({ selected });
     }
@@ -40,18 +44,17 @@ class HomePage extends React.Component {
         return (
             <div className="homePage page">
                 <div className="homePageInner pageInner">
-                    <div className="title">My Campaigns</div>
+                    <div className="title">All Campaigns</div>
                     {campaigns &&
                         campaigns.map((campaign, i) => (
                             <div className="campaign" key={i + 1}>
-                                <div className="inner">
-                                    <Link
-                                        to={"/campaign/" + (i + 1).toString()}
-                                    >
-                                        <div className="photo">
-                                            <img src={tempCampaign} />
-                                        </div>
-                                    </Link>
+                                <Link
+                                    className="inner"
+                                    to={"/campaign/" + (i + 1).toString()}
+                                >
+                                    <div className="photo">
+                                        <img src={tempCampaign} />
+                                    </div>
                                     <div className="details">
                                         Campaign #{i + 1}
                                         <br />
@@ -59,21 +62,25 @@ class HomePage extends React.Component {
                                         <br />
                                         Remaining: {campaign.currentPLA}
                                         <br />
+                                        Total Batches: {campaign.totalBatches}
+                                        <br />
                                     </div>
-                                </div>
+                                </Link>
                                 <div className="links">
                                     <Link
                                         to={"/campaign/" + (i + 1).toString()}
                                     >
                                         View Campaign Details {"\u2197"}
                                     </Link>
-                                    <span onClick={() => this.setSelected(i)}>
-                                    {
-                                        this.state.selected === i ?
-                                            "View Batches \u21A7":
-                                            "Close Batches \u21A5"
-                                        }
-                                    </span>
+                                    {parseInt(campaign.totalBatches) > 0 && (
+                                        <span
+                                            onClick={() => this.setSelected(i)}
+                                        >
+                                            {this.state.selected === i
+                                                ? "Close Batches \u21A5"
+                                                : "View Batches \u21A7"}
+                                        </span>
+                                    )}
                                 </div>
                                 <div
                                     className={
@@ -139,9 +146,9 @@ function mapState(state) {
 }
 
 const actionCreators = {
-    getMyCampaigns: contractActions.getMyCampaigns,
-    getMyBatches: contractActions.getMyBatches,
-    cleanMyBatches: contractActions.cleanMyBatches,
+    getAllCampaigns: contractActions.getAllCampaigns,
+    getBatches: contractActions.getBatches,
+    cleanDataBatches: contractActions.cleanDataBatches,
     clean: contractActions.clean
 };
 

@@ -19,6 +19,7 @@ class CampaignDetails extends React.Component {
 
     async init() {
         const { campaignId, campaign } = this.props;
+        await this.props.cleanDataBatches();
         await this.props.getBatches(
             campaignId,
             parseInt(campaign.totalBatches)
@@ -125,6 +126,7 @@ function mapState(state) {
 }
 
 const actionCreators = {
+    cleanDataBatches: contractActions.cleanDataBatches,
     getBatches: contractActions.getBatches
 };
 

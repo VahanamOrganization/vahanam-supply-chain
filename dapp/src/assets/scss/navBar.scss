@@ -57,6 +57,9 @@
                         height: 100%;
                         .barIcon {
                             color: $grey;
+                            &:hover {
+                                opacity: 0.5;
+                            }
                         }
                     }
                     &.plus {

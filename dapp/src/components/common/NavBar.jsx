@@ -2,7 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import loading from "../../assets/img/loading.gif";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import homeFill from "@iconify/icons-ant-design/home-fill";
 import homeOutline from "@iconify/icons-ant-design/home-outlined";
 import searchFill from "@iconify/icons-bx/bx-search-alt";
@@ -19,6 +19,7 @@ class NavBar extends React.Component {
             pathname: this.props.location.pathname
         };
     }
+
     static getDerivedStateFromProps(props, state) {
         if (props.location.pathname !== state.pathname) {
             return {
@@ -29,7 +30,7 @@ class NavBar extends React.Component {
     }
 
     render() {
-        const { loggedIn, inProgress } = this.props;
+        const { loggedIn, inProgress, account } = this.props;
         return (
             <div className="navBar">
                 <img
@@ -88,11 +89,12 @@ class NavBar extends React.Component {
                                 </Link>
                             </div>
                             <div className="barIconContainer">
-                                <Link to="/profile">
+                                <Link to={"/profile/" + account}>
                                     <Icon
                                         className="barIcon"
                                         icon={
-                                            this.state.pathname === "/profile"
+                                            this.state.pathname ===
+                                            "/profile/" + account
                                                 ? profileFill
                                                 : profileOutline
                                         }
@@ -113,11 +115,12 @@ class NavBar extends React.Component {
 }
 function mapState(state) {
     const { loggedIn } = state.box;
+    const { account } = state.web3;
     const inProgress =
         state.contract.inProgress ||
         state.box.inProgress ||
         state.web3.inProgress;
-    return { loggedIn, inProgress };
+    return { loggedIn, inProgress, account };
 }
 
 const actionCreators = {};

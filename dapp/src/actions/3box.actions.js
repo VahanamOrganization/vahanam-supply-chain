@@ -5,6 +5,7 @@ import { boxConstants } from "../constants";
 export const boxActions = {
     login,
     loadProfile,
+    getDataProfile,
     getProfiles,
     clean
 };
@@ -43,6 +44,23 @@ function loadProfile(account) {
             return;
         }
         dispatch(loaded({ profile }));
+    };
+}
+
+function getDataProfile(userAddress) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let profile;
+        try {
+            profile = await Box.getProfile(userAddress);
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            let error = "Could not get 3Box Profile";
+            dispatch(alertActions.error(error));
+            return;
+        }
+        dispatch(loaded({ data: { profile } }));
     };
 }
 

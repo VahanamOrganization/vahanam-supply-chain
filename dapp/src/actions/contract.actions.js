@@ -6,6 +6,8 @@ import { contractService } from "../services";
 export const contractActions = {
     clean,
     getRole,
+    getDataRole,
+    cleanDataRole,
     makeCoordinator,
     startCampaign,
     addManufacturers,
@@ -14,14 +16,16 @@ export const contractActions = {
     createNewBatch,
     getBatchDetails,
     getBatches,
+    cleanDataBatches,
     confirmPLAPickedUp,
     confirmPLAReceived,
     confirmMasksMade,
     confirmMasksPickedUp,
     confirmMasksReceived,
-    getMyCampaigns,
-    cleanMyBatches,
-    getMyBatches
+    getUserCampaigns,
+    getUserBatches,
+    getAllCampaigns,
+    cleanDataCampaigns
 };
 
 function clean() {
@@ -50,6 +54,34 @@ function getRole() {
     };
 }
 
+function getDataRole(userAddress) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let role;
+        try {
+            const { account, contract } = getState().web3;
+            role = await contractService.getDataRole(
+                contract,
+                account,
+                userAddress
+            );
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            dispatch(alertActions.error("Error Getting Role"));
+            return;
+        }
+        dispatch(result({ data: { role } }));
+        return role;
+    };
+}
+
+function cleanDataRole() {
+    return async dispatch => {
+        dispatch(cleanSelected({ data: { role: undefined } }));
+    };
+}
+
 function getCampaignDetails(campaignId) {
     return async (dispatch, getState) => {
         dispatch(started());
@@ -71,13 +103,16 @@ function getCampaignDetails(campaignId) {
     };
 }
 
-function getMyCampaigns() {
+function getAllCampaigns() {
     return async (dispatch, getState) => {
         dispatch(started());
         let campaigns;
         try {
             const { account, contract } = getState().web3;
-            campaigns = await contractService.getMyCampaigns(contract, account);
+            campaigns = await contractService.getAllCampaigns(
+                contract,
+                account
+            );
         } catch (e) {
             console.log(e);
             dispatch(failure(e));
@@ -88,22 +123,50 @@ function getMyCampaigns() {
     };
 }
 
-function cleanMyBatches() {
-    return async dispatch => {
-        dispatch(cleanSelected({ data: { batches: undefined } }));
-    }
+function getUserCampaigns(userAddress) {
+    return async (dispatch, getState) => {
+        dispatch(started());
+        let campaigns;
+        try {
+            const { account, contract } = getState().web3;
+            campaigns = await contractService.getUserCampaigns(
+                contract,
+                account,
+                userAddress
+            );
+        } catch (e) {
+            console.log(e);
+            dispatch(failure(e));
+            dispatch(alertActions.error("Error Getting Campaigns"));
+            return;
+        }
+        dispatch(result({ data: { campaigns } }));
+    };
 }
 
-function getMyBatches(campaignId) {
+function cleanDataCampaigns() {
+    return async dispatch => {
+        dispatch(cleanSelected({ data: { campaigns: undefined } }));
+    };
+}
+
+function cleanDataBatches() {
+    return async dispatch => {
+        dispatch(cleanSelected({ data: { batches: undefined } }));
+    };
+}
+
+function getUserBatches(campaignId, userAddress) {
     return async (dispatch, getState) => {
         dispatch(started());
         let batches = undefined;
         try {
             const { account, contract } = getState().web3;
-            batches = await contractService.getMyBatches(
+            batches = await contractService.getUserBatches(
                 contract,
                 account,
-                campaignId
+                campaignId,
+                userAddress
             );
         } catch (e) {
             console.log(e);
@@ -162,7 +225,7 @@ function getBatches(campaignId, totalBatches) {
     };
 }
 
-function makeCoordinator(address) {
+function makeCoordinator(userAddress) {
     return async (dispatch, getState) => {
         dispatch(started());
         let data;
@@ -171,7 +234,7 @@ function makeCoordinator(address) {
             data = await contractService.makeCoordinator(
                 contract,
                 account,
-                address
+                userAddress
             );
         } catch (e) {
             console.log(e);

@@ -2,6 +2,7 @@ import { getStringFromRole, getRoleFromString, logReceipt } from "../helpers";
 
 export const contractService = {
     getRole,
+    getDataRole,
     getCampaignDetails,
     getBatchDetails,
     getBatches,
@@ -15,8 +16,9 @@ export const contractService = {
     addManufacturers,
     addCouriers,
     createNewBatch,
-    getMyCampaigns,
-    getMyBatches
+    getUserCampaigns,
+    getUserBatches,
+    getAllCampaigns
 };
 
 async function getRole(contract, account) {
@@ -26,7 +28,15 @@ async function getRole(contract, account) {
     return getStringFromRole(role);
 }
 
+async function getDataRole(contract, account, userAddress) {
+    const role = await contract.methods
+        .getRole(userAddress)
+        .call({ from: account });
+    return getStringFromRole(role);
+}
+
 async function getCampaignDetails(contract, account, campaignId) {
+    console.log({ campaignId });
     return contract.methods
         .getCampaignDetalis(campaignId)
         .call({ from: account });
@@ -40,19 +50,17 @@ async function getBatchDetails(contract, account, campaignId, batchId) {
 
 async function getBatches(contract, account, campaignId, totalBatches) {
     return Promise.all(
-        Array(totalBatches)
+        Array(parseInt(totalBatches))
             .fill(1)
             .map((el, i) =>
-                contract.methods
-                    .getBatchDetails(campaignId, i + 1)
-                    .call({ from: account })
+                getBatchDetails(contract, account, campaignId, i + 1)
             )
     );
 }
 
-async function makeCoordinator(contract, account, address) {
+async function makeCoordinator(contract, account, userAddress) {
     const receipt = await contract.methods
-        .makeCoordinator(address)
+        .makeCoordinator(userAddress)
         .send({ from: account });
     if (!receipt.status) {
         logReceipt(receipt);
@@ -193,9 +201,9 @@ async function createNewBatch(contract, account, batch) {
     return { event: receipt.events["PLAPacked"] };
 }
 
-async function getMyCampaigns(contract, account) {
+async function getUserCampaigns(contract, account, userAddress) {
     const campaignIds = await contract.methods
-        .partOfWhichCampaigns(account)
+        .partOfWhichCampaigns(userAddress)
         .call({ from: account });
     const result = await Promise.all(
         campaignIds.map(id => getCampaignDetails(contract, account, id))
@@ -203,13 +211,31 @@ async function getMyCampaigns(contract, account) {
     return result;
 }
 
-async function getMyBatches(contract, account, campaignId) {
+async function getUserBatches(contract, account, campaignId, userAddress) {
     const batchIds = await contract.methods
-        .partOfWhichBatches(campaignId, account)
+        .partOfWhichBatches(campaignId, userAddress)
         .call({ from: account });
-    return Promise.all(
-        batchIds.map(id =>
-            getBatchDetails(contract, account, campaignId, id)
-        )
+    const result = await Promise.all(
+        batchIds.map(id => getBatchDetails(contract, account, campaignId, id))
     );
+    return result;
+}
+
+async function campaignCounter(contract, account) {
+    const totalCampaigns = await contract.methods
+        .campaignCounter()
+        .call({ from: account });
+    return parseInt(totalCampaigns);
+}
+
+async function getAllCampaigns(contract, account) {
+    const totalCampaigns = await campaignCounter(contract, account);
+    console.log({ totalCampaigns });
+    console.log(Array(totalCampaigns).fill(1));
+    const result = await Promise.all(
+        Array(totalCampaigns)
+            .fill(1)
+            .map((el, i) => getCampaignDetails(contract, account, i + 1))
+    );
+    return result;
 }

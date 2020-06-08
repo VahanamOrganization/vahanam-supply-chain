@@ -1,8 +1,14 @@
 @import "config";
 
-.homePageInner {
+.userCampaigns {
     font-size: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     .title {
+        font-size: 2rem;
         width: 100%;
         padding-left: 2rem;
         padding-bottom: 1rem;

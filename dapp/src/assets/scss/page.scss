@@ -5,9 +5,15 @@
     flex-direction: column;
     width: 100%;
     height: calc(100% - 5rem);
-    font-size: 2rem;
+    font-size: 1rem;
     padding: 2rem;
     overflow-x: hidden;
+}
+
+@media (max-width: 600px) {
+    .page {
+        padding: 1rem;
+    }
 }
 
 .pageInner {

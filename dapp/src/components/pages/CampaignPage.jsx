@@ -7,7 +7,7 @@ import peopleIcon from "@iconify/icons-eva/people-fill";
 import detailsIcon from "@iconify/icons-ic/baseline-assignment";
 import arrowDownIcon from "@iconify/icons-dashicons/arrow-down-alt2";
 import tempCampaign from "../../assets/img/tempCampaign.png";
-import * as Displays from "../displays";
+import { CampaignDetails, PeopleList } from "../displays";
 
 class CampaignPage extends React.Component {
     constructor(props) {
@@ -115,7 +115,7 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                <Displays.CampaignDetails
+                                <CampaignDetails
                                     campaignId={this.campaignId}
                                     campaign={campaign}
                                 />
@@ -127,7 +127,7 @@ class CampaignPage extends React.Component {
                                         : "tabDataInner"
                                 }
                             >
-                                <Displays.PeopleList campaign={campaign} />
+                                <PeopleList campaign={campaign} />
                             </div>
                         </div>
                     </div>

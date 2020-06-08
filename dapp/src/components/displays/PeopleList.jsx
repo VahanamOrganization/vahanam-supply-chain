@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { boxActions } from "../../actions";
 import { getImageUrl, getAccountString } from "../../helpers";
@@ -36,7 +37,8 @@ class PeopleList extends React.Component {
         const numCouriers = campaign.couriers.length;
         return (
             <div className="peopleList">
-                {campaign && profiles &&
+                {campaign &&
+                    profiles &&
                     profiles.map((profile, index) => (
                         <Person
                             key={index.toString()}
@@ -61,7 +63,7 @@ class PeopleList extends React.Component {
 function Person(props) {
     const { profile, role, account } = props;
     return (
-        <div className="person">
+        <Link to={"/profile/" + account} className="person">
             <div className="photo">
                 {profile.image && profile.image.length >= 1 ? (
                     <img src={getImageUrl(profile.image)} />
@@ -75,7 +77,7 @@ function Person(props) {
                 </div>
                 <div className="role">{role}</div>
             </div>
-        </div>
+        </Link>
     );
 }
 

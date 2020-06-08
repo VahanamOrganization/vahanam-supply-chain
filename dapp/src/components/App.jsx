@@ -97,7 +97,7 @@ class App extends React.Component {
                                 {/*TODO: make profile route private */}
                                 <Route
                                     exact
-                                    path="/profile"
+                                    path="/profile/:address"
                                     component={ProfilePage}
                                 />
                                 <Route exact path="/" component={LandingPage} />
