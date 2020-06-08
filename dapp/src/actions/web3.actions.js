@@ -45,7 +45,7 @@ function loadNetwork() {
             return;
         }
         if (networkId !== config.networkId) {
-            let error = "Incorrect NetworkID, Expecting " + config.networkId;
+            let error = "Please connect to Rinkeby test-net on MetaMask";
             dispatch(failure(error));
             dispatch(alertActions.error(error));
             return;
