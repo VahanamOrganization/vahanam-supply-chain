@@ -3,9 +3,9 @@ import config from "config";
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => {
+export const PrivateRoute = ({ component: Component, needLogin, ...rest }) => {
     const { web3, box } = useSelector(state => state);
-    let isCorrectNetwork = web3.account && web3.networkId == config.networkId;
+    let isCorrectNetwork = web3.account && web3.networkId == config.networkId && web3.connected;
     let isLoggedIn = box.loggedIn;
     return (
         <Route

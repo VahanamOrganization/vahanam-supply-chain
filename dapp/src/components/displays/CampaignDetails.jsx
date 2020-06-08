@@ -84,6 +84,9 @@ class CampaignDetails extends React.Component {
                     <div className="inProgress">In Progress</div>
                     <div className="done">Done</div>
                 </div>
+                {batches && batches.length === 0 && (
+                    <p> Campaign has not created any batches </p>
+                )}
                 {batches &&
                     batches.map((batch, i) => (
                         <div className="batch" key={i + 1}>

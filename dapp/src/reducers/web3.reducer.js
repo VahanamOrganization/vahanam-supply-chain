@@ -11,7 +11,6 @@ export function web3(state = {account: ""}, action) {
             return {
                 ...state,
                 inProgress: false,
-                connected: true,
                 ...action
             };
         case web3Constants.ERROR:

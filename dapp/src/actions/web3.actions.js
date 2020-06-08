@@ -25,7 +25,7 @@ function loadAccount() {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({account}));
+        dispatch(loaded({account, connected: false}));
         dispatch(alertActions.success("Reloaded MetaMask Account"));
     };
 }
@@ -45,12 +45,12 @@ function loadNetwork() {
             return;
         }
         if (networkId !== config.networkId) {
-            let error = "Please connect to Rinkeby test-net on MetaMask";
+            let error = "Please connect to rinkeby network on MetaMask";
             dispatch(failure(error));
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({networkId}));
+        dispatch(loaded({networkId, connected: false}));
         dispatch(alertActions.success("Reloaded MetaMask Network"));
     };
 }
@@ -60,7 +60,7 @@ function loadWeb3() {
         dispatch(started());
         let { web3 } = getState().web3;
         if (web3) {
-            dispatch(loaded({}));
+            dispatch(loaded({connected: true}));
             return;
         }
         if (window.ethereum) {
@@ -94,7 +94,7 @@ function loadWeb3() {
             return;
         }
         if (networkId !== config.networkId) {
-            let error = "Incorrect NetworkID, Expecting " + config.networkId;
+            let error = "Please connect to rinkeby network on MetaMask";
             dispatch(failure(error));
             dispatch(alertActions.error(error));
             return;
@@ -112,7 +112,7 @@ function loadWeb3() {
             dispatch(alertActions.error(error));
             return;
         }
-        dispatch(loaded({web3, account, networkId, contract}));
+        dispatch(loaded({web3, account, networkId, contract, connected: true}));
         dispatch(alertActions.success("MetaMask Connected"));
         return contract;
     };

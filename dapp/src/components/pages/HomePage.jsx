@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractActions } from "../../actions";
+import { web3Actions, contractActions } from "../../actions";
 import { contractConstants } from "../../constants";
 import { getBatchDateString } from "../../helpers";
 import { Icon, InlineIcon } from "@iconify/react";
@@ -22,7 +22,8 @@ class HomePage extends React.Component {
     }
 
     async init() {
-        this.props.clean();
+        await this.props.loadWeb3();
+        await this.props.clean();
         await this.props.getAllCampaigns();
     }
 
@@ -146,6 +147,7 @@ function mapState(state) {
 }
 
 const actionCreators = {
+    loadWeb3: web3Actions.loadWeb3,
     getAllCampaigns: contractActions.getAllCampaigns,
     getBatches: contractActions.getBatches,
     cleanDataBatches: contractActions.cleanDataBatches,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { contractActions, boxActions, authActions } from "../../actions";
+import { web3Actions, contractActions, boxActions, authActions } from "../../actions";
 import { history } from "../../helpers";
 
 class LoginPage extends React.Component {
@@ -16,7 +16,11 @@ class LoginPage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.logout();
+        this.init();
+    }
+    async init() {
+        await this.props.logout();
+        await this.props.loadWeb3();
     }
 
     handleChange(event) {
@@ -108,6 +112,7 @@ function mapState(state) {
 
 const actionCreators = {
     logout: authActions.logout,
+    loadWeb3: web3Actions.loadWeb3,
     loadBoxProfile: boxActions.loadProfile,
     loadBox: boxActions.login,
     getRole: contractActions.getRole

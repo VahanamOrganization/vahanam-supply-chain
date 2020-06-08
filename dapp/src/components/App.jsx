@@ -37,16 +37,10 @@ class App extends React.Component {
         if (this.props.web3) {
             await this.props.loadAccount();
         }
-        if (!["/", "/login", "/register"].includes(history.location.pathname)) {
-            history.push("/login");
-        }
     }
     async networkChanged() {
         if (this.props.web3) {
             await this.props.loadNetwork();
-        }
-        if (!["/", "/login", "/register"].includes(history.location.pathname)) {
-            history.push("/login");
         }
     }
 
