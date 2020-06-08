@@ -43,13 +43,13 @@ class HomePage extends React.Component {
         const { campaigns, batches } = this.props.data;
         return (
             <div className="homePage page">
-                <div className="homePageInner pageInner">
+                <div className="campaignsDisplay pageInner">
                     <div className="title">All Campaigns</div>
                     {campaigns &&
                         campaigns.map((campaign, i) => (
                             <div className="campaign" key={i + 1}>
                                 <Link
-                                    className="inner"
+                                    className="campaignInner"
                                     to={"/campaign/" + (i + 1).toString()}
                                 >
                                     <div className="photo">
@@ -105,7 +105,7 @@ class HomePage extends React.Component {
                                                             icon={packageIcon}
                                                             className="icon"
                                                         />
-                                                        <div className="inner">
+                                                        <div className="batchInner">
                                                             Batch #{j + 1}
                                                             <br />
                                                             Status:{" "}

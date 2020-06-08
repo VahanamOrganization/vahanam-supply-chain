@@ -12,7 +12,6 @@ import { CampaignDetails, PeopleList } from "../displays";
 class CampaignPage extends React.Component {
     constructor(props) {
         super(props);
-        this.campaignId = this.props.match.params.id;
         this.state = {
             selected: 1
         };
@@ -23,14 +22,25 @@ class CampaignPage extends React.Component {
     }
 
     async init() {
-        this.props.clean();
         await this.props.loadWeb3();
-        await this.props.getCampaignDetails(this.campaignId);
+        await this.loadData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.params.id != this.props.match.params.id) {
+            this.loadData(this.props.match.params.address);
+        }
+    }
+
+    async loadData() {
+        await this.props.clean();
+        await this.props.getCampaignDetails(this.props.match.params.id);
     }
 
     render() {
         const { campaign } = this.props;
-        const title = "Campaign SuperNova";
+        const campaignId = this.props.match.params.id;
+        const title = `Campaign #${campaignId}`;
         const description = "We are making masks using 3d printers. You are welcome to join and help!";
 
         return (
@@ -116,7 +126,7 @@ class CampaignPage extends React.Component {
                                 }
                             >
                                 <CampaignDetails
-                                    campaignId={this.campaignId}
+                                    campaignId={campaignId}
                                     campaign={campaign}
                                 />
                             </div>

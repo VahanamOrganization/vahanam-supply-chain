@@ -1,6 +1,6 @@
 @import "config";
 
-.userCampaigns {
+.campaignsDisplay {
     font-size: 1rem;
     display: flex;
     justify-content: flex-start;
@@ -24,7 +24,7 @@
         border-style: solid none none none;
         border-width: 1px;
         border-color: $grey_;
-        .inner {
+        .campaignInner {
             padding: 0.5rem;
             text-decoration: none;
             color: $grey;
@@ -129,7 +129,7 @@
                             width: 3rem;
                             font-size: 2rem;
                         }
-                        .inner {
+                        .batchInner {
                             flex: 1;
                             color: $grey_8;
                             width: 100%;
@@ -157,7 +157,7 @@
     .homePageInner {
         font-size: 1rem;
         .campaign {
-            .inner {
+            .campaignInner {
                 .photo {
                     border-radius: 50%;
                     border-style: solid;

@@ -38,7 +38,7 @@ class UserCampaigns extends React.Component {
     render() {
         const { campaigns, batches } = this.props.data;
         return (
-            <div className="userCampaigns">
+            <div className="userCampaigns campaignsDisplay">
                 <div className="title">User Campaigns</div>
                 {campaigns && campaigns.length === 0 && (
                     <p> User is not part of any campaigns </p>
@@ -46,7 +46,7 @@ class UserCampaigns extends React.Component {
                 {campaigns &&
                     campaigns.map((campaign, i) => (
                         <div className="campaign" key={i + 1}>
-                            <div className="inner">
+                            <div className="campaignInner">
                                 <Link to={"/campaign/" + (i + 1).toString()}>
                                     <div className="photo">
                                         <img src={tempCampaign} />
@@ -96,7 +96,7 @@ class UserCampaigns extends React.Component {
                                                         icon={packageIcon}
                                                         className="icon"
                                                     />
-                                                    <div className="inner">
+                                                    <div className="batchInner">
                                                         Batch #{j + 1}
                                                         <br />
                                                         Status:{" "}

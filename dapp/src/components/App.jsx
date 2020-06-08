@@ -74,7 +74,7 @@ class App extends React.Component {
                             }
                         >
                             <Switch>
-                                <PrivateRoute
+                                <Route
                                     exact
                                     path="/home"
                                     component={HomePage}
