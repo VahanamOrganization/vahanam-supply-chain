@@ -96,4 +96,6 @@ module.exports = {
       // }
     },
   },
+  // contracts_directory: "",
+  // contracts_build_directory: "../dapp/src/assets/contracts"
 };
