@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "build": "rm -rf ./dist && webpack --mode production",
-    "start": "webpack-dev-server --host 0.0.0.0"
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "3box": "^1.18.1",
