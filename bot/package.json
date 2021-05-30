@@ -16,7 +16,7 @@
     "node-red-contrib-viseo-airtable": "github:alokt/node-red-contrib-airtable#master",
     "node-red-node-twitter": "~1.1.6",
     "telegraf": "^3.37.0",
-    "ws": "^7.2.3"
+    "ws": "^7.4.6"
   },
   "main": "settings.js",
   "directories": {
