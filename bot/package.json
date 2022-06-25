@@ -9,7 +9,7 @@
     "aws-sdk": "^2.659.0",
     "eth-sdk": "^0.2.8",
     "ethers": "^4.0.46",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "node-red-contrib-chatbot": "~0.18.15",
     "node-red-contrib-loop-processing": "^0.4.0",
     "node-red-contrib-simple-message-queue": "^0.2.5",
